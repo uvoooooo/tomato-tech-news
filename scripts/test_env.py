@@ -8,14 +8,14 @@ from dotenv import load_dotenv
 # 尝试加载当前目录下的 .env
 load_dotenv()
 
-def test_openai():
-    print("\n--- Testing OpenAI API ---")
-    api_key = os.getenv("OPENAI_API_KEY")
-    base_url = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
-    model = os.getenv("OPENAI_MODEL", "gpt-4o")
+def test_openrouter():
+    print("\n--- Testing OpenRouter API ---")
+    api_key = os.getenv("OPENROUTER_API_KEY")
+    base_url = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
+    model = os.getenv("OPENROUTER_MODEL", "openai/gpt-4o")
 
     if not api_key:
-        print("❌ OPENAI_API_KEY not found in environment.")
+        print("❌ OPENROUTER_API_KEY not found in environment.")
         return False
 
     print(f"Base URL: {base_url}")
@@ -90,7 +90,7 @@ def main():
     print("🚀 Starting Environment API Key Test...")
     
     results = {
-        "OpenAI": test_openai(),
+        "OpenRouter": test_openrouter(),
         "SMTP": test_smtp(),
         "Firefly": test_firefly()
     }

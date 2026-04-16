@@ -13,7 +13,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).parent
 sys.path.insert(0, str(BASE_DIR))
 
-from config import OPENAI_API_KEY, OUTPUT_DIR, ENABLE_IMAGE_GENERATION
+from config import OPENROUTER_API_KEY, OUTPUT_DIR, ENABLE_IMAGE_GENERATION
 from rss_fetcher import NewsLoader
 from llm_analyzer import ContentProcessor
 from html_generator import PageBuilder
@@ -44,8 +44,8 @@ async def run_pipeline():
     cli.add_argument('--language', type=str, default='zh', choices=['zh', 'en'], help='Language')
     args = cli.parse_args()
 
-    if not OPENAI_API_KEY:
-        print("❌ Error: OPENAI_API_KEY not found.")
+    if not OPENROUTER_API_KEY:
+        print("❌ Error: OPENROUTER_API_KEY not found.")
         sys.exit(1)
 
     # Components

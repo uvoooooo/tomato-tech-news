@@ -1,15 +1,15 @@
 """
 AI Analysis Module
-Uses OpenAI API to intelligently analyze, classify, and summarize news content.
+Uses OpenRouter (OpenAI-compatible API) to analyze, classify, and summarize news.
 """
 import os
 import json
 from typing import Dict, Any, Optional
 from openai import OpenAI
 from config import (
-    OPENAI_BASE_URL,
-    OPENAI_API_KEY,
-    OPENAI_MODEL,
+    OPENROUTER_BASE_URL,
+    OPENROUTER_API_KEY,
+    OPENROUTER_MODEL,
     CLAUDE_MAX_TOKENS,
     CATEGORIES,
     THEMES,
@@ -24,16 +24,16 @@ class ContentProcessor:
         """
         Initialize the processor with API credentials
         Args:
-            key: OpenAI API key. Defaults to config.
+            key: OpenRouter API key. Defaults to config.
             endpoint: API base URL. Defaults to config.
         """
-        self.api_key = key or OPENAI_API_KEY
-        self.api_url = endpoint or OPENAI_BASE_URL
-        self.engine = OPENAI_MODEL
+        self.api_key = key or OPENROUTER_API_KEY
+        self.api_url = endpoint or OPENROUTER_BASE_URL
+        self.engine = OPENROUTER_MODEL
         self.token_limit = CLAUDE_MAX_TOKENS
         
         if not self.api_key:
-            raise EnvironmentError("Missing OPENAI_API_KEY in environment")
+            raise EnvironmentError("Missing OPENROUTER_API_KEY in environment")
             
         try:
             self.api_client = OpenAI(base_url=self.api_url, api_key=self.api_key)

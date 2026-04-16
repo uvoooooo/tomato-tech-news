@@ -8,13 +8,13 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-# OpenAI API Configuration
-OPENAI_BASE_URL = os.getenv(
-    "OPENAI_BASE_URL",
-    "https://api.openai.com/v1"
+# OpenRouter API (OpenAI-compatible)
+OPENROUTER_BASE_URL = os.getenv(
+    "OPENROUTER_BASE_URL",
+    "https://openrouter.ai/api/v1",
 )
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "openai/gpt-4o")
 CLAUDE_MAX_TOKENS = 8192
 
 # RSS Feed Configuration
