@@ -31,14 +31,23 @@ htmlcov/
 *~
 
 # Project Specific Output
-# Generated news reports and assets
-docs/
+# Ignore generated docs except bundled sample (for README) + shared CSS
+docs/**
+!docs/css/
+!docs/css/**
+!docs/2026-04-16-zh.pdf
+!docs/2026-04-16-zh.html
+!docs/index.html
+!docs/.index.json
+
 *.log
 *.pdf
+!docs/2026-04-16-zh.pdf
 *.png
 
-# Temporary/Cache
+# Temporary/Cache (allow tracked sample under docs/)
 .index.json
+!docs/.index.json
 
 # Format
 format/
