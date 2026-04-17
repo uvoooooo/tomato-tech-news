@@ -6,8 +6,8 @@ name: Tomato Tech News Daily Automation
 
 on:
   schedule:
-    # 定时触发：每天 UTC 时间 08:00 (北京时间 16:00)
-    - cron: '0 8 * * *'
+    # 仅工作日 Mon–Fri，UTC 08:00（北京时间 16:00）
+    - cron: '0 8 * * 1-5'
   workflow_dispatch:
   push:
     branches:
@@ -61,6 +61,7 @@ jobs:
           ENABLE_IMAGE_GENERATION: ${{ vars.ENABLE_IMAGE_GENERATION || 'false' }}
           FIREFLY_API_KEY: ${{ secrets.FIREFLY_API_KEY }}
           GITHUB_PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          SKIP_WEEKENDS: ${{ vars.SKIP_WEEKENDS || 'true' }}
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/scripts
           python scripts/main.py --days 1

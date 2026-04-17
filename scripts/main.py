@@ -2,6 +2,7 @@
 AI Daily Generator - Main Entry Point
 Orchestrates the news collection, analysis, and publishing workflow.
 """
+import os
 import sys
 import argparse
 import asyncio
@@ -40,6 +41,15 @@ def resolve_date(offset: int = 1) -> str:
     return target.strftime("%Y-%m-%d")
 
 
+def _is_weekend_utc() -> bool:
+    """Monday=0 … Sunday=6; treat Sat/Sun as weekend."""
+    return datetime.now(timezone.utc).weekday() >= 5
+
+
+def _skip_weekends_enabled() -> bool:
+    return os.getenv("SKIP_WEEKENDS", "true").lower() in ("1", "true", "yes")
+
+
 async def run_pipeline():
     """Execute the full automation sequence"""
     show_welcome()
@@ -54,7 +64,25 @@ async def run_pipeline():
         choices=["zh", "en"],
         help="Report language when using legacy NOTIFICATION_TO (single list)",
     )
+    cli.add_argument(
+        "--force",
+        action="store_true",
+        help="Run even on Saturday/Sunday (UTC) when SKIP_WEEKENDS is on",
+    )
     args = cli.parse_args()
+
+    # Weekends: no scheduled work unless backfilling (--date) or --force / SKIP_WEEKENDS=false
+    if (
+        _skip_weekends_enabled()
+        and not args.force
+        and not args.date
+        and _is_weekend_utc()
+    ):
+        print(
+            "⏭️ Skip: today is weekend (UTC). "
+            "Use --date YYYY-MM-DD to backfill, --force, or set SKIP_WEEKENDS=false."
+        )
+        return
 
     if not OPENROUTER_API_KEY:
         print("❌ Error: OPENROUTER_API_KEY not found.")
