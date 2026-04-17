@@ -1,3 +1,7 @@
+# Deploys static site via GitHub’s official Pages Actions flow.
+# In the repo: Settings → Pages → Build and deployment → Source → "GitHub Actions"
+# (If Source is left on "Deploy from branch" / gh-pages only, this workflow’s deploy step will not publish — use this source instead.)
+
 name: Tomato Tech News Daily Automation
 
 on:
@@ -15,17 +19,19 @@ on:
       - '.github/workflows/daily.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  generate-and-deploy:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -52,6 +58,7 @@ jobs:
           NOTIFICATION_TO: ${{ secrets.NOTIFICATION_TO }}
           ENABLE_IMAGE_GENERATION: ${{ vars.ENABLE_IMAGE_GENERATION || 'false' }}
           FIREFLY_API_KEY: ${{ secrets.FIREFLY_API_KEY }}
+          GITHUB_PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/scripts
           python scripts/main.py --days 2
@@ -64,15 +71,11 @@ jobs:
           fi
           echo "Build successful, found docs/index.html"
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          keep_files: true
-          commit_message: "chore: update daily news report [skip ci]"
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
+          path: docs
+          include-hidden-files: true
 
       - name: Archive Results
         if: always()
@@ -81,3 +84,14 @@ jobs:
           name: daily-report-artifacts
           path: docs/
           retention-days: 3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
