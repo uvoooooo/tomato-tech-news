@@ -101,7 +101,7 @@ async def run_pipeline():
         total = sum(len(c.get('items', [])) for c in report.get('categories', []))
         
         if alerts._is_ready():
-            alerts.notify_success(target_day, total)
+            alerts.notify_success(target_day, total, args.language)
 
         print(f"\n✨ Done! Processed {total} items for {target_day}.")
         
