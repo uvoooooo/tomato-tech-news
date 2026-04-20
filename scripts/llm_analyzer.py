@@ -66,7 +66,7 @@ class ContentProcessor:
             )
             raw_output = chat_response.choices[0].message.content
             print(f"✅ AI analysis complete ({len(raw_output)} chars)")
-            return self._decode_ai_output(raw_output, date_tag)
+            return self._decode_ai_output(raw_output, date_tag, language)
         except Exception as err:
             print(f"❌ AI processing error: {err}")
             return self._create_emergency_fallback(raw_data, date_tag)
@@ -144,7 +144,7 @@ Strict JSON only:
 ```
 """
 
-    def _decode_ai_output(self, text: str, date: str) -> Dict[str, Any]:
+    def _decode_ai_output(self, text: str, date: str, language: str = "zh") -> Dict[str, Any]:
         """Parse and validate the JSON returned by AI"""
         clean_text = text.strip()
         for marker in ["```json", "```"]:
@@ -158,12 +158,14 @@ Strict JSON only:
             parsed = json.loads(clean_text)
             # Default value injection
             parsed.setdefault("status", "success")
-            parsed.setdefault("date", date)
+            if parsed.get("date") and parsed.get("date") != date:
+                print(f"⚠️ Model date {parsed.get('date')!r} ignored; using pipeline date {date!r}")
+            parsed["date"] = date
+            parsed["lang"] = language
             parsed["theme"] = FIXED_THEME or parsed.get("theme", DEFAULT_THEME)
             parsed.setdefault("summary", [])
             parsed.setdefault("keywords", [])
             parsed.setdefault("categories", [])
-            parsed.setdefault("lang", "zh")
             
             print(f"✅ Data verified: {len(parsed['summary'])} highlights, {len(parsed['categories'])} sections")
             return parsed

@@ -63,7 +63,8 @@ cp .env.example .env
 | `OPENROUTER_MODEL` | 可选 | 默认 `openai/gpt-4o` |
 | `RSS_URL` | 可选 | RSS 地址 |
 | `OUTPUT_DIR` | 可选 | 输出目录，默认 `docs` |
-| `SKIP_WEEKENDS` | 可选 | 默认 `true`：在 **UTC 周六、周日** 不跑主流程（仍可用 `--date` / `--force` 或设为 `false` 绕过） |
+| `SKIP_WEEKENDS` | 可选 | 默认 `true`：在 **`NEWS_DATE_TZ` 时区的周六、周日** 不跑主流程（仍可用 `--date` / `--force` 或设为 `false` 绕过） |
+| `NEWS_DATE_TZ` | 可选 | 不设则用 **`scripts/config.py`** 里的 **`DEFAULT_NEWS_DATE_TZ`**（仓库模板当前为英国 **`Europe/London`**）。fork 后改默认值或设本变量（如 **`Asia/Shanghai`**、**`Etc/UTC`**）即可，不必改业务代码。CI 可在 **Repository variables** 里设同名变量，由 workflow 传入 |
 | `GITHUB_PAGES_URL` | 可选 | 站点根 URL，用于邮件中的「打开报告」链接；在 GitHub Actions 里工作流会注入，一般可不填 |
 | `SMTP_*` | 可选 | 发信账号；不配则跳过邮件 |
 | `NOTIFICATION_TO` | 可选 | **传统**：单一收件人列表（可逗号分隔），邮件文案语言跟随 `--language` |
@@ -74,7 +75,8 @@ cp .env.example .env
 
 ```bash
 export PYTHONPATH="$(pwd)/scripts${PYTHONPATH:+:$PYTHONPATH}"
-python scripts/main.py --days 1          # 默认处理「UTC 昨天」对应日期，可按需改 --days
+python scripts/main.py --days 1          # 默认：「上一工作日」（时区见 config.DEFAULT_NEWS_DATE_TZ 或 NEWS_DATE_TZ）
+# python scripts/main.py --days 2        # 按 UTC 往前数自然日（非工作日历）
 # python scripts/main.py --date 2026-04-16 --language zh
 # python scripts/main.py --language en
 ```
@@ -90,7 +92,7 @@ python scripts/main.py --days 1          # 默认处理「UTC 昨天」对应日
 4. 在 **Actions** 中手动运行一次 **Tomato Tech News Daily Automation**，确认 `build` 与 `deploy` 均成功。  
 5. 站点根地址一般为：`https://<owner>.github.io/<repo>/`（与 `GITHUB_REPOSITORY` 对应）。工作流里已为邮件注入 `GITHUB_PAGES_URL`，与上述地址一致。
 
-定时：**仅工作日（UTC 周一至周五）每天 08:00** 触发（北京时间 16:00）；周末不跑定时任务。手动 **Run workflow** 或 **push** 触发的运行若在周末，默认也会被脚本跳过（与 `SKIP_WEEKENDS` 有关）；周末补跑可设 **`SKIP_WEEKENDS=false`**、传 **`--force`**，或使用 **`--date YYYY-MM-DD`** 指定要生成的日期（不视为「日常定时」）。
+定时：**仅工作日（UTC 周一至周五）每天 08:00** 触发（北京时间 16:00）；周末不跑定时任务。默认 **`--days 1`** 取 **上一工作日**（UTC）：例如 **周一** 构建的是 **上周五** 的 RSS 日期，**周二** 为 **周一**，以此类推。手动 **Run workflow** 或 **push** 触发的运行若在周末，默认也会被脚本跳过（与 `SKIP_WEEKENDS` 有关）；周末补跑可设 **`SKIP_WEEKENDS=false`**、传 **`--force`**，或使用 **`--date YYYY-MM-DD`** 指定要生成的日期（不视为「日常定时」）。
 
 ---
 

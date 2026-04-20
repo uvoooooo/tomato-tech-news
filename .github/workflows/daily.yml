@@ -47,6 +47,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # --days 1：上一工作日，时区由 NEWS_DATE_TZ 决定（默认见 scripts/config.py）。
       - name: Run News Pipeline
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
@@ -62,8 +63,11 @@ jobs:
           FIREFLY_API_KEY: ${{ secrets.FIREFLY_API_KEY }}
           GITHUB_PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
           SKIP_WEEKENDS: ${{ vars.SKIP_WEEKENDS || 'true' }}
+          # Optional override; if unset/empty, Python uses DEFAULT_NEWS_DATE_TZ in scripts/config.py
+          NEWS_DATE_TZ: ${{ vars.NEWS_DATE_TZ }}
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/scripts
+          # 与本地一致：默认拉「上一工作日」RSS；显式某天请改用 workflow_dispatch + 在仓库里加输入或脚本参数
           python scripts/main.py --days 1
 
       - name: Verify Output

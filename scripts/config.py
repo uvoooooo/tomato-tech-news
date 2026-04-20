@@ -4,6 +4,7 @@ Contains all settings, theme definitions, and internationalization (I18N) texts.
 """
 import os
 from typing import Optional, List
+from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -25,6 +26,31 @@ RSS_TIMEOUT = 30
 # Output and Deployment Configuration
 OUTPUT_DIR = os.getenv("OUTPUT_DIR", "docs")
 GITHUB_PAGES_URL = os.getenv("GITHUB_PAGES_URL", "")
+
+# --- Report calendar (IANA zone name) -----------------------------------------
+# Single place to set the default for forks: change DEFAULT_NEWS_DATE_TZ, or set
+# the environment variable NEWS_DATE_TZ (e.g. in .env or CI variables). No need
+# to edit main.py or workflow defaults.
+DEFAULT_NEWS_DATE_TZ = "Europe/London"
+
+
+def _resolved_news_date_tz() -> str:
+    raw = os.getenv("NEWS_DATE_TZ")
+    if raw is None:
+        return DEFAULT_NEWS_DATE_TZ
+    s = str(raw).strip()
+    return s or DEFAULT_NEWS_DATE_TZ
+
+
+NEWS_DATE_TZ = _resolved_news_date_tz()
+
+
+def get_news_timezone() -> ZoneInfo:
+    """Resolve ZoneInfo for NEWS_DATE_TZ; invalid names fall back to DEFAULT_NEWS_DATE_TZ."""
+    try:
+        return ZoneInfo(NEWS_DATE_TZ)
+    except Exception:
+        return ZoneInfo(DEFAULT_NEWS_DATE_TZ)
 
 def _get_env_int(key: str, default: int) -> int:
     """Helper to get integer environment variables with a default value"""

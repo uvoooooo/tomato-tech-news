@@ -6,14 +6,20 @@ import os
 import sys
 import argparse
 import asyncio
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from pathlib import Path
 
 # Setup path for local imports
 BASE_DIR = Path(__file__).parent
 sys.path.insert(0, str(BASE_DIR))
 
-from config import OPENROUTER_API_KEY, OUTPUT_DIR, languages_for_pipeline
+from config import (
+    OPENROUTER_API_KEY,
+    OUTPUT_DIR,
+    languages_for_pipeline,
+    get_news_timezone,
+    NEWS_DATE_TZ,
+)
 from rss_fetcher import NewsLoader
 from llm_analyzer import ContentProcessor
 from html_generator import PageBuilder
@@ -36,14 +42,37 @@ def show_welcome():
 
 
 def resolve_date(offset: int = 1) -> str:
-    """Calculate target date string"""
-    target = datetime.now(timezone.utc) - timedelta(days=offset)
-    return target.strftime("%Y-%m-%d")
+    """
+    Target calendar date for the report.
+
+    Uses **NEWS_DATE_TZ** from config (see **DEFAULT_NEWS_DATE_TZ** / env **NEWS_DATE_TZ**).
+
+    offset == 1: **previous business day** (Mon–Fri). Monday → Friday; Tue–Fri → yesterday.
+
+    offset >= 2: **calendar** days ago in the same timezone.
+    """
+    tz = get_news_timezone()
+    today = datetime.now(tz).date()
+    if offset == 1:
+        d = today - timedelta(days=1)
+        while d.weekday() >= 5:
+            d -= timedelta(days=1)
+        out = d.strftime("%Y-%m-%d")
+        print(
+            f"📅 Date anchor: TZ={NEWS_DATE_TZ} local_today={today} → target={out} (previous weekday)"
+        )
+        return out
+    anchor = datetime.now(tz)
+    target_dt = anchor - timedelta(days=offset)
+    out = target_dt.strftime("%Y-%m-%d")
+    print(f"📅 Date anchor: TZ={NEWS_DATE_TZ} local_today={today} → target={out} (calendar -{offset}d)")
+    return out
 
 
-def _is_weekend_utc() -> bool:
-    """Monday=0 … Sunday=6; treat Sat/Sun as weekend."""
-    return datetime.now(timezone.utc).weekday() >= 5
+def _is_weekend_in_news_tz() -> bool:
+    """Sat/Sun in NEWS_DATE_TZ (weekend skip)."""
+    tz = get_news_timezone()
+    return datetime.now(tz).weekday() >= 5
 
 
 def _skip_weekends_enabled() -> bool:
@@ -55,7 +84,12 @@ async def run_pipeline():
     show_welcome()
 
     cli = argparse.ArgumentParser(description="Tomato AI Daily")
-    cli.add_argument("--days", type=int, default=1, help="Lookback days")
+    cli.add_argument(
+        "--days",
+        type=int,
+        default=1,
+        help="1 = previous weekday in NEWS_DATE_TZ; 2+ = calendar days back in that TZ",
+    )
     cli.add_argument("--date", type=str, help="Specific date (YYYY-MM-DD)")
     cli.add_argument(
         "--language",
@@ -67,7 +101,7 @@ async def run_pipeline():
     cli.add_argument(
         "--force",
         action="store_true",
-        help="Run even on Saturday/Sunday (UTC) when SKIP_WEEKENDS is on",
+        help="Run even on Sat/Sun (NEWS_DATE_TZ) when SKIP_WEEKENDS is on",
     )
     args = cli.parse_args()
 
@@ -76,10 +110,10 @@ async def run_pipeline():
         _skip_weekends_enabled()
         and not args.force
         and not args.date
-        and _is_weekend_utc()
+        and _is_weekend_in_news_tz()
     ):
         print(
-            "⏭️ Skip: today is weekend (UTC). "
+            f"⏭️ Skip: today is weekend ({NEWS_DATE_TZ}). "
             "Use --date YYYY-MM-DD to backfill, --force, or set SKIP_WEEKENDS=false."
         )
         return
