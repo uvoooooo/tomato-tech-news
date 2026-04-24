@@ -31,13 +31,11 @@ htmlcov/
 *~
 
 # Project Specific Output
-# Ignore generated docs except bundled sample (for README) + shared CSS
-docs/**
+# Version daily HTML + archive in git so each Pages deploy still serves past mail links (see workflow).
+docs/*
 !docs/css/
 !docs/css/**
-!docs/2026-04-16-zh.pdf
-!docs/2026-04-16-zh.html
-!docs/index.html
+!docs/*.html
 !docs/.index.json
 
 *.log

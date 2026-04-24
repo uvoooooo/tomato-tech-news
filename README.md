@@ -92,7 +92,8 @@ Check `docs/` for new `YYYY-MM-DD-<lang>.html` and optional PDF.
 3. **Settings → Pages**  
    - **Build and deployment → Source**: choose **GitHub Actions** (this repo uses `upload-pages-artifact` + `deploy-pages`, not the old `gh-pages` branch flow).  
 4. In **Actions**, run **Tomato Tech News Daily Automation** once and confirm `build` and `deploy` succeed.  
-5. The site is usually at `https://<owner>.github.io/<repo>/` (from `GITHUB_REPOSITORY`). The workflow injects `GITHUB_PAGES_URL` for emails to match.
+5. The site is usually at `https://<owner>.github.io/<repo>/` (from `GITHUB_REPOSITORY`). The workflow injects `GITHUB_PAGES_URL` for emails to match.  
+6. After a successful run, the workflow **commits** updated `docs/` (daily HTML, `index.html`, `.index.json`, CSS) to **`main` / `tomatonewsdaily`**, so **older “open report” links in email keep working** on GitHub Pages (each deploy still ships the full `docs/` tree from the branch). If **branch rules** block direct pushes, add an allow rule for **`github-actions[bot]`** (or relax rules for that path) so this step can succeed.
 
 Schedule: **weekdays only (Mon–Fri UTC) at 08:00** (16:00 Beijing); no weekend cron. Default **`--days 1`** uses the **previous business day (UTC)**: e.g. **Monday** builds **Friday**’s RSS date, **Tuesday** builds **Monday**, and so on. Manual **Run workflow** or **push** runs on weekends are also skipped by default (see `SKIP_WEEKENDS`); to backfill, set **`SKIP_WEEKENDS=false`**, use **`--force`**, or **`--date YYYY-MM-DD`** (not treated as the “daily” run).
 
@@ -102,7 +103,7 @@ Schedule: **weekdays only (Mon–Fri UTC) at 08:00** (16:00 Beijing); no weekend
 
 ```
 scripts/           # Pipeline: RSS, LLM, HTML, PDF, email
-docs/              # Site and samples (some paths whitelisted in .gitignore)
+docs/              # Site; daily HTML + archive tracked in git (CI commit) for stable URLs
 .github/workflows/ # daily.yml: scheduled build and Pages
 requirements.txt
 .env.example

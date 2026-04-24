@@ -23,7 +23,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write # commit docs/ after each run so Pages keeps past daily HTML URLs
   pages: write
   id-token: write
 
@@ -69,6 +69,22 @@ jobs:
           export PYTHONPATH=$PYTHONPATH:$(pwd)/scripts
           # 与本地一致：默认拉「上一工作日」RSS；显式某天请改用 workflow_dispatch + 在仓库里加输入或脚本参数
           python scripts/main.py --days 1
+
+      - name: Commit and push docs (keep past daily links on GitHub Pages)
+        if: success() && (github.ref_name == 'main' || github.ref_name == 'tomatonewsdaily')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A -- docs
+          if git diff --staged --quiet; then
+            echo "No docs/ changes; nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore(pages): publish daily HTML [skip actions]"
+          if ! git push origin "HEAD:refs/heads/${{ github.ref_name }}"; then
+            git pull --rebase origin "${{ github.ref_name }}"
+            git push origin "HEAD:refs/heads/${{ github.ref_name }}"
+          fi
 
       - name: Verify Output
         run: |
