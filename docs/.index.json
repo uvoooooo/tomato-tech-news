@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-04-23",
+    "url": "2026-04-23-en.html",
+    "summary": "OpenAI launched GPT-5.5, emphasizing improved token efficiency and new features for coding and knowledge work.",
+    "lang": "en",
+    "ts": "2026-04-24T15:16:35.695254"
+  },
+  {
+    "date": "2026-04-23",
+    "url": "2026-04-23-zh.html",
+    "summary": "OpenAI发布GPT-5.5，作为其新旗舰模型，专注于实际工作和代理功能。",
+    "lang": "zh",
+    "ts": "2026-04-24T15:16:28.076342"
+  },
+  {
     "date": "2026-04-17",
     "url": "2026-04-17-zh.html",
     "summary": "Anthropic推出Claude Design，旨在挑战Figma等设计工具。",
