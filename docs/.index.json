@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-04-24",
+    "url": "2026-04-24-en.html",
+    "summary": "DeepSeek released V4 Pro and V4 Flash, featuring a 1M-token context and hybrid reasoning modes.",
+    "lang": "en",
+    "ts": "2026-04-27T10:25:10.711239"
+  },
+  {
+    "date": "2026-04-24",
+    "url": "2026-04-24-zh.html",
+    "summary": "DeepSeek发布了DeepSeek-V4 Pro和DeepSeek-V4 Flash，首次引入双层架构，支持1M-token上下文，采用MIT许可证。",
+    "lang": "zh",
+    "ts": "2026-04-27T10:25:05.433155"
+  },
+  {
     "date": "2026-04-23",
     "url": "2026-04-23-en.html",
     "summary": "OpenAI launched GPT-5.5, emphasizing improved token efficiency and new features for coding and knowledge work.",
