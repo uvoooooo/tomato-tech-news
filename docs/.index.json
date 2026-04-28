@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-04-27",
+    "url": "2026-04-27-en.html",
+    "summary": "OpenAI expands cloud availability beyond Azure, allowing distribution via Google TPU and AWS.",
+    "lang": "en",
+    "ts": "2026-04-28T10:23:56.306944"
+  },
+  {
+    "date": "2026-04-27",
+    "url": "2026-04-27-zh.html",
+    "summary": "OpenAI放宽Azure独占协议，允许其产品在所有云平台上发布。",
+    "lang": "zh",
+    "ts": "2026-04-28T10:23:46.048434"
+  },
+  {
     "date": "2026-04-24",
     "url": "2026-04-24-en.html",
     "summary": "DeepSeek released V4 Pro and V4 Flash, featuring a 1M-token context and hybrid reasoning modes.",
