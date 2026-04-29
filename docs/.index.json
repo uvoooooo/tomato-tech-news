@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-04-28",
+    "url": "2026-04-28-en.html",
+    "summary": "vLLM v0.20.0 enhances memory and MoE serving efficiency with TurboQuant 2-bit KV cache.",
+    "lang": "en",
+    "ts": "2026-04-29T10:15:09.116275"
+  },
+  {
+    "date": "2026-04-28",
+    "url": "2026-04-28-zh.html",
+    "summary": "vLLM 0.20 发布，提升内存和 MoE 服务效率。",
+    "lang": "zh",
+    "ts": "2026-04-29T10:14:58.046982"
+  },
+  {
     "date": "2026-04-27",
     "url": "2026-04-27-en.html",
     "summary": "OpenAI expands cloud availability beyond Azure, allowing distribution via Google TPU and AWS.",
