@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-04-29",
+    "url": "2026-04-29-en.html",
+    "summary": "OpenAI expands Codex capabilities to include broader knowledge-work tasks.",
+    "lang": "en",
+    "ts": "2026-04-30T10:16:15.246309"
+  },
+  {
+    "date": "2026-04-29",
+    "url": "2026-04-29-zh.html",
+    "summary": "OpenAI将Codex从编码工具转变为通用工作平台，扩展了持久上下文、工具和集成。",
+    "lang": "zh",
+    "ts": "2026-04-30T10:16:03.504368"
+  },
+  {
     "date": "2026-04-28",
     "url": "2026-04-28-en.html",
     "summary": "vLLM v0.20.0 enhances memory and MoE serving efficiency with TurboQuant 2-bit KV cache.",
