@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-04-30",
+    "url": "2026-04-30-en.html",
+    "summary": "OpenAI's GPT-5.5 achieves high performance in cyber tasks, challenging Anthropic's Mythos.",
+    "lang": "en",
+    "ts": "2026-05-01T09:55:02.907975"
+  },
+  {
+    "date": "2026-04-30",
+    "url": "2026-04-30-zh.html",
+    "summary": "OpenAI的GPT-5.5在网络安全任务中表现出色，挑战Anthropic的领先地位。",
+    "lang": "zh",
+    "ts": "2026-05-01T09:54:52.980782"
+  },
+  {
     "date": "2026-04-29",
     "url": "2026-04-29-en.html",
     "summary": "OpenAI expands Codex capabilities to include broader knowledge-work tasks.",
