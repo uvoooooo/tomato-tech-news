@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-01",
+    "url": "2026-05-01-en.html",
+    "summary": "xAI released Grok 4.3 with improved cost/performance but mixed evaluations.",
+    "lang": "en",
+    "ts": "2026-05-04T10:21:44.977952"
+  },
+  {
+    "date": "2026-05-01",
+    "url": "2026-05-01-zh.html",
+    "summary": "Grok 4.3发布，性能提升但评价不一。",
+    "lang": "zh",
+    "ts": "2026-05-04T10:21:34.971250"
+  },
+  {
     "date": "2026-04-30",
     "url": "2026-04-30-en.html",
     "summary": "OpenAI's GPT-5.5 achieves high performance in cyber tasks, challenging Anthropic's Mythos.",
