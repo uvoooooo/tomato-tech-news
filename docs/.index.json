@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-04",
+    "url": "2026-05-04-en.html",
+    "summary": "Harness engineering and context pipelines are becoming critical for AI performance, surpassing model quality alone.",
+    "lang": "en",
+    "ts": "2026-05-05T10:10:07.035162"
+  },
+  {
+    "date": "2026-05-04",
+    "url": "2026-05-04-zh.html",
+    "summary": "模型质量不再是唯一的竞争优势，模型与上下文策略的结合变得重要。",
+    "lang": "zh",
+    "ts": "2026-05-05T10:10:02.060725"
+  },
+  {
     "date": "2026-05-01",
     "url": "2026-05-01-en.html",
     "summary": "xAI released Grok 4.3 with improved cost/performance but mixed evaluations.",
