@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-05",
+    "url": "2026-05-05-en.html",
+    "summary": "OpenAI launched GPT-5.5 Instant, enhancing ChatGPT's factuality and personalization.",
+    "lang": "en",
+    "ts": "2026-05-06T10:25:36.733356"
+  },
+  {
+    "date": "2026-05-05",
+    "url": "2026-05-05-zh.html",
+    "summary": "OpenAI推出GPT-5.5 Instant，增强了ChatGPT的个性化和语音基础设施。",
+    "lang": "zh",
+    "ts": "2026-05-06T10:25:30.998672"
+  },
+  {
     "date": "2026-05-04",
     "url": "2026-05-04-en.html",
     "summary": "Harness engineering and context pipelines are becoming critical for AI performance, surpassing model quality alone.",
