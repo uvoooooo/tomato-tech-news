@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-06",
+    "url": "2026-05-06-en.html",
+    "summary": "Anthropic partners with SpaceX to significantly increase compute capacity, enhancing Claude Code's capabilities.",
+    "lang": "en",
+    "ts": "2026-05-07T10:32:10.254861"
+  },
+  {
+    "date": "2026-05-06",
+    "url": "2026-05-06-zh.html",
+    "summary": "Anthropic与SpaceX达成计算能力合作，提升Claude产品的使用限制。",
+    "lang": "zh",
+    "ts": "2026-05-07T10:32:02.996272"
+  },
+  {
     "date": "2026-05-05",
     "url": "2026-05-05-en.html",
     "summary": "OpenAI launched GPT-5.5 Instant, enhancing ChatGPT's factuality and personalization.",
