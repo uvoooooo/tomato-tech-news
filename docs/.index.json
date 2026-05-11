@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-08",
+    "url": "2026-05-08-en.html",
+    "summary": "OpenAI's GPT-5.5 family expands with new models like GPT-5.5 Pro and GPT-5.5 Cyber, focusing on usability and efficiency",
+    "lang": "en",
+    "ts": "2026-05-11T11:32:56.689939"
+  },
+  {
+    "date": "2026-05-08",
+    "url": "2026-05-08-zh.html",
+    "summary": "OpenAI发布了GPT-5.5系列，扩展了多种产品和功能。",
+    "lang": "zh",
+    "ts": "2026-05-11T11:32:48.016113"
+  },
+  {
     "date": "2026-05-07",
     "url": "2026-05-07-en.html",
     "summary": "OpenAI released GPT-Realtime-2, a voice model with enhanced capabilities and translation features.",
