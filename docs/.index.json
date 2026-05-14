@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-13",
+    "url": "2026-05-13-en.html",
+    "summary": "LangChain introduces SmithDB, enhancing agent infrastructure with faster access on key workloads.",
+    "lang": "en",
+    "ts": "2026-05-14T10:28:21.599145"
+  },
+  {
+    "date": "2026-05-13",
+    "url": "2026-05-13-zh.html",
+    "summary": "LangChain推出了LangSmith Engine和SmithDB，提升了代理生命周期基础设施。",
+    "lang": "zh",
+    "ts": "2026-05-14T10:28:13.406764"
+  },
+  {
     "date": "2026-05-12",
     "url": "2026-05-12-en.html",
     "summary": "Research-level reasoning benchmarks are becoming more challenging, with new math and medical benchmarks released.",
