@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-14",
+    "url": "2026-05-14-en.html",
+    "summary": "OpenAI launched Codex in the ChatGPT mobile app, enhancing remote coding workflows.",
+    "lang": "en",
+    "ts": "2026-05-15T10:34:38.369471"
+  },
+  {
+    "date": "2026-05-14",
+    "url": "2026-05-14-zh.html",
+    "summary": "OpenAI推出Codex移动应用，支持远程控制和审查代码代理会话。",
+    "lang": "zh",
+    "ts": "2026-05-15T10:34:31.910942"
+  },
+  {
     "date": "2026-05-13",
     "url": "2026-05-13-en.html",
     "summary": "LangChain introduces SmithDB, enhancing agent infrastructure with faster access on key workloads.",
