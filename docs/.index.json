@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-15",
+    "url": "2026-05-15-en.html",
+    "summary": "Cerebras IPO marks a significant milestone, highlighting its capability to serve trillion-parameter models, including Op",
+    "lang": "en",
+    "ts": "2026-05-18T11:51:49.268945"
+  },
+  {
+    "date": "2026-05-15",
+    "url": "2026-05-15-zh.html",
+    "summary": "Cerebras成功上市，展示其在推理基础设施中的重要性。",
+    "lang": "zh",
+    "ts": "2026-05-18T11:51:43.099506"
+  },
+  {
     "date": "2026-05-14",
     "url": "2026-05-14-en.html",
     "summary": "OpenAI launched Codex in the ChatGPT mobile app, enhancing remote coding workflows.",
