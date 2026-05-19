@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-18",
+    "url": "2026-05-18-en.html",
+    "summary": "LangSmith Engine and SmithDB enhance agent observability and automation.",
+    "lang": "en",
+    "ts": "2026-05-19T11:28:56.566529"
+  },
+  {
+    "date": "2026-05-18",
+    "url": "2026-05-18-zh.html",
+    "summary": "LangSmith Engine和SmithDB推动代理基础设施的成熟，强调可观察性和自动化。",
+    "lang": "zh",
+    "ts": "2026-05-19T11:28:44.706796"
+  },
+  {
     "date": "2026-05-15",
     "url": "2026-05-15-en.html",
     "summary": "Cerebras IPO marks a significant milestone, highlighting its capability to serve trillion-parameter models, including Op",
