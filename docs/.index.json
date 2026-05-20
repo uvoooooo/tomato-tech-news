@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-19",
+    "url": "2026-05-19-en.html",
+    "summary": "Google I/O 2026 introduced Gemini 3.5 Flash, a high-speed agentic/coding model with 1M-token context and 65k max output.",
+    "lang": "en",
+    "ts": "2026-05-20T11:14:53.263659"
+  },
+  {
+    "date": "2026-05-19",
+    "url": "2026-05-19-zh.html",
+    "summary": "Google在I/O大会上推出了Gemini 3.5 Flash，专注于快速代理和编码工作负载。",
+    "lang": "zh",
+    "ts": "2026-05-20T11:14:47.410233"
+  },
+  {
     "date": "2026-05-18",
     "url": "2026-05-18-en.html",
     "summary": "LangSmith Engine and SmithDB enhance agent observability and automation.",
