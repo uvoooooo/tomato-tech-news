@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-20",
+    "url": "2026-05-20-en.html",
+    "summary": "OpenAI's general-purpose reasoning model disproved a long-standing Erdős problem, showcasing advanced AI capabilities.",
+    "lang": "en",
+    "ts": "2026-05-21T11:33:44.478334"
+  },
+  {
+    "date": "2026-05-20",
+    "url": "2026-05-20-zh.html",
+    "summary": "OpenAI 使用通用推理模型解决了一个长期存在的数学问题。",
+    "lang": "zh",
+    "ts": "2026-05-21T11:33:37.889207"
+  },
+  {
     "date": "2026-05-19",
     "url": "2026-05-19-en.html",
     "summary": "Google I/O 2026 introduced Gemini 3.5 Flash, a high-speed agentic/coding model with 1M-token context and 65k max output.",
