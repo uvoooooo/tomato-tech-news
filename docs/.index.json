@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-21",
+    "url": "2026-05-21-en.html",
+    "summary": "RAEv2 offers >10x faster convergence and improved generation.",
+    "lang": "en",
+    "ts": "2026-05-22T11:12:44.759142"
+  },
+  {
+    "date": "2026-05-21",
+    "url": "2026-05-21-zh.html",
+    "summary": "RAEv2大幅提升了视觉理解与生成的速度和质量。",
+    "lang": "zh",
+    "ts": "2026-05-22T11:12:38.548896"
+  },
+  {
     "date": "2026-05-20",
     "url": "2026-05-20-en.html",
     "summary": "OpenAI's general-purpose reasoning model disproved a long-standing Erdős problem, showcasing advanced AI capabilities.",
