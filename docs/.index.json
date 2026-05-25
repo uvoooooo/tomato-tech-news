@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-22",
+    "url": "2026-05-22-en.html",
+    "summary": "AI development is shifting focus from model quality to a holistic approach including workflow and economics.",
+    "lang": "en",
+    "ts": "2026-05-25T11:58:44.110622"
+  },
+  {
+    "date": "2026-05-22",
+    "url": "2026-05-22-zh.html",
+    "summary": "AI产品开发重点转向综合解决方案，包括模型、工作流和经济性。",
+    "lang": "zh",
+    "ts": "2026-05-25T11:58:38.897502"
+  },
+  {
     "date": "2026-05-21",
     "url": "2026-05-21-en.html",
     "summary": "RAEv2 offers >10x faster convergence and improved generation.",
