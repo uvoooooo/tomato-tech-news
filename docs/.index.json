@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-26",
+    "url": "2026-05-26-en.html",
+    "summary": "Harness engineering is becoming crucial for coding agents, emphasizing model + harness + eval loop.",
+    "lang": "en",
+    "ts": "2026-05-27T11:46:28.849458"
+  },
+  {
+    "date": "2026-05-26",
+    "url": "2026-05-26-zh.html",
+    "summary": "DeepSeek正在构建一个harness团队，以优化模型输出和验证。",
+    "lang": "zh",
+    "ts": "2026-05-27T11:46:19.631886"
+  },
+  {
     "date": "2026-05-22",
     "url": "2026-05-22-en.html",
     "summary": "AI development is shifting focus from model quality to a holistic approach including workflow and economics.",
