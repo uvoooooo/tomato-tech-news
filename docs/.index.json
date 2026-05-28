@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-27",
+    "url": "2026-05-27-en.html",
+    "summary": "EAGLE 3.1 enhances inference efficiency with architectural improvements, reducing attention drift and CPU utilization.",
+    "lang": "en",
+    "ts": "2026-05-28T11:46:42.106877"
+  },
+  {
+    "date": "2026-05-27",
+    "url": "2026-05-27-zh.html",
+    "summary": "EAGLE 3.1通过稳定隐藏状态反馈和减少注意力漂移，提高了推理效率。",
+    "lang": "zh",
+    "ts": "2026-05-28T11:46:30.356706"
+  },
+  {
     "date": "2026-05-26",
     "url": "2026-05-26-en.html",
     "summary": "Harness engineering is becoming crucial for coding agents, emphasizing model + harness + eval loop.",
