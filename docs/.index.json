@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-28",
+    "url": "2026-05-28-en.html",
+    "summary": "Anthropic raised $65B in Series H funding at a $965B valuation, indicating significant growth and enterprise adoption.",
+    "lang": "en",
+    "ts": "2026-05-29T11:36:46.821326"
+  },
+  {
+    "date": "2026-05-28",
+    "url": "2026-05-28-zh.html",
+    "summary": "Anthropic完成65亿美元融资，估值达9650亿美元，并发布Claude Opus 4.8和动态工作流。",
+    "lang": "zh",
+    "ts": "2026-05-29T11:36:37.369775"
+  },
+  {
     "date": "2026-05-27",
     "url": "2026-05-27-en.html",
     "summary": "EAGLE 3.1 enhances inference efficiency with architectural improvements, reducing attention drift and CPU utilization.",
@@ -334,12 +348,5 @@
     "summary": "Anthropic推出Claude Design，旨在挑战Figma等设计工具。",
     "lang": "zh",
     "ts": "2026-04-20T10:43:18.496453"
-  },
-  {
-    "date": "2026-04-16",
-    "url": "2026-04-16-zh.html",
-    "summary": "Anthropic推出Claude Opus 4.7，提升了编码和代理性能。",
-    "lang": "zh",
-    "ts": "2026-04-17T11:53:38.712402"
   }
 ]
