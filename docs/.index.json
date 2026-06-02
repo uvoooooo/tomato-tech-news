@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-01",
+    "url": "2026-06-01-en.html",
+    "summary": "NVIDIA's Cosmos 3 and Nemotron 3 Ultra mark significant advancements in open physical AI models.",
+    "lang": "en",
+    "ts": "2026-06-02T12:13:38.130618"
+  },
+  {
+    "date": "2026-06-01",
+    "url": "2026-06-01-zh.html",
+    "summary": "NVIDIA推出Cosmos 3和Nemotron 3 Ultra，推动开放物理AI的发展。",
+    "lang": "zh",
+    "ts": "2026-06-02T12:13:28.653206"
+  },
+  {
     "date": "2026-05-29",
     "url": "2026-05-29-en.html",
     "summary": "Claude Opus 4.8 rollout shows incremental improvements but mixed evaluations.",
@@ -334,19 +348,5 @@
     "summary": "DeepSeek released V4 Pro and V4 Flash, featuring a 1M-token context and hybrid reasoning modes.",
     "lang": "en",
     "ts": "2026-04-27T10:25:10.711239"
-  },
-  {
-    "date": "2026-04-24",
-    "url": "2026-04-24-zh.html",
-    "summary": "DeepSeek发布了DeepSeek-V4 Pro和DeepSeek-V4 Flash，首次引入双层架构，支持1M-token上下文，采用MIT许可证。",
-    "lang": "zh",
-    "ts": "2026-04-27T10:25:05.433155"
-  },
-  {
-    "date": "2026-04-23",
-    "url": "2026-04-23-en.html",
-    "summary": "OpenAI launched GPT-5.5, emphasizing improved token efficiency and new features for coding and knowledge work.",
-    "lang": "en",
-    "ts": "2026-04-24T15:16:35.695254"
   }
 ]
