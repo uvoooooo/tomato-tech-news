@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-02",
+    "url": "2026-06-02-en.html",
+    "summary": "Microsoft announced seven new MAI models, including MAI-Thinking-1, with detailed technical disclosures.",
+    "lang": "en",
+    "ts": "2026-06-03T12:48:24.974925"
+  },
+  {
+    "date": "2026-06-02",
+    "url": "2026-06-02-zh.html",
+    "summary": "微软在Build大会上推出了七个新的MAI模型，包括MAI-Thinking-1，这是微软的首个推理模型。",
+    "lang": "zh",
+    "ts": "2026-06-03T12:48:15.097000"
+  },
+  {
     "date": "2026-06-01",
     "url": "2026-06-01-en.html",
     "summary": "NVIDIA's Cosmos 3 and Nemotron 3 Ultra mark significant advancements in open physical AI models.",
@@ -334,19 +348,5 @@
     "summary": "OpenAI expands cloud availability beyond Azure, allowing distribution via Google TPU and AWS.",
     "lang": "en",
     "ts": "2026-04-28T10:23:56.306944"
-  },
-  {
-    "date": "2026-04-27",
-    "url": "2026-04-27-zh.html",
-    "summary": "OpenAI放宽Azure独占协议，允许其产品在所有云平台上发布。",
-    "lang": "zh",
-    "ts": "2026-04-28T10:23:46.048434"
-  },
-  {
-    "date": "2026-04-24",
-    "url": "2026-04-24-en.html",
-    "summary": "DeepSeek released V4 Pro and V4 Flash, featuring a 1M-token context and hybrid reasoning modes.",
-    "lang": "en",
-    "ts": "2026-04-27T10:25:10.711239"
   }
 ]
