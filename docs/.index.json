@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-04",
+    "url": "2026-06-04-en.html",
+    "summary": "NVIDIA released Nemotron 3 Ultra, a 550B MoE model, offering significant speed and cost improvements for agentic tasks.",
+    "lang": "en",
+    "ts": "2026-06-05T11:34:50.919610"
+  },
+  {
+    "date": "2026-06-04",
+    "url": "2026-06-04-zh.html",
+    "summary": "NVIDIA发布Nemotron 3 Ultra和3.5 ASR，提升AI模型性能。",
+    "lang": "zh",
+    "ts": "2026-06-05T11:34:43.304546"
+  },
+  {
     "date": "2026-06-03",
     "url": "2026-06-03-en.html",
     "summary": "Microsoft's MAI-Thinking-1 model achieves 97% on AIME 2025 without third-party distillation.",
@@ -334,19 +348,5 @@
     "summary": "OpenAI expands Codex capabilities to include broader knowledge-work tasks.",
     "lang": "en",
     "ts": "2026-04-30T10:16:15.246309"
-  },
-  {
-    "date": "2026-04-29",
-    "url": "2026-04-29-zh.html",
-    "summary": "OpenAI将Codex从编码工具转变为通用工作平台，扩展了持久上下文、工具和集成。",
-    "lang": "zh",
-    "ts": "2026-04-30T10:16:03.504368"
-  },
-  {
-    "date": "2026-04-28",
-    "url": "2026-04-28-en.html",
-    "summary": "vLLM v0.20.0 enhances memory and MoE serving efficiency with TurboQuant 2-bit KV cache.",
-    "lang": "en",
-    "ts": "2026-04-29T10:15:09.116275"
   }
 ]
