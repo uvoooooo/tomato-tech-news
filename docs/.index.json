@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-05",
+    "url": "2026-06-05-en.html",
+    "summary": "Anthropic's Mythos/Opus cycle sparks debate on AI capabilities and benchmark performance.",
+    "lang": "en",
+    "ts": "2026-06-08T12:40:47.011602"
+  },
+  {
+    "date": "2026-06-05",
+    "url": "2026-06-05-zh.html",
+    "summary": "Anthropic 的 Mythos/Opus 周期引发了关于其性能和潜力的讨论。",
+    "lang": "zh",
+    "ts": "2026-06-08T12:40:35.711074"
+  },
+  {
     "date": "2026-06-04",
     "url": "2026-06-04-en.html",
     "summary": "NVIDIA released Nemotron 3 Ultra, a 550B MoE model, offering significant speed and cost improvements for agentic tasks.",
@@ -334,19 +348,5 @@
     "summary": "OpenAI's GPT-5.5 achieves high performance in cyber tasks, challenging Anthropic's Mythos.",
     "lang": "en",
     "ts": "2026-05-01T09:55:02.907975"
-  },
-  {
-    "date": "2026-04-30",
-    "url": "2026-04-30-zh.html",
-    "summary": "OpenAI的GPT-5.5在网络安全任务中表现出色，挑战Anthropic的领先地位。",
-    "lang": "zh",
-    "ts": "2026-05-01T09:54:52.980782"
-  },
-  {
-    "date": "2026-04-29",
-    "url": "2026-04-29-en.html",
-    "summary": "OpenAI expands Codex capabilities to include broader knowledge-work tasks.",
-    "lang": "en",
-    "ts": "2026-04-30T10:16:15.246309"
   }
 ]
