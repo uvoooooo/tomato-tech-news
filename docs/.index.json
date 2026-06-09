@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-08",
+    "url": "2026-06-08-en.html",
+    "summary": "FrontierCode introduces a new benchmark focusing on mergeable software, revealing coding challenges.",
+    "lang": "en",
+    "ts": "2026-06-09T11:25:31.478531"
+  },
+  {
+    "date": "2026-06-08",
+    "url": "2026-06-08-zh.html",
+    "summary": "FrontierCode引入新基准，强调代码可合并性而非仅通过单元测试。",
+    "lang": "zh",
+    "ts": "2026-06-09T11:25:18.240949"
+  },
+  {
     "date": "2026-06-05",
     "url": "2026-06-05-en.html",
     "summary": "Anthropic's Mythos/Opus cycle sparks debate on AI capabilities and benchmark performance.",
@@ -334,19 +348,5 @@
     "summary": "xAI released Grok 4.3 with improved cost/performance but mixed evaluations.",
     "lang": "en",
     "ts": "2026-05-04T10:21:44.977952"
-  },
-  {
-    "date": "2026-05-01",
-    "url": "2026-05-01-zh.html",
-    "summary": "Grok 4.3发布，性能提升但评价不一。",
-    "lang": "zh",
-    "ts": "2026-05-04T10:21:34.971250"
-  },
-  {
-    "date": "2026-04-30",
-    "url": "2026-04-30-en.html",
-    "summary": "OpenAI's GPT-5.5 achieves high performance in cyber tasks, challenging Anthropic's Mythos.",
-    "lang": "en",
-    "ts": "2026-05-01T09:55:02.907975"
   }
 ]
