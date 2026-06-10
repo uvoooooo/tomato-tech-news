@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-09",
+    "url": "2026-06-09-en.html",
+    "summary": "Anthropic released Claude Fable 5 and Mythos 5, with Fable 5 being generally available and Mythos 5 restricted.",
+    "lang": "en",
+    "ts": "2026-06-10T11:45:17.187022"
+  },
+  {
+    "date": "2026-06-09",
+    "url": "2026-06-09-zh.html",
+    "summary": "Anthropic发布了Claude Fable 5和Claude Mythos 5，前者为广泛可用，后者为限制访问。",
+    "lang": "zh",
+    "ts": "2026-06-10T11:45:06.131614"
+  },
+  {
     "date": "2026-06-08",
     "url": "2026-06-08-en.html",
     "summary": "FrontierCode introduces a new benchmark focusing on mergeable software, revealing coding challenges.",
@@ -334,19 +348,5 @@
     "summary": "Harness engineering and context pipelines are becoming critical for AI performance, surpassing model quality alone.",
     "lang": "en",
     "ts": "2026-05-05T10:10:07.035162"
-  },
-  {
-    "date": "2026-05-04",
-    "url": "2026-05-04-zh.html",
-    "summary": "模型质量不再是唯一的竞争优势，模型与上下文策略的结合变得重要。",
-    "lang": "zh",
-    "ts": "2026-05-05T10:10:02.060725"
-  },
-  {
-    "date": "2026-05-01",
-    "url": "2026-05-01-en.html",
-    "summary": "xAI released Grok 4.3 with improved cost/performance but mixed evaluations.",
-    "lang": "en",
-    "ts": "2026-05-04T10:21:44.977952"
   }
 ]
