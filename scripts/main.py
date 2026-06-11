@@ -146,11 +146,7 @@ async def run_pipeline():
                     EMPTY_RSS_MSG.get(lang, EMPTY_RSS_MSG["en"]),
                     lang,
                 )
-            if alerts._is_ready():
-                reason = "RSS feed returned no entries for this date."
-                for lang in langs:
-                    if alerts.recipients_for_locale(lang):
-                        alerts.notify_empty(target_day, reason, mail_locale=lang)
+            print("📭 RSS empty for this date — skipping email notification.")
             return
 
         ai = ContentProcessor()
@@ -168,12 +164,7 @@ async def run_pipeline():
                     report.get("reason", "AI analysis empty"),
                     lang,
                 )
-                if alerts._is_ready() and alerts.recipients_for_locale(lang):
-                    alerts.notify_empty(
-                        target_day,
-                        report.get("reason", "AI analysis empty"),
-                        mail_locale=lang,
-                    )
+                print(f"📭 AI empty for {lang} — skipping email notification.")
                 continue
 
             print("[4/5] Generating HTML...")
@@ -195,11 +186,7 @@ async def run_pipeline():
             print(f"\n✨ Done ({lang}): processed {total} items for {target_day}.")
 
     except Exception as e:
-        print(f"\n💥 Pipeline Error: {e}")
-        if alerts._is_ready():
-            for lang in langs:
-                if alerts.recipients_for_locale(lang):
-                    alerts.notify_failure(target_day, str(e), mail_locale=lang)
+        print(f"\n Pipeline Error: {e}")
         sys.exit(1)
 
 
