@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-22",
+    "url": "2026-06-22-en.html",
+    "summary": "OpenAI's Daybreak program expands into cyber security with GPT-5.5-Cyber.",
+    "lang": "en",
+    "ts": "2026-06-23T11:25:18.987357"
+  },
+  {
+    "date": "2026-06-22",
+    "url": "2026-06-22-zh.html",
+    "summary": "OpenAI推出GPT-5.5-Cyber，扩展其网络安全能力。",
+    "lang": "zh",
+    "ts": "2026-06-23T11:25:08.601080"
+  },
+  {
     "date": "2026-06-19",
     "url": "2026-06-19-en.html",
     "summary": "GLM-5.2 emerges as a strong open-weight coding model, challenging proprietary models.",
@@ -334,19 +348,5 @@
     "summary": "Anthropic partners with SpaceX to significantly increase compute capacity, enhancing Claude Code's capabilities.",
     "lang": "en",
     "ts": "2026-05-07T10:32:10.254861"
-  },
-  {
-    "date": "2026-05-06",
-    "url": "2026-05-06-zh.html",
-    "summary": "Anthropic与SpaceX达成计算能力合作，提升Claude产品的使用限制。",
-    "lang": "zh",
-    "ts": "2026-05-07T10:32:02.996272"
-  },
-  {
-    "date": "2026-05-05",
-    "url": "2026-05-05-en.html",
-    "summary": "OpenAI launched GPT-5.5 Instant, enhancing ChatGPT's factuality and personalization.",
-    "lang": "en",
-    "ts": "2026-05-06T10:25:36.733356"
   }
 ]
