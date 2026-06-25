@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-24",
+    "url": "2026-06-24-en.html",
+    "summary": "OpenAI announced Jalapeño, its first custom AI chip, aiming for full-stack AI infrastructure control.",
+    "lang": "en",
+    "ts": "2026-06-25T10:50:03.559977"
+  },
+  {
+    "date": "2026-06-24",
+    "url": "2026-06-24-zh.html",
+    "summary": "OpenAI推出首款定制AI芯片Jalapeño，旨在增强LLM推理能力。",
+    "lang": "zh",
+    "ts": "2026-06-25T10:49:55.921250"
+  },
+  {
     "date": "2026-06-23",
     "url": "2026-06-23-en.html",
     "summary": "Anthropic launched Claude Tag, a Slack-native feature for team collaboration.",
@@ -334,19 +348,5 @@
     "summary": "OpenAI's GPT-5.5 family expands with new models like GPT-5.5 Pro and GPT-5.5 Cyber, focusing on usability and efficiency",
     "lang": "en",
     "ts": "2026-05-11T11:32:56.689939"
-  },
-  {
-    "date": "2026-05-08",
-    "url": "2026-05-08-zh.html",
-    "summary": "OpenAI发布了GPT-5.5系列，扩展了多种产品和功能。",
-    "lang": "zh",
-    "ts": "2026-05-11T11:32:48.016113"
-  },
-  {
-    "date": "2026-05-07",
-    "url": "2026-05-07-en.html",
-    "summary": "OpenAI released GPT-Realtime-2, a voice model with enhanced capabilities and translation features.",
-    "lang": "en",
-    "ts": "2026-05-08T09:47:18.743600"
   }
 ]
