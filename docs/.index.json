@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-26",
+    "url": "2026-06-26-en.html",
+    "summary": "OpenAI's GPT-5.6 launched with a restricted rollout at the request of the U.S. government.",
+    "lang": "en",
+    "ts": "2026-06-29T12:40:50.383907"
+  },
+  {
+    "date": "2026-06-26",
+    "url": "2026-06-26-zh.html",
+    "summary": "OpenAI推出GPT-5.6，采用受限发布模式，初期仅限于受信任的合作伙伴。",
+    "lang": "zh",
+    "ts": "2026-06-29T12:40:40.469591"
+  },
+  {
     "date": "2026-06-25",
     "url": "2026-06-25-en.html",
     "summary": "GLM-5.2 outperforms in coding benchmarks, showcasing rapid advancements.",
@@ -334,19 +348,5 @@
     "summary": "LangChain推出了LangSmith Engine和SmithDB，提升了代理生命周期基础设施。",
     "lang": "zh",
     "ts": "2026-05-14T10:28:13.406764"
-  },
-  {
-    "date": "2026-05-12",
-    "url": "2026-05-12-en.html",
-    "summary": "Research-level reasoning benchmarks are becoming more challenging, with new math and medical benchmarks released.",
-    "lang": "en",
-    "ts": "2026-05-13T10:38:20.881249"
-  },
-  {
-    "date": "2026-05-12",
-    "url": "2026-05-12-zh.html",
-    "summary": "研究基准测试难度不断增加，推动科学和数学领域的前沿发展。",
-    "lang": "zh",
-    "ts": "2026-05-13T10:38:05.856496"
   }
 ]
