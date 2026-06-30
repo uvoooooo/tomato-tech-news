@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-06-29",
+    "url": "2026-06-29-en.html",
+    "summary": "Meta's Brain2Qwerty v2 achieves real-time sentence decoding from non-invasive brain signals.",
+    "lang": "en",
+    "ts": "2026-06-30T11:16:42.595970"
+  },
+  {
+    "date": "2026-06-29",
+    "url": "2026-06-29-zh.html",
+    "summary": "Meta发布了Brain2Qwerty v2，能够从非侵入性脑信号中实时解码句子。",
+    "lang": "zh",
+    "ts": "2026-06-30T11:16:35.002332"
+  },
+  {
     "date": "2026-06-26",
     "url": "2026-06-26-en.html",
     "summary": "OpenAI's GPT-5.6 launched with a restricted rollout at the request of the U.S. government.",
@@ -334,19 +348,5 @@
     "summary": "OpenAI推出Codex移动应用，支持远程控制和审查代码代理会话。",
     "lang": "zh",
     "ts": "2026-05-15T10:34:31.910942"
-  },
-  {
-    "date": "2026-05-13",
-    "url": "2026-05-13-en.html",
-    "summary": "LangChain introduces SmithDB, enhancing agent infrastructure with faster access on key workloads.",
-    "lang": "en",
-    "ts": "2026-05-14T10:28:21.599145"
-  },
-  {
-    "date": "2026-05-13",
-    "url": "2026-05-13-zh.html",
-    "summary": "LangChain推出了LangSmith Engine和SmithDB，提升了代理生命周期基础设施。",
-    "lang": "zh",
-    "ts": "2026-05-14T10:28:13.406764"
   }
 ]
