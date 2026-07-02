@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-01",
+    "url": "2026-07-01-en.html",
+    "summary": "Anthropic re-enabled Claude Fable 5 with updated safety measures.",
+    "lang": "en",
+    "ts": "2026-07-02T10:48:57.416085"
+  },
+  {
+    "date": "2026-07-01",
+    "url": "2026-07-01-zh.html",
+    "summary": "Anthropic重新启用了Claude Fable 5，并引入了新的安全措施。",
+    "lang": "zh",
+    "ts": "2026-07-02T10:48:47.379702"
+  },
+  {
     "date": "2026-06-29",
     "url": "2026-06-29-en.html",
     "summary": "Meta's Brain2Qwerty v2 achieves real-time sentence decoding from non-invasive brain signals.",
@@ -334,19 +348,5 @@
     "summary": "Cerebras成功上市，展示其在推理基础设施中的重要性。",
     "lang": "zh",
     "ts": "2026-05-18T11:51:43.099506"
-  },
-  {
-    "date": "2026-05-14",
-    "url": "2026-05-14-en.html",
-    "summary": "OpenAI launched Codex in the ChatGPT mobile app, enhancing remote coding workflows.",
-    "lang": "en",
-    "ts": "2026-05-15T10:34:38.369471"
-  },
-  {
-    "date": "2026-05-14",
-    "url": "2026-05-14-zh.html",
-    "summary": "OpenAI推出Codex移动应用，支持远程控制和审查代码代理会话。",
-    "lang": "zh",
-    "ts": "2026-05-15T10:34:31.910942"
   }
 ]
