@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-02",
+    "url": "2026-07-02-en.html",
+    "summary": "Full-stack evaluations are replacing toy coding demos, emphasizing realistic app development.",
+    "lang": "en",
+    "ts": "2026-07-03T10:46:26.972874"
+  },
+  {
+    "date": "2026-07-02",
+    "url": "2026-07-02-zh.html",
+    "summary": "Code Arena推出Fullstack Code Arena，推动从前端到完整应用的评估。",
+    "lang": "zh",
+    "ts": "2026-07-03T10:46:18.810654"
+  },
+  {
     "date": "2026-07-01",
     "url": "2026-07-01-en.html",
     "summary": "Anthropic re-enabled Claude Fable 5 with updated safety measures.",
@@ -334,19 +348,5 @@
     "summary": "LangSmith Engine和SmithDB推动代理基础设施的成熟，强调可观察性和自动化。",
     "lang": "zh",
     "ts": "2026-05-19T11:28:44.706796"
-  },
-  {
-    "date": "2026-05-15",
-    "url": "2026-05-15-en.html",
-    "summary": "Cerebras IPO marks a significant milestone, highlighting its capability to serve trillion-parameter models, including Op",
-    "lang": "en",
-    "ts": "2026-05-18T11:51:49.268945"
-  },
-  {
-    "date": "2026-05-15",
-    "url": "2026-05-15-zh.html",
-    "summary": "Cerebras成功上市，展示其在推理基础设施中的重要性。",
-    "lang": "zh",
-    "ts": "2026-05-18T11:51:43.099506"
   }
 ]
