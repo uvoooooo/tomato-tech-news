@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-06",
+    "url": "2026-07-06-en.html",
+    "summary": "Tencent released Hy3, a competitive open model with advanced inference support.",
+    "lang": "en",
+    "ts": "2026-07-07T11:16:23.054900"
+  },
+  {
+    "date": "2026-07-06",
+    "url": "2026-07-06-zh.html",
+    "summary": "腾讯发布Hy3模型，具有开放权重和强大的推理能力。",
+    "lang": "zh",
+    "ts": "2026-07-07T11:16:11.448185"
+  },
+  {
     "date": "2026-07-02",
     "url": "2026-07-02-en.html",
     "summary": "Full-stack evaluations are replacing toy coding demos, emphasizing realistic app development.",
@@ -334,19 +348,5 @@
     "summary": "Google在I/O大会上推出了Gemini 3.5 Flash，专注于快速代理和编码工作负载。",
     "lang": "zh",
     "ts": "2026-05-20T11:14:47.410233"
-  },
-  {
-    "date": "2026-05-18",
-    "url": "2026-05-18-en.html",
-    "summary": "LangSmith Engine and SmithDB enhance agent observability and automation.",
-    "lang": "en",
-    "ts": "2026-05-19T11:28:56.566529"
-  },
-  {
-    "date": "2026-05-18",
-    "url": "2026-05-18-zh.html",
-    "summary": "LangSmith Engine和SmithDB推动代理基础设施的成熟，强调可观察性和自动化。",
-    "lang": "zh",
-    "ts": "2026-05-19T11:28:44.706796"
   }
 ]
