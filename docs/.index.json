@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-08",
+    "url": "2026-07-08-en.html",
+    "summary": "xAI launched Grok 4.5, a coding-and-agents-focused model, emphasizing capability-per-dollar.",
+    "lang": "en",
+    "ts": "2026-07-09T11:14:25.252476"
+  },
+  {
+    "date": "2026-07-08",
+    "url": "2026-07-08-zh.html",
+    "summary": "xAI发布了Grok 4.5，专注于编码和代理，强调性价比而非绝对性能。",
+    "lang": "zh",
+    "ts": "2026-07-09T11:14:19.680242"
+  },
+  {
     "date": "2026-07-06",
     "url": "2026-07-06-en.html",
     "summary": "Tencent released Hy3, a competitive open model with advanced inference support.",
@@ -334,19 +348,5 @@
     "summary": "OpenAI 使用通用推理模型解决了一个长期存在的数学问题。",
     "lang": "zh",
     "ts": "2026-05-21T11:33:37.889207"
-  },
-  {
-    "date": "2026-05-19",
-    "url": "2026-05-19-en.html",
-    "summary": "Google I/O 2026 introduced Gemini 3.5 Flash, a high-speed agentic/coding model with 1M-token context and 65k max output.",
-    "lang": "en",
-    "ts": "2026-05-20T11:14:53.263659"
-  },
-  {
-    "date": "2026-05-19",
-    "url": "2026-05-19-zh.html",
-    "summary": "Google在I/O大会上推出了Gemini 3.5 Flash，专注于快速代理和编码工作负载。",
-    "lang": "zh",
-    "ts": "2026-05-20T11:14:47.410233"
   }
 ]
