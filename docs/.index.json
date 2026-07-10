@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-09",
+    "url": "2026-07-09-en.html",
+    "summary": "OpenAI launched the GPT-5.6 family, including Sol, Terra, and Luna models.",
+    "lang": "en",
+    "ts": "2026-07-10T11:13:36.257897"
+  },
+  {
+    "date": "2026-07-09",
+    "url": "2026-07-09-zh.html",
+    "summary": "OpenAI发布了GPT-5.6系列，包括Sol、Terra和Luna三种模型，扩展了产品组合。",
+    "lang": "zh",
+    "ts": "2026-07-10T11:13:30.633959"
+  },
+  {
     "date": "2026-07-08",
     "url": "2026-07-08-en.html",
     "summary": "xAI launched Grok 4.5, a coding-and-agents-focused model, emphasizing capability-per-dollar.",
@@ -334,19 +348,5 @@
     "summary": "RAEv2大幅提升了视觉理解与生成的速度和质量。",
     "lang": "zh",
     "ts": "2026-05-22T11:12:38.548896"
-  },
-  {
-    "date": "2026-05-20",
-    "url": "2026-05-20-en.html",
-    "summary": "OpenAI's general-purpose reasoning model disproved a long-standing Erdős problem, showcasing advanced AI capabilities.",
-    "lang": "en",
-    "ts": "2026-05-21T11:33:44.478334"
-  },
-  {
-    "date": "2026-05-20",
-    "url": "2026-05-20-zh.html",
-    "summary": "OpenAI 使用通用推理模型解决了一个长期存在的数学问题。",
-    "lang": "zh",
-    "ts": "2026-05-21T11:33:37.889207"
   }
 ]
