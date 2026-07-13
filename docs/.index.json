@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-10",
+    "url": "2026-07-10-en.html",
+    "summary": "OpenAI's GPT-5.6 introduces model stratification and faces mixed user reactions.",
+    "lang": "en",
+    "ts": "2026-07-13T11:22:25.490140"
+  },
+  {
+    "date": "2026-07-10",
+    "url": "2026-07-10-zh.html",
+    "summary": "OpenAI推出GPT-5.6，强调模型分层和代理用户体验。",
+    "lang": "zh",
+    "ts": "2026-07-13T11:22:12.497847"
+  },
+  {
     "date": "2026-07-09",
     "url": "2026-07-09-en.html",
     "summary": "OpenAI launched the GPT-5.6 family, including Sol, Terra, and Luna models.",
@@ -334,19 +348,5 @@
     "summary": "AI产品开发重点转向综合解决方案，包括模型、工作流和经济性。",
     "lang": "zh",
     "ts": "2026-05-25T11:58:38.897502"
-  },
-  {
-    "date": "2026-05-21",
-    "url": "2026-05-21-en.html",
-    "summary": "RAEv2 offers >10x faster convergence and improved generation.",
-    "lang": "en",
-    "ts": "2026-05-22T11:12:44.759142"
-  },
-  {
-    "date": "2026-05-21",
-    "url": "2026-05-21-zh.html",
-    "summary": "RAEv2大幅提升了视觉理解与生成的速度和质量。",
-    "lang": "zh",
-    "ts": "2026-05-22T11:12:38.548896"
   }
 ]
