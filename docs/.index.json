@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-13",
+    "url": "2026-07-13-en.html",
+    "summary": "Prime Intellect released verifiers v1, optimizing agentic RL infrastructure with message DAGs for efficiency.",
+    "lang": "en",
+    "ts": "2026-07-14T10:06:10.917920"
+  },
+  {
+    "date": "2026-07-13",
+    "url": "2026-07-13-zh.html",
+    "summary": "Prime Intellect发布了verifiers v1，显著提高了agentic RL的效率。",
+    "lang": "zh",
+    "ts": "2026-07-14T10:05:58.293659"
+  },
+  {
     "date": "2026-07-10",
     "url": "2026-07-10-en.html",
     "summary": "OpenAI's GPT-5.6 introduces model stratification and faces mixed user reactions.",
@@ -334,19 +348,5 @@
     "summary": "DeepSeek正在构建一个harness团队，以优化模型输出和验证。",
     "lang": "zh",
     "ts": "2026-05-27T11:46:19.631886"
-  },
-  {
-    "date": "2026-05-22",
-    "url": "2026-05-22-en.html",
-    "summary": "AI development is shifting focus from model quality to a holistic approach including workflow and economics.",
-    "lang": "en",
-    "ts": "2026-05-25T11:58:44.110622"
-  },
-  {
-    "date": "2026-05-22",
-    "url": "2026-05-22-zh.html",
-    "summary": "AI产品开发重点转向综合解决方案，包括模型、工作流和经济性。",
-    "lang": "zh",
-    "ts": "2026-05-25T11:58:38.897502"
   }
 ]
