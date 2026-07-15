@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-14",
+    "url": "2026-07-14-en.html",
+    "summary": "OpenAI's Codex and ChatGPT Work usage surged 2.5x in a week, highlighting strong demand for GPT-5.6 Sol.",
+    "lang": "en",
+    "ts": "2026-07-15T10:10:18.829340"
+  },
+  {
+    "date": "2026-07-14",
+    "url": "2026-07-14-zh.html",
+    "summary": "OpenAI的Codex和ChatGPT Work使用量在一周内增长了2.5倍。",
+    "lang": "zh",
+    "ts": "2026-07-15T10:10:09.061787"
+  },
+  {
     "date": "2026-07-13",
     "url": "2026-07-13-en.html",
     "summary": "Prime Intellect released verifiers v1, optimizing agentic RL infrastructure with message DAGs for efficiency.",
@@ -334,19 +348,5 @@
     "summary": "EAGLE 3.1通过稳定隐藏状态反馈和减少注意力漂移，提高了推理效率。",
     "lang": "zh",
     "ts": "2026-05-28T11:46:30.356706"
-  },
-  {
-    "date": "2026-05-26",
-    "url": "2026-05-26-en.html",
-    "summary": "Harness engineering is becoming crucial for coding agents, emphasizing model + harness + eval loop.",
-    "lang": "en",
-    "ts": "2026-05-27T11:46:28.849458"
-  },
-  {
-    "date": "2026-05-26",
-    "url": "2026-05-26-zh.html",
-    "summary": "DeepSeek正在构建一个harness团队，以优化模型输出和验证。",
-    "lang": "zh",
-    "ts": "2026-05-27T11:46:19.631886"
   }
 ]
