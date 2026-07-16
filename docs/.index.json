@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-15",
+    "url": "2026-07-15-en.html",
+    "summary": "Thinking Machines Lab launched Inkling, a customizable multimodal base model with open weights.",
+    "lang": "en",
+    "ts": "2026-07-16T10:18:54.586836"
+  },
+  {
+    "date": "2026-07-15",
+    "url": "2026-07-15-zh.html",
+    "summary": "Thinking Machines Lab发布了其首个开源权重基础模型家族Inkling，支持文本、图像和音频输入。",
+    "lang": "zh",
+    "ts": "2026-07-16T10:18:47.056843"
+  },
+  {
     "date": "2026-07-14",
     "url": "2026-07-14-en.html",
     "summary": "OpenAI's Codex and ChatGPT Work usage surged 2.5x in a week, highlighting strong demand for GPT-5.6 Sol.",
@@ -334,19 +348,5 @@
     "summary": "Anthropic完成65亿美元融资，估值达9650亿美元，并发布Claude Opus 4.8和动态工作流。",
     "lang": "zh",
     "ts": "2026-05-29T11:36:37.369775"
-  },
-  {
-    "date": "2026-05-27",
-    "url": "2026-05-27-en.html",
-    "summary": "EAGLE 3.1 enhances inference efficiency with architectural improvements, reducing attention drift and CPU utilization.",
-    "lang": "en",
-    "ts": "2026-05-28T11:46:42.106877"
-  },
-  {
-    "date": "2026-05-27",
-    "url": "2026-05-27-zh.html",
-    "summary": "EAGLE 3.1通过稳定隐藏状态反馈和减少注意力漂移，提高了推理效率。",
-    "lang": "zh",
-    "ts": "2026-05-28T11:46:30.356706"
   }
 ]
