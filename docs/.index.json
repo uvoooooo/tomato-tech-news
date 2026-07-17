@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-16",
+    "url": "2026-07-16-en.html",
+    "summary": "Moonshot AI launched Kimi K3, a frontier-class open-weights model with 2.8 trillion parameters and 1M-token context.",
+    "lang": "en",
+    "ts": "2026-07-17T10:06:55.537723"
+  },
+  {
+    "date": "2026-07-16",
+    "url": "2026-07-16-zh.html",
+    "summary": "Moonshot发布Kimi K3，成为最大开源模型，参数达2.8万亿。",
+    "lang": "zh",
+    "ts": "2026-07-17T10:06:48.168575"
+  },
+  {
     "date": "2026-07-15",
     "url": "2026-07-15-en.html",
     "summary": "Thinking Machines Lab launched Inkling, a customizable multimodal base model with open weights.",
@@ -334,19 +348,5 @@
     "summary": "Claude Opus 4.8版本推出，尽管在某些基准测试中表现不佳，但在实际应用中显示出改进。",
     "lang": "zh",
     "ts": "2026-06-01T13:45:25.003833"
-  },
-  {
-    "date": "2026-05-28",
-    "url": "2026-05-28-en.html",
-    "summary": "Anthropic raised $65B in Series H funding at a $965B valuation, indicating significant growth and enterprise adoption.",
-    "lang": "en",
-    "ts": "2026-05-29T11:36:46.821326"
-  },
-  {
-    "date": "2026-05-28",
-    "url": "2026-05-28-zh.html",
-    "summary": "Anthropic完成65亿美元融资，估值达9650亿美元，并发布Claude Opus 4.8和动态工作流。",
-    "lang": "zh",
-    "ts": "2026-05-29T11:36:37.369775"
   }
 ]
