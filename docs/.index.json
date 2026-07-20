@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-17",
+    "url": "2026-07-17-en.html",
+    "summary": "Moonshot's Kimi K3 release prompts reassessment of Chinese AI models' proximity to frontier capabilities.",
+    "lang": "en",
+    "ts": "2026-07-20T11:09:24.412943"
+  },
+  {
+    "date": "2026-07-17",
+    "url": "2026-07-17-zh.html",
+    "summary": "Moonshot发布的Kimi K3模型引发了对中国开放权重模型与前沿技术接近程度的重新评估。",
+    "lang": "zh",
+    "ts": "2026-07-20T11:09:11.121400"
+  },
+  {
     "date": "2026-07-16",
     "url": "2026-07-16-en.html",
     "summary": "Moonshot AI launched Kimi K3, a frontier-class open-weights model with 2.8 trillion parameters and 1M-token context.",
@@ -334,19 +348,5 @@
     "summary": "NVIDIA推出Cosmos 3和Nemotron 3 Ultra，推动开放物理AI的发展。",
     "lang": "zh",
     "ts": "2026-06-02T12:13:28.653206"
-  },
-  {
-    "date": "2026-05-29",
-    "url": "2026-05-29-en.html",
-    "summary": "Claude Opus 4.8 rollout shows incremental improvements but mixed evaluations.",
-    "lang": "en",
-    "ts": "2026-06-01T13:45:34.538179"
-  },
-  {
-    "date": "2026-05-29",
-    "url": "2026-05-29-zh.html",
-    "summary": "Claude Opus 4.8版本推出，尽管在某些基准测试中表现不佳，但在实际应用中显示出改进。",
-    "lang": "zh",
-    "ts": "2026-06-01T13:45:25.003833"
   }
 ]
