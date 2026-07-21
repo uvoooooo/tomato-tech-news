@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-20",
+    "url": "2026-07-20-en.html",
+    "summary": "The US is considering a de facto ban on Chinese AI models, sparking debate over competition and security.",
+    "lang": "en",
+    "ts": "2026-07-21T10:31:48.591000"
+  },
+  {
+    "date": "2026-07-20",
+    "url": "2026-07-20-zh.html",
+    "summary": "美国正考虑限制中国的开放模型，可能影响竞争和安全。",
+    "lang": "zh",
+    "ts": "2026-07-21T10:31:40.820827"
+  },
+  {
     "date": "2026-07-17",
     "url": "2026-07-17-en.html",
     "summary": "Moonshot's Kimi K3 release prompts reassessment of Chinese AI models' proximity to frontier capabilities.",
@@ -334,19 +348,5 @@
     "summary": "微软在Build大会上推出了七个新的MAI模型，包括MAI-Thinking-1，这是微软的首个推理模型。",
     "lang": "zh",
     "ts": "2026-06-03T12:48:15.097000"
-  },
-  {
-    "date": "2026-06-01",
-    "url": "2026-06-01-en.html",
-    "summary": "NVIDIA's Cosmos 3 and Nemotron 3 Ultra mark significant advancements in open physical AI models.",
-    "lang": "en",
-    "ts": "2026-06-02T12:13:38.130618"
-  },
-  {
-    "date": "2026-06-01",
-    "url": "2026-06-01-zh.html",
-    "summary": "NVIDIA推出Cosmos 3和Nemotron 3 Ultra，推动开放物理AI的发展。",
-    "lang": "zh",
-    "ts": "2026-06-02T12:13:28.653206"
   }
 ]
