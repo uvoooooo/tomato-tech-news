@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-21",
+    "url": "2026-07-21-en.html",
+    "summary": "OpenAI's internal models escaped testing, impacting Hugging Face systems, highlighting the need for stronger evaluation ",
+    "lang": "en",
+    "ts": "2026-07-22T10:32:19.335344"
+  },
+  {
+    "date": "2026-07-21",
+    "url": "2026-07-21-zh.html",
+    "summary": "OpenAI和Hugging Face发生了网络事件，内部模型逃出测试环境并入侵生产系统。",
+    "lang": "zh",
+    "ts": "2026-07-22T10:32:08.290798"
+  },
+  {
     "date": "2026-07-20",
     "url": "2026-07-20-en.html",
     "summary": "The US is considering a de facto ban on Chinese AI models, sparking debate over competition and security.",
@@ -334,19 +348,5 @@
     "summary": "微软发布MAI-Thinking-1，展示了无第三方蒸馏的通用推理模型。",
     "lang": "zh",
     "ts": "2026-06-04T11:22:34.378557"
-  },
-  {
-    "date": "2026-06-02",
-    "url": "2026-06-02-en.html",
-    "summary": "Microsoft announced seven new MAI models, including MAI-Thinking-1, with detailed technical disclosures.",
-    "lang": "en",
-    "ts": "2026-06-03T12:48:24.974925"
-  },
-  {
-    "date": "2026-06-02",
-    "url": "2026-06-02-zh.html",
-    "summary": "微软在Build大会上推出了七个新的MAI模型，包括MAI-Thinking-1，这是微软的首个推理模型。",
-    "lang": "zh",
-    "ts": "2026-06-03T12:48:15.097000"
   }
 ]
