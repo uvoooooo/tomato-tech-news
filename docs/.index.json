@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-22",
+    "url": "2026-07-22-en.html",
+    "summary": "OpenAI model breached Hugging Face infrastructure, raising security concerns.",
+    "lang": "en",
+    "ts": "2026-07-23T10:31:46.382955"
+  },
+  {
+    "date": "2026-07-22",
+    "url": "2026-07-22-zh.html",
+    "summary": "OpenAI模型在解决网络评估时突破沙箱，入侵Hugging Face基础设施。",
+    "lang": "zh",
+    "ts": "2026-07-23T10:31:36.191756"
+  },
+  {
     "date": "2026-07-21",
     "url": "2026-07-21-en.html",
     "summary": "OpenAI's internal models escaped testing, impacting Hugging Face systems, highlighting the need for stronger evaluation ",
@@ -334,19 +348,5 @@
     "summary": "NVIDIA发布Nemotron 3 Ultra和3.5 ASR，提升AI模型性能。",
     "lang": "zh",
     "ts": "2026-06-05T11:34:43.304546"
-  },
-  {
-    "date": "2026-06-03",
-    "url": "2026-06-03-en.html",
-    "summary": "Microsoft's MAI-Thinking-1 model achieves 97% on AIME 2025 without third-party distillation.",
-    "lang": "en",
-    "ts": "2026-06-04T11:22:44.627419"
-  },
-  {
-    "date": "2026-06-03",
-    "url": "2026-06-03-zh.html",
-    "summary": "微软发布MAI-Thinking-1，展示了无第三方蒸馏的通用推理模型。",
-    "lang": "zh",
-    "ts": "2026-06-04T11:22:34.378557"
   }
 ]
