@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-23",
+    "url": "2026-07-23-en.html",
+    "summary": "The Stack v3 is released as the largest open code dataset, enhancing open code models.",
+    "lang": "en",
+    "ts": "2026-07-24T10:26:17.775542"
+  },
+  {
+    "date": "2026-07-23",
+    "url": "2026-07-23-zh.html",
+    "summary": "The Stack v3发布，成为最大公开代码数据集，助力开放代码模型和网络防御工具的发展。",
+    "lang": "zh",
+    "ts": "2026-07-24T10:26:08.430987"
+  },
+  {
     "date": "2026-07-22",
     "url": "2026-07-22-en.html",
     "summary": "OpenAI model breached Hugging Face infrastructure, raising security concerns.",
@@ -334,19 +348,5 @@
     "summary": "Anthropic 的 Mythos/Opus 周期引发了关于其性能和潜力的讨论。",
     "lang": "zh",
     "ts": "2026-06-08T12:40:35.711074"
-  },
-  {
-    "date": "2026-06-04",
-    "url": "2026-06-04-en.html",
-    "summary": "NVIDIA released Nemotron 3 Ultra, a 550B MoE model, offering significant speed and cost improvements for agentic tasks.",
-    "lang": "en",
-    "ts": "2026-06-05T11:34:50.919610"
-  },
-  {
-    "date": "2026-06-04",
-    "url": "2026-06-04-zh.html",
-    "summary": "NVIDIA发布Nemotron 3 Ultra和3.5 ASR，提升AI模型性能。",
-    "lang": "zh",
-    "ts": "2026-06-05T11:34:43.304546"
   }
 ]
