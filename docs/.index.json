@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-11-19",
+    "url": "2026-11-19-en.html",
+    "summary": "Google DeepMind released Gemini 4 Neon, outperforming previous models despite being smaller.",
+    "lang": "en",
+    "ts": "2026-11-20T16:53:49.169588"
+  },
+  {
+    "date": "2026-11-19",
+    "url": "2026-11-19-zh.html",
+    "summary": "Google DeepMind推出了Gemini 4 Neon模型，尽管体积较小，但在某些指标上优于Carbon。",
+    "lang": "zh",
+    "ts": "2026-11-20T16:53:41.232174"
+  },
+  {
     "date": "2026-11-20",
     "url": "2026-11-20-en.html",
     "summary": "Anthropic completed the largest IPO in history, valued at $1.5 trillion.",
@@ -40,20 +54,6 @@
     "summary": "Perplexity公司年收入突破10亿美元，估值达30-50亿美元。",
     "lang": "zh",
     "ts": "2026-11-20T11:50:43.414540"
-  },
-  {
-    "date": "2026-11-19",
-    "url": "2026-11-19-en.html",
-    "summary": "Google DeepMind released Gemini 4 Neon, outperforming previous models despite smaller size.",
-    "lang": "en",
-    "ts": "2026-11-20T11:37:16.564257"
-  },
-  {
-    "date": "2026-11-19",
-    "url": "2026-11-19-zh.html",
-    "summary": "Google DeepMind推出了Gemini 4 Neon模型，性能优于Carbon。",
-    "lang": "zh",
-    "ts": "2026-11-20T11:37:10.324270"
   },
   {
     "date": "2026-09-02",
