@@ -63,25 +63,57 @@ class NewsLoader:
             raise ValueError(f"Date format mismatch: {date_str} (use YYYY-MM-DD)")
 
         print(f"🔍 Locating content for: {date_str}")
-        for item in feed_data.entries:
-            # Check published timestamp
-            if hasattr(item, 'published_parsed') and item.published_parsed:
-                pub_time = datetime(*item.published_parsed[:6], tzinfo=timezone.utc)
-                if self._compare_dates(pub_time, target_obj):
-                    return self._format_item(item)
-            
-            # Check URL pattern for date
-            if hasattr(item, 'link'):
-                extracted = self._parse_url_date(item.link)
-                if extracted == date_str:
-                    return self._format_item(item)
+        for item in self._candidate_entries(feed_data.entries):
+            if self._entry_day(item) == target_obj.strftime("%Y-%m-%d"):
+                formatted = self._format_item(item)
+                print(f"✅ Matched: {formatted['title']} ({formatted['link']})")
+                return formatted
 
         print(f"❌ No matching content for {date_str}")
         return None
 
-    def _compare_dates(self, d1: datetime, d2: datetime) -> bool:
-        """Verify if two timestamps fall on the same calendar day"""
-        return d1.date() == d2.date()
+    def _candidate_entries(self, entries) -> List[Any]:
+        """
+        Prefer weekday AINews roundups when the feed mixes them with other posts.
+
+        Latent Space's feed also carries essays and podcasts. Those are skipped
+        once any entry is tagged `ainews` or titled `[AINews]`. A feed with no
+        such entries (the old smol.ai issue feed) is searched as-is.
+        """
+        ainews = [item for item in entries if self._is_ainews(item)]
+        if ainews:
+            print(f"📰 AINews entries: {len(ainews)} (other feed items ignored)")
+            return ainews
+        return list(entries)
+
+    def _is_ainews(self, item) -> bool:
+        """True for Latent Space weekday roundups."""
+        title = str(item.get("title", "")).strip()
+        if title.lower().startswith("[ainews]"):
+            return True
+        for tag in getattr(item, "tags", None) or []:
+            term = tag.get("term", "") if isinstance(tag, dict) else getattr(tag, "term", "")
+            if term and "ainews" in str(term).lower():
+                return True
+        return False
+
+    def _entry_day(self, item) -> Optional[str]:
+        """
+        Calendar day used to match a report.
+
+        Legacy smol.ai issue URLs (`/issues/YY-MM-DD-`) win over pubDate, because
+        those feeds sometimes republish with a stale timestamp. Latent Space
+        permalinks have no date, so the UTC publish date is used.
+        """
+        link = item.get("link", "") or ""
+        url_date = self._parse_url_date(link)
+        if url_date:
+            return url_date
+        parsed = getattr(item, "published_parsed", None)
+        if parsed:
+            pub_time = datetime(*parsed[:6], tzinfo=timezone.utc)
+            return pub_time.strftime("%Y-%m-%d")
+        return None
 
     def _parse_url_date(self, url: str) -> Optional[str]:
         """Extract YYYY-MM-DD from URL path segments"""
@@ -99,8 +131,10 @@ class NewsLoader:
 
     def _format_item(self, raw_item) -> Dict[str, Any]:
         """Clean and structure raw RSS entry data"""
+        title = str(raw_item.get("title", "") or "")
+        title = re.sub(r"(?i)^\[AINews\]\s*", "", title).strip()
         out = {
-            "title": raw_item.get("title", ""),
+            "title": title,
             "link": raw_item.get("link", ""),
             "guid": raw_item.get("id", raw_item.get("guid", raw_item.get("link", ""))),
             "description": raw_item.get("description", ""),
@@ -127,15 +161,12 @@ class NewsLoader:
         if not feed_data.entries:
             return None
             
-        top_item = feed_data.entries[0]
-        if hasattr(top_item, 'link'):
-            url_date = self._parse_url_date(top_item.link)
-            if url_date:
-                return url_date
-        if hasattr(top_item, 'published_parsed') and top_item.published_parsed:
-            ts = datetime(*top_item.published_parsed[:6], tzinfo=timezone.utc)
-            return ts.strftime("%Y-%m-%d")
-        return None
+        dates = [
+            day for day in (
+                self._entry_day(item) for item in self._candidate_entries(feed_data.entries)
+            ) if day
+        ]
+        return max(dates) if dates else None
 
     def get_available_range(self, feed_data: feedparser.FeedParserDict = None) -> tuple:
         """Determine the start and end dates present in the feed"""
@@ -144,13 +175,11 @@ class NewsLoader:
         if not feed_data.entries:
             return None, None
             
-        found_dates = []
-        for item in feed_data.entries:
-            if hasattr(item, 'link'):
-                d = self._parse_url_date(item.link)
-                if d:
-                    found_dates.append(d)
-        
+        found_dates = [
+            day for day in (
+                self._entry_day(item) for item in self._candidate_entries(feed_data.entries)
+            ) if day
+        ]
         if not found_dates:
             return None, None
         return min(found_dates), max(found_dates)

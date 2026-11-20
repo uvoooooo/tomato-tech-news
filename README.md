@@ -10,7 +10,7 @@ Fetches the day’s items from **RSS**, classifies and summarizes them with a **
 
 | Capability | Description |
 |------------|-------------|
-| Data source | Default `news.smol.ai` RSS; override with `RSS_URL` |
+| Data source | Default Latent Space weekday AINews (`https://latent.space/feed`); only `[AINews]` / `ainews` items, matched by publish date. Override with `RSS_URL` |
 | Processing | OpenRouter-compatible API for categorization, takeaways, and keywords |
 | Outputs | Daily HTML under `docs/`, archive `index.html`, styles in `css/styles.css`; **PDF** (Playwright) locally or in CI |
 | Automation | `.github/workflows/daily.yml`: scheduled pipeline and Pages deploy |

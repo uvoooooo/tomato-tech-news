@@ -20,7 +20,9 @@ OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "openai/gpt-4o")
 CLAUDE_MAX_TOKENS = 8192
 
 # RSS Feed Configuration
-RSS_URL = os.getenv("RSS_URL", "https://news.smol.ai/rss.xml")
+# Latent Space weekday AINews roundups. The loader keeps entries tagged
+# `ainews` (title prefix `[AINews]`) and matches them by publish date.
+RSS_URL = os.getenv("RSS_URL", "https://latent.space/feed")
 RSS_TIMEOUT = 30     
 
 # Output and Deployment Configuration
