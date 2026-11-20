@@ -9,6 +9,11 @@ on:
     # 仅工作日 Mon–Fri，UTC 08:00（北京时间 16:00）
     - cron: '0 8 * * 1-5'
   workflow_dispatch:
+    inputs:
+      dates:
+        description: 'Comma-separated YYYY-MM-DD to backfill. Empty runs the previous weekday.'
+        required: false
+        type: string
   push:
     branches:
       - main
@@ -48,8 +53,12 @@ jobs:
           pip install -r requirements.txt
 
       # --days 1：上一工作日，时区由 NEWS_DATE_TZ 决定（默认见 scripts/config.py）。
+      # workflow_dispatch 可传 dates=2026-11-17,2026-11-18 补跑指定日期。
+      # 推送提交信息含 [no run] 时跳过本步，避免改 workflow 时重跑上一工作日。
       - name: Run News Pipeline
+        if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[no run]')
         env:
+          BACKFILL_DATES: ${{ github.event.inputs.dates }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           OPENROUTER_BASE_URL: ${{ secrets.OPENROUTER_BASE_URL }}
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
@@ -67,8 +76,20 @@ jobs:
           NEWS_DATE_TZ: ${{ vars.NEWS_DATE_TZ }}
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/scripts
-          # 与本地一致：默认拉「上一工作日」RSS；显式某天请改用 workflow_dispatch + 在仓库里加输入或脚本参数
-          python scripts/main.py --days 1
+          if [ -n "$BACKFILL_DATES" ]; then
+            IFS=',' read -ra DAYS <<< "$BACKFILL_DATES"
+            for raw in "${DAYS[@]}"; do
+              day=$(printf '%s' "$raw" | tr -d '[:space:]')
+              case "$day" in
+                [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) ;;
+                *) echo "Invalid date: $day"; exit 1 ;;
+              esac
+              echo "===== Backfill $day ====="
+              python scripts/main.py --date "$day"
+            done
+          else
+            python scripts/main.py --days 1
+          fi
 
       - name: Commit and push docs (keep past daily links on GitHub Pages)
         if: success() && (github.ref_name == 'main' || github.ref_name == 'tomatonewsdaily')
