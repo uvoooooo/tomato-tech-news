@@ -10,7 +10,7 @@
 
 | 能力 | 说明 |
 |------|------|
-| 数据源 | 默认 `news.smol.ai` RSS，可通过环境变量 `RSS_URL` 更换 |
+| 数据源 | 默认 Latent Space 工作日 AINews（`https://latent.space/feed`），只取 `[AINews]` / `ainews` 条目并按发布日期匹配；可通过环境变量 `RSS_URL` 更换 |
 | 内容加工 | 使用 OpenRouter 兼容 API，对新闻做分类、要点与关键词提炼 |
 | 产出物 | `docs/` 下日报 HTML、归档 `index.html`、样式 `css/styles.css`，本地/CI 中可另存 **PDF**（Playwright） |
 | 自动化 | `.github/workflows/daily.yml`：定时运行流水线并部署 Pages |
