@@ -28,6 +28,9 @@ MAIL = {
     "zh": {
         "success_subj": "✅ 日报已就绪 - {day}",
         "success_lead": "<strong>{day}</strong> 的日报已发布。",
+        "weekly_subj": "Tomato AI Weekly · {start} – {end}",
+        "weekly_lead": "截至 <strong>{day}</strong> 的一周周报已发布。",
+        "weekly_btn": "打开周报",
         "success_items": "条目数",
         "success_btn": "打开日报",
         "success_copy_hint": "若按钮无法点击，请复制以下链接：",
@@ -45,6 +48,9 @@ MAIL = {
     "en": {
         "success_subj": "✅ Daily Ready - {day}",
         "success_lead": "The report for <strong>{day}</strong> is live.",
+        "weekly_subj": "Tomato AI Weekly · {start} – {end}",
+        "weekly_lead": "The weekly report ending <strong>{day}</strong> is live.",
+        "weekly_btn": "Open Weekly",
         "success_items": "Total items",
         "success_btn": "Open Report",
         "success_copy_hint": "If the button does not work, copy this link:",
@@ -93,18 +99,36 @@ class AlertManager:
     def _is_ready(self) -> bool:
         return bool(self.host and self.sender and self.secret and self._has_any_recipient())
 
-    def notify_success(self, day: str, count: int, mail_locale: str = "zh") -> bool:
-        """Send success email in mail_locale; link points to {day}-{mail_locale}.html"""
+    def notify_success(
+        self,
+        day: str,
+        count: int,
+        mail_locale: str = "zh",
+        kind: str = "daily",
+        window_start: str = "",
+        window_end: str = "",
+    ) -> bool:
+        """Send success email in mail_locale. Weekly links point at week-{day}-{lang}.html."""
         recipients = self.recipients_for_locale(mail_locale)
         if not recipients:
             return True
 
         loc = mail_locale if mail_locale in MAIL else "en"
         t = MAIL[loc]
-        link = self._build_report_link(day, mail_locale)
+        link = self._build_report_link(day, mail_locale, kind)
         safe_href = escape(link, quote=True)
         safe_visible = escape(link)
-        subj = t["success_subj"].format(day=day)
+        weekly = kind == "weekly"
+        if weekly:
+            subj = t["weekly_subj"].format(
+                start=window_start or day,
+                end=window_end or day,
+                day=day,
+            )
+        else:
+            subj = t["success_subj"].format(day=day)
+        lead = t["weekly_lead" if weekly else "success_lead"].format(day=day)
+        button = t["weekly_btn"] if weekly else t["success_btn"]
 
         plain = (
             f"Tomato AI Daily — {day}\n{t['success_items']}: {count}\n\n{link}\n"
@@ -120,11 +144,11 @@ class AlertManager:
                     <h2 style="margin: 0;">Tomato AI Daily</h2>
                 </div>
                 <div style="padding: 25px;">
-                    <p style="font-size: 16px;">{t['success_lead'].format(day=day)}</p>
+                    <p style="font-size: 16px;">{lead}</p>
                     <div style="background: #f0f4f8; padding: 15px; border-radius: 5px; margin: 20px 0;">
                         <p style="margin: 0; color: #34495e;">{t['success_items']}: <strong>{count}</strong></p>
                     </div>
-                    <a href="{safe_href}" style="display: inline-block; text-align: center; background: #3498db; color: #fff; padding: 12px 24px; border-radius: 5px; text-decoration: none; font-weight: bold;">{t['success_btn']}</a>
+                    <a href="{safe_href}" style="display: inline-block; text-align: center; background: #3498db; color: #fff; padding: 12px 24px; border-radius: 5px; text-decoration: none; font-weight: bold;">{button}</a>
                     <p style="margin-top: 18px; font-size: 12px; color: #555; word-break: break-all;">{t['success_copy_hint']}<br><a href="{safe_href}" style="color: #3498db;">{safe_visible}</a></p>
                 </div>
                 <div style="padding: 15px; border-top: 1px solid #eee; font-size: 11px; color: #999; text-align: center;">
@@ -217,12 +241,12 @@ class AlertManager:
         owner, name = repo.split("/", 1)
         return f"https://{owner}.github.io/{name}"
 
-    def _build_report_link(self, day: str, lang: str = "zh") -> str:
+    def _build_report_link(self, day: str, lang: str = "zh", kind: str = "daily") -> str:
         raw_base = GITHUB_PAGES_URL or os.getenv("GITHUB_PAGES_URL", "")
         base = self._normalize_pages_base(raw_base)
         if not base:
             base = self._infer_github_pages_base()
-        path = f"{day}-{lang}.html"
+        path = f"week-{day}-{lang}.html" if kind == "weekly" else f"{day}-{lang}.html"
         if not base:
             return path
         return f"{base.rstrip('/')}/{path}"

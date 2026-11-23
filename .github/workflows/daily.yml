@@ -6,14 +6,21 @@ name: Tomato Tech News Daily Automation
 
 on:
   schedule:
-    # 仅工作日 Mon–Fri，UTC 08:00（北京时间 16:00）
+    # 工作日日报 Mon–Fri，UTC 08:00（北京时间 16:00）
     - cron: '0 8 * * 1-5'
+    # 周六周报：刚结束的那一周。同一时刻，避免周日再出一份。
+    - cron: '0 8 * * 6'
   workflow_dispatch:
     inputs:
       dates:
         description: 'Comma-separated YYYY-MM-DD to backfill. Empty runs the previous weekday.'
         required: false
         type: string
+      weekly:
+        description: 'Generate the weekly report instead of a daily. Uses --date as the week end when dates has one day.'
+        required: false
+        type: boolean
+        default: false
   push:
     branches:
       - main
@@ -76,7 +83,16 @@ jobs:
           NEWS_DATE_TZ: ${{ vars.NEWS_DATE_TZ }}
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/scripts
-          if [ -n "$BACKFILL_DATES" ]; then
+          if [ "${{ github.event.schedule }}" = "0 8 * * 6" ] || [ "${{ github.event.inputs.weekly }}" = "true" ]; then
+            if [ -n "$BACKFILL_DATES" ]; then
+              week_end=$(printf '%s' "$BACKFILL_DATES" | cut -d',' -f1 | tr -d '[:space:]')
+              echo "===== Weekly ending $week_end ====="
+              python scripts/main.py --weekly --date "$week_end"
+            else
+              echo "===== Weekly ====="
+              python scripts/main.py --weekly
+            fi
+          elif [ -n "$BACKFILL_DATES" ]; then
             IFS=',' read -ra DAYS <<< "$BACKFILL_DATES"
             for raw in "${DAYS[@]}"; do
               day=$(printf '%s' "$raw" | tr -d '[:space:]')

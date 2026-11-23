@@ -4,7 +4,7 @@ Uses OpenRouter (OpenAI-compatible API) to analyze, classify, and summarize news
 """
 import os
 import json
-from typing import Dict, Any, Optional
+from typing import Dict, Any, List, Optional
 from openai import OpenAI
 from config import (
     OPENROUTER_BASE_URL,
@@ -40,6 +40,132 @@ class ContentProcessor:
             print(f"✅ AI Engine ready: {self.engine}")
         except Exception as err:
             raise RuntimeError(f"AI Client initialization failed: {err}")
+
+    def rank_week(self, items: List[Dict[str, Any]], date_tag: str, language: str = "zh") -> Dict[str, Any]:
+        """Order every daily item by importance. None are dropped."""
+        ui = I18N.get(language, I18N["zh"])
+        if not items:
+            return self._generate_empty_state(
+                date_tag,
+                ui.get("weekly_empty", "No daily items this week."),
+                language,
+            )
+
+        catalog = []
+        for item in items:
+            catalog.append(
+                f"{item['id']}. category: {item.get('category', '')}\n"
+                f"   title: {item.get('title', '')}\n"
+                f"   summary: {item.get('summary', '')}\n"
+                f"   url: {item.get('url', '')}\n"
+                f"   dailies: {', '.join(item.get('dates') or [])}"
+            )
+        lang_label = "中文" if language == "zh" else "English"
+        ids = ", ".join(item["id"] for item in items)
+        instruction = f"""Rank every item below by importance for a weekly brief.
+Target Language: {lang_label}. Write highlights and keywords in {lang_label}.
+
+Include every id exactly once. Do not drop, merge, or invent items.
+Most important first.
+
+[Items]
+{chr(10).join(catalog)}
+
+[Output]
+Strict JSON only:
+{{
+  "summary": ["Up to 5 highlights, each under 40 words, from the most important items"],
+  "keywords": ["KW1", "KW2"],
+  "order": ["most-important-id", "next-id"]
+}}
+The order array must contain each of these ids once: {ids}
+"""
+        print(f"🤖 Ranking {len(items)} daily items ({language})...")
+        order: List[str] = []
+        summary: List[str] = []
+        keywords: List[str] = []
+        try:
+            chat_response = self.api_client.chat.completions.create(
+                model=self.engine,
+                max_tokens=self.token_limit,
+                temperature=0.2,
+                messages=[{"role": "user", "content": instruction}],
+            )
+            parsed = self._load_json(chat_response.choices[0].message.content)
+            order = [str(item_id) for item_id in parsed.get("order") or []]
+            summary = [str(line) for line in parsed.get("summary") or [] if str(line).strip()]
+            keywords = [str(word) for word in parsed.get("keywords") or [] if str(word).strip()]
+        except Exception as err:
+            print(f"⚠️ Ranking failed, keeping daily order: {err}")
+
+        rank_of = {}
+        for index, item_id in enumerate(order):
+            rank_of.setdefault(item_id, index)
+
+        def importance(item: Dict[str, Any]):
+            return (rank_of.get(item["id"], len(items) + 1), int(item["id"]))
+
+        grouped: Dict[str, List[Dict[str, Any]]] = {}
+        category_order: List[str] = []
+        for item in items:
+            category = item.get("category") or "News"
+            if category not in grouped:
+                grouped[category] = []
+                category_order.append(category)
+            grouped[category].append(item)
+
+        categories = []
+        kept = 0
+        for category in category_order:
+            ordered_items = sorted(grouped[category], key=importance)
+            cards = []
+            for item in ordered_items:
+                tags = list(item.get("dates") or []) + list(item.get("tags") or [])
+                cards.append({
+                    "title": item.get("title", ""),
+                    "summary": item.get("summary", ""),
+                    "url": item.get("url", ""),
+                    "tags": tags[:4],
+                })
+            kept += len(cards)
+            categories.append({
+                "key": category,
+                "name": category,
+                "icon": "",
+                "items": cards,
+            })
+
+        if not summary:
+            top = sorted(items, key=importance)
+            summary = [item["summary"] for item in top[:5] if item.get("summary")]
+
+        print(f"✅ Weekly keeps all {kept} items in {len(categories)} sections")
+        return {
+            "status": "success",
+            "date": date_tag,
+            "lang": language,
+            "theme": FIXED_THEME or DEFAULT_THEME,
+            "summary": summary[:5],
+            "keywords": keywords[:8],
+            "categories": categories,
+        }
+
+    def _load_json(self, text: str) -> Dict[str, Any]:
+        clean_text = text.strip()
+        for marker in ["```json", "```"]:
+            if clean_text.startswith(marker):
+                clean_text = clean_text[len(marker):]
+            if clean_text.endswith("```"):
+                clean_text = clean_text[:-3]
+        clean_text = clean_text.strip()
+        try:
+            return json.loads(clean_text)
+        except json.JSONDecodeError:
+            start = clean_text.find("{")
+            end = clean_text.rfind("}")
+            if start >= 0 and end > start:
+                return json.loads(clean_text[start:end + 1])
+            raise
 
     def process_news(self, raw_data: Dict[str, Any], date_tag: str, language: str = "zh") -> Dict[str, Any]:
         """
@@ -88,7 +214,15 @@ class ContentProcessor:
         keys = " / ".join(topic["key"] for topic in FOCUS_TOPICS)
         papers = self._format_papers(data.get("papers") or [])
         roundup = (data.get("content") or "").strip()
-        roundup_block = roundup[:8000] if roundup else "(none for this date)"
+        roundup_block = roundup[:8000] if roundup else "(none)"
+        highlight_rule = (
+            "2. summary: up to 5 highlights, each under 50 words, drawn only from kept items. "
+            "Cover more than one topic when several topics have items. Do not pad."
+        )
+        keep_rule = (
+            "When a topic's shortlist has clear papers, keep 3 to 4 of the strongest. "
+            "Do not drop a topic because another topic has more papers."
+        )
 
         return f"""You write a narrow research brief. Keep only items that are clearly about the topics below.
 Target Language: {lang_label}. Write titles, summaries, highlights, and keywords in {lang_label}. Keep topic keys and proper nouns as given.
@@ -115,9 +249,9 @@ Body:
 
 [Tasks]
 1. status is "success" when you keep at least one item, otherwise "empty".
-2. summary: up to 5 highlights, each under 50 words, drawn only from kept items. Cover more than one topic when several topics have items. Do not pad.
+{highlight_rule}
 3. categories: one bucket per topic that has clear matches. key must be one of: {keys}.
-   Judge each topic on its own. When a topic's shortlist has clear papers, keep 3 to 4 of the strongest. Do not drop a topic because another topic has more papers.
+   Judge each topic on its own. {keep_rule}
    Omit a topic only when nothing in its shortlist is actually about it.
    A paper goes in exactly one bucket, the best fit among its topic hints.
    Each item needs title, summary (under 60 words), url copied from the source, and up to 3 tags.
@@ -156,11 +290,10 @@ Strict JSON only:
 ```
 """
 
-    def _format_papers(self, papers: list) -> str:
+    def _format_papers(self, papers: list, per_topic: int = 5) -> str:
         """Render a balanced arXiv shortlist, capped per topic."""
         if not papers:
             return "(none)"
-        per_topic = 5
         chosen = []
         seen = set()
         for topic in FOCUS_TOPICS:

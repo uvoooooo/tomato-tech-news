@@ -4,8 +4,9 @@ Responsible for creating the daily news report in HTML format and updating the i
 """
 import os
 import json
-from datetime import datetime
-from html import escape
+from datetime import datetime, timedelta
+from html import escape, unescape
+from html.parser import HTMLParser
 from typing import Dict, Any, List
 from pathlib import Path
 from config import (
@@ -16,6 +17,76 @@ from config import (
     I18N,
     FOCUS_LOOKBACK_DAYS,
 )
+
+class _DailyCardParser(HTMLParser):
+    """Pull news cards out of a generated daily page."""
+
+    def __init__(self):
+        super().__init__()
+        self.section = ""
+        self.items: List[Dict[str, Any]] = []
+        self._current = None
+        self._buf: List[str] = []
+        self._in_h2 = False
+        self._in_h3 = False
+        self._in_summary = False
+        self._in_tag = False
+        self._skip_section = False
+
+    def handle_starttag(self, tag, attrs):
+        attr = dict(attrs)
+        classes = attr.get("class", "")
+        if tag == "section" and "summary-card" in classes:
+            self._skip_section = True
+        elif tag == "section" and "category-section" in classes:
+            self._skip_section = False
+        elif tag == "h2" and "section-title" in classes and not self._skip_section:
+            self._in_h2 = True
+            self._buf = []
+        elif tag == "article" and not self._skip_section:
+            self._current = {
+                "category": self.section,
+                "title": "",
+                "summary": "",
+                "url": "",
+                "tags": [],
+            }
+        elif tag == "h3" and self._current is not None:
+            self._in_h3 = True
+            self._buf = []
+        elif tag == "p" and "news-summary" in classes and self._current is not None:
+            self._in_summary = True
+            self._buf = []
+        elif tag == "a" and "item-link" in classes and self._current is not None:
+            self._current["url"] = attr.get("href", "")
+        elif tag == "span" and "tag" in classes.split() and self._current is not None:
+            self._in_tag = True
+            self._buf = []
+
+    def handle_endtag(self, tag):
+        if tag == "h2" and self._in_h2:
+            self.section = unescape("".join(self._buf).strip())
+            self._in_h2 = False
+        elif tag == "h3" and self._in_h3 and self._current is not None:
+            self._current["title"] = unescape("".join(self._buf).strip())
+            self._in_h3 = False
+        elif tag == "p" and self._in_summary and self._current is not None:
+            self._current["summary"] = unescape("".join(self._buf).strip())
+            self._in_summary = False
+        elif tag == "span" and self._in_tag and self._current is not None:
+            text = unescape("".join(self._buf).strip())
+            if text:
+                self._current["tags"].append(text)
+            self._in_tag = False
+        elif tag == "article" and self._current is not None:
+            if self._current["title"]:
+                self.items.append(self._current)
+            self._current = None
+
+    def handle_data(self, data):
+        if self._in_h2 or self._in_h3 or self._in_summary or self._in_tag:
+            self._buf.append(data)
+
 
 class PageBuilder:
     """Handles construction of HTML reports and index maintenance"""
@@ -34,6 +105,40 @@ class PageBuilder:
         """Prepare asset directories"""
         (self.root / "css").mkdir(parents=True, exist_ok=True)
 
+    def collect_week_items(self, start: str, end: str, lang: str) -> List[Dict[str, Any]]:
+        """Unique news cards from the weekday dailies in an inclusive date window."""
+        start_day = datetime.strptime(start, "%Y-%m-%d").date()
+        end_day = datetime.strptime(end, "%Y-%m-%d").date()
+        merged: Dict[str, Dict[str, Any]] = {}
+        order: List[str] = []
+        day = start_day
+        while day <= end_day:
+            if day.weekday() < 5:
+                path = self.root / f"{day.strftime('%Y-%m-%d')}-{lang}.html"
+                for card in self._read_daily_cards(path):
+                    key = card.get("url") or card["title"].casefold()
+                    if key in merged:
+                        if day.isoformat() not in merged[key]["dates"]:
+                            merged[key]["dates"].append(day.isoformat())
+                    else:
+                        card["dates"] = [day.isoformat()]
+                        merged[key] = card
+                        order.append(key)
+            day += timedelta(days=1)
+        items = []
+        for index, key in enumerate(order, 1):
+            card = merged[key]
+            card["id"] = str(index)
+            items.append(card)
+        return items
+
+    def _read_daily_cards(self, path: Path) -> List[Dict[str, Any]]:
+        if not path.exists():
+            return []
+        parser = _DailyCardParser()
+        parser.feed(path.read_text(encoding="utf-8"))
+        return parser.items
+
     def build_daily(self, data: Dict[str, Any]) -> str:
         """Create a new daily report page"""
         day = data.get("date", datetime.now().strftime("%Y-%m-%d"))
@@ -48,7 +153,7 @@ class PageBuilder:
         data["lang"] = lang
         
         content = self._assemble_html(data, style)
-        fname = f"{day}-{lang}.html"
+        fname = self._report_filename(day, lang, data.get("kind") or "daily")
         fpath = self.root / fname
         
         fpath.write_text(content, encoding='utf-8')
@@ -57,22 +162,29 @@ class PageBuilder:
         self.sync_index(day, data, lang)
         return str(fpath)
 
-    def build_empty(self, day: str, msg: str = "No data", lang: str = "zh") -> str:
+    def _report_filename(self, day: str, lang: str, kind: str = "daily") -> str:
+        """Weekly pages use a separate name so they do not replace that Friday's daily."""
+        if kind == "weekly":
+            return f"week-{day}-{lang}.html"
+        return f"{day}-{lang}.html"
+
+    def build_empty(self, day: str, msg: str = "No data", lang: str = "zh", kind: str = "daily") -> str:
         """Create a placeholder page for missing data"""
         ui = I18N.get(lang, I18N["zh"])
+        title = ui.get("weekly_title", ui["title"]) if kind == "weekly" else ui["title"]
         html = f"""<!DOCTYPE html>
 <html lang="{lang}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{ui['title']} · {day}</title>
+    <title>{title} · {day}</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="container">
         <header class="header">
             <div class="logo-icon">🍅</div>
-            <h1>{ui['title']}</h1>
+            <h1>{title}</h1>
             <div class="date-badge">{self._pretty_date(day, lang)}</div>
         </header>
         <main class="main-content" style="text-align: center; padding: 100px 0;">
@@ -85,7 +197,7 @@ class PageBuilder:
     </div>
 </body>
 </html>"""
-        fpath = self.root / f"{day}-{lang}.html"
+        fpath = self.root / self._report_filename(day, lang, kind)
         fpath.write_text(html, encoding='utf-8')
         return str(fpath)
 
@@ -95,8 +207,16 @@ class PageBuilder:
         # Use safe get with default to avoid KeyError
         lang = data.get("lang") or data.get("language") or "zh"
         ui = I18N.get(lang, I18N["zh"])
-        date_label = self._pretty_date(day, lang)
-        focus_line = escape(ui.get("focus", "").format(n=FOCUS_LOOKBACK_DAYS))
+        kind = data.get("kind") or "daily"
+        page_title = ui.get("weekly_title", ui["title"]) if kind == "weekly" else ui["title"]
+        if kind == "weekly" and data.get("window_start"):
+            date_label = f"{data['window_start']} – {data.get('window_end', day)}"
+            focus_line = ""
+            highlights_label = ui.get("weekly_highlights", ui["highlights"])
+        else:
+            date_label = self._pretty_date(day, lang)
+            focus_line = escape(ui.get("focus", "").format(n=FOCUS_LOOKBACK_DAYS))
+            highlights_label = ui["highlights"]
         
         # Highlights
         highlights_section = ""
@@ -106,7 +226,7 @@ class PageBuilder:
             ])
             highlights_section = f"""
             <section class="summary-card">
-                <h2 class="section-title">{ui['highlights']}</h2>
+                <h2 class="section-title">{highlights_label}</h2>
                 <ul class="summary-list">
                     {items}
                 </ul>
@@ -144,7 +264,7 @@ class PageBuilder:
 
         # Keywords
         keywords_bar = ""
-        if data.get("keywords"):
+        if kind != "weekly" and data.get("keywords"):
             keywords_bar = f"""
             <footer class="keywords-footer">
                 <p>{ui['keywords']}: {escape(' / '.join(str(k) for k in data['keywords']))}</p>
@@ -155,7 +275,7 @@ class PageBuilder:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{ui['title']} · {date_label}</title>
+    <title>{page_title} · {date_label}</title>
     <meta name="description" content="{SITE_META['description']}">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -164,9 +284,9 @@ class PageBuilder:
     <div class="container">
         <header class="header">
             <div class="logo-icon">🍅</div>
-            <h1>{ui['title']}</h1>
+            <h1>{page_title}</h1>
             <div class="date-badge">{date_label}</div>
-            <p class="focus-line">{focus_line}</p>
+            {f'<p class="focus-line">{focus_line}</p>' if focus_line else ''}
         </header>
         <main class="main-content">
             {highlights_section}
@@ -179,6 +299,17 @@ class PageBuilder:
     </div>
 </body>
 </html>"""
+
+    def _index_date(self, entry: Dict[str, Any]) -> str:
+        """Archive label. Weeklies show their range so they stay distinct from a Friday daily."""
+        lang = entry.get("lang", "zh")
+        if (entry.get("kind") or "daily") == "weekly":
+            start = entry.get("window_start") or ""
+            end = entry.get("window_end") or entry.get("date", "")
+            if start and end:
+                return f"Week · {start} – {end}"
+            return f"Week · {self._pretty_date(entry.get('date', ''), lang)}"
+        return self._pretty_date(entry.get("date", ""), lang)
 
     def _pretty_date(self, dstr: str, lang: str) -> str:
         """Format date for human reading"""
@@ -203,18 +334,26 @@ class PageBuilder:
                 log = []
             
         summary = data.get("summary", [""])[0]
+        kind = data.get("kind") or "daily"
         entry = {
             "date": day,
-            "url": f"{day}-{lang}.html",
+            "url": self._report_filename(day, lang, kind),
             "summary": summary[:120],
             "lang": lang,
+            "kind": kind,
+            "window_start": data.get("window_start", ""),
+            "window_end": data.get("window_end", ""),
             "ts": datetime.now().isoformat()
         }
         
-        # Merge: one row per (date, lang) so zh/en on the same day both appear
+        # One row per (date, lang, kind) so a Friday daily and that week's report both stay
         log = [
             e for e in log
-            if not (e.get("date") == day and e.get("lang", "zh") == lang)
+            if not (
+                e.get("date") == day
+                and e.get("lang", "zh") == lang
+                and (e.get("kind") or "daily") == kind
+            )
         ]
         log.insert(0, entry)
         log = log[:50]
@@ -228,7 +367,7 @@ class PageBuilder:
             rows += f"""
             <article class="index-entry">
                 <a href="{e.get('url', '#')}" class="entry-link">
-                    <span class="entry-date">{self._pretty_date(e.get('date', ''), e_lang)}</span>
+                    <span class="entry-date">{self._index_date(e)}</span>
                     <p class="entry-summary">{e.get('summary', '')}</p>
                 </a>
             </article>"""

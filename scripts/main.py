@@ -15,12 +15,12 @@ sys.path.insert(0, str(BASE_DIR))
 
 from config import (
     OPENROUTER_API_KEY,
-    OUTPUT_DIR,
     languages_for_pipeline,
     get_news_timezone,
     NEWS_DATE_TZ,
     I18N,
     FOCUS_LOOKBACK_DAYS,
+    WEEKLY_WINDOW_DAYS,
 )
 from rss_fetcher import NewsLoader
 from arxiv_fetcher import PaperLoader
@@ -82,6 +82,123 @@ def _skip_weekends_enabled() -> bool:
     return os.getenv("SKIP_WEEKENDS", "true").lower() in ("1", "true", "yes")
 
 
+def completed_week_end(today):
+    """Friday that closes the latest finished work week."""
+    weekday = today.weekday()
+    if weekday >= 5:
+        return today - timedelta(days=weekday - 4)
+    if weekday == 4:
+        return today
+    return today - timedelta(days=weekday + 3)
+
+
+def week_window(end_day):
+    """Inclusive window of WEEKLY_WINDOW_DAYS ending on end_day."""
+    span = max(WEEKLY_WINDOW_DAYS, 1)
+    return end_day - timedelta(days=span - 1), end_day
+
+
+async def _emit(builder, alerts, report, lang: str, kind: str = "daily"):
+    """Write one language of a report and notify when mail is configured."""
+    day = report.get("date", "")
+    if report.get("status") == "empty":
+        print(f"⚠️ Empty analysis for {lang}.")
+        builder.build_empty(
+            day,
+            report.get("reason", "AI analysis empty"),
+            lang,
+            kind=kind,
+        )
+        print(f"📭 Empty for {lang} — skipping email notification.")
+        return
+
+    print("[4/5] Generating HTML...")
+    html_file = builder.build_daily(report)
+
+    print("[5/5] Finalizing exports...")
+    pdf_file = str(Path(html_file).with_suffix(".pdf"))
+    try:
+        await capture_screenshot(html_file, pdf_file)
+    except Exception as err:
+        print(f"⚠️ PDF export failed: {err}")
+
+    total = sum(len(c.get("items", [])) for c in report.get("categories", []))
+    if alerts._is_ready():
+        alerts.notify_success(
+            day,
+            total,
+            mail_locale=lang,
+            kind=kind,
+            window_start=report.get("window_start") or "",
+            window_end=report.get("window_end") or "",
+        )
+    print(f"\n✨ Done ({lang}): processed {total} items for {day}.")
+
+
+async def run_weekly(args):
+    """One report covering the week that ends on the latest finished Friday."""
+    langs = languages_for_pipeline(args.language)
+    if args.date:
+        end = datetime.strptime(args.date, "%Y-%m-%d").date()
+    else:
+        end = completed_week_end(datetime.now(get_news_timezone()).date())
+    start, end = week_window(end)
+    start_s = start.strftime("%Y-%m-%d")
+    end_s = end.strftime("%Y-%m-%d")
+    print(f"📅 Week: {start_s} → {end_s} | Report language(s): {', '.join(langs)}")
+
+    alerts = AlertManager()
+    builder = PageBuilder()
+
+    try:
+        await _run_weekly_body(langs, start_s, end_s, alerts, builder)
+    except Exception as err:
+        print(f"\n Pipeline Error: {err}")
+        sys.exit(1)
+
+
+async def _run_weekly_body(langs, start_s, end_s, alerts, builder):
+    print("\n[1/4] Reading this week's dailies...")
+    builder.write_styles()
+    collected = {
+        lang: builder.collect_week_items(start_s, end_s, lang)
+        for lang in langs
+    }
+    for lang, items in collected.items():
+        print(f"   {lang}: {len(items)} unique items")
+
+    if not any(collected.values()):
+        print("⚠️ No daily items in this week. Generating empty page(s).")
+        for lang in langs:
+            builder.build_empty(
+                end_s,
+                I18N.get(lang, I18N["zh"]).get("weekly_empty", EMPTY_RSS_MSG["en"]),
+                lang,
+                kind="weekly",
+            )
+        return
+
+    ai = ContentProcessor()
+    for lang in langs:
+        items = collected[lang]
+        print(f"\n========== Language: {lang} ==========")
+        if not items:
+            builder.build_empty(
+                end_s,
+                I18N.get(lang, I18N["zh"]).get("weekly_empty", EMPTY_RSS_MSG["en"]),
+                lang,
+                kind="weekly",
+            )
+            print(f"📭 No {lang} dailies in this week — skipping email notification.")
+            continue
+        print(f"[2/4] Ranking {len(items)} items ({lang})...")
+        report = ai.rank_week(items, end_s, lang)
+        report["kind"] = "weekly"
+        report["window_start"] = start_s
+        report["window_end"] = end_s
+        await _emit(builder, alerts, report, lang, kind="weekly")
+
+
 async def run_pipeline():
     """Execute the full automation sequence"""
     show_welcome()
@@ -106,9 +223,22 @@ async def run_pipeline():
         action="store_true",
         help="Run even on Sat/Sun (NEWS_DATE_TZ) when SKIP_WEEKENDS is on",
     )
+    cli.add_argument(
+        "--weekly",
+        action="store_true",
+        help="Weekly brief for the 7 days ending the latest finished Friday. --date sets that end day.",
+    )
     args = cli.parse_args()
 
-    # Weekends: no scheduled work unless backfilling (--date) or --force / SKIP_WEEKENDS=false
+    if not OPENROUTER_API_KEY:
+        print("❌ Error: OPENROUTER_API_KEY not found.")
+        sys.exit(1)
+
+    if args.weekly:
+        await run_weekly(args)
+        return
+
+    # Weekends: no scheduled daily unless backfilling (--date) or --force / SKIP_WEEKENDS=false
     if (
         _skip_weekends_enabled()
         and not args.force
@@ -120,10 +250,6 @@ async def run_pipeline():
             "Use --date YYYY-MM-DD to backfill, --force, or set SKIP_WEEKENDS=false."
         )
         return
-
-    if not OPENROUTER_API_KEY:
-        print("❌ Error: OPENROUTER_API_KEY not found.")
-        sys.exit(1)
 
     langs = languages_for_pipeline(args.language)
     target_day = args.date or resolve_date(args.days)
@@ -175,34 +301,10 @@ async def run_pipeline():
             print(f"\n========== Language: {lang} ==========")
             print(f"[3/5] AI Analysis ({lang})...")
             report = ai.process_news(bundle, target_day, lang)
-
-            if report.get("status") == "empty":
-                print(f"⚠️ AI returned empty analysis for {lang}.")
-                builder.build_empty(
-                    target_day,
-                    report.get("reason", "AI analysis empty"),
-                    lang,
-                )
-                print(f"📭 AI empty for {lang} — skipping email notification.")
-                continue
-
-            print("[4/5] Generating HTML...")
-            html_file = builder.build_daily(report)
-
-            print("[5/5] Finalizing exports...")
-            pdf_file = str(Path(OUTPUT_DIR) / f"{target_day}-{lang}.pdf")
-            try:
-                await capture_screenshot(html_file, pdf_file)
-            except Exception as e:
-                print(f"⚠️ PDF export failed: {e}")
-
-            total = sum(
-                len(c.get("items", [])) for c in report.get("categories", [])
-            )
-            if alerts._is_ready():
-                alerts.notify_success(target_day, total, mail_locale=lang)
-
-            print(f"\n✨ Done ({lang}): processed {total} items for {target_day}.")
+            report["kind"] = "daily"
+            report["window_start"] = bundle["window_start"]
+            report["window_end"] = bundle["window_end"]
+            await _emit(builder, alerts, report, lang, kind="daily")
 
     except Exception as e:
         print(f"\n Pipeline Error: {e}")

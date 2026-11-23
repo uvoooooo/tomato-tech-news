@@ -124,6 +124,9 @@ I18N = {
         "subtitle": "Agent Memory · Agent RSI · AI for Math · Coding Agent",
         "focus": "关注 Agent Memory、Agent RSI、AI for Math、Coding Agent · arXiv 近 {n} 日",
         "highlights": "Today's Highlights",
+        "weekly_title": "Tomato AI Weekly",
+        "weekly_highlights": "This Week",
+        "weekly_empty": "这一周的日报里没有条目。",
         "keywords": "Keywords",
         "read_more": "Read More",
         "empty_title": "No News Today",
@@ -144,6 +147,9 @@ I18N = {
         "subtitle": "Agent Memory · Agent RSI · AI for Math · Coding Agent",
         "focus": "Focus: Agent Memory, Agent RSI, AI for Math, Coding Agent · arXiv last {n} days",
         "highlights": "Highlights",
+        "weekly_title": "Tomato AI Weekly",
+        "weekly_highlights": "This Week",
+        "weekly_empty": "The dailies in this week had no items.",
         "keywords": "Keywords",
         "read_more": "Read More",
         "empty_title": "No News Today",
@@ -164,6 +170,8 @@ I18N = {
 # Topics the daily keeps. Anything outside this list is dropped.
 # arXiv queries use the API's search_query syntax.
 FOCUS_LOOKBACK_DAYS = _get_env_int("FOCUS_LOOKBACK_DAYS", 7)
+# Inclusive length of a weekend weekly. 7 ends on Friday and starts the Saturday before.
+WEEKLY_WINDOW_DAYS = _get_env_int("WEEKLY_WINDOW_DAYS", 7)
 ARXIV_API_URL = os.getenv("ARXIV_API_URL", "https://export.arxiv.org/api/query")
 ARXIV_MAX_RESULTS = _get_env_int("ARXIV_MAX_RESULTS", 12)
 ARXIV_TIMEOUT = _get_env_int("ARXIV_TIMEOUT", 25)
