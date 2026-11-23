@@ -37,6 +37,8 @@ docs/*
 !docs/css/**
 !docs/*.html
 !docs/.index.json
+# Local layout previews. Not published pages.
+docs/*preview.html
 
 *.log
 *.pdf
