@@ -2,22 +2,22 @@
   {
     "date": "2026-11-20",
     "url": "2026-11-20-en.html",
-    "summary": "VMSA introduces a video memory skill agent for long video understanding, focusing on effective retrieval and reasoning.",
+    "summary": "VMSA introduces a video memory skill agent for long video understanding, enhancing retrieval and reasoning capabilities.",
     "lang": "en",
     "kind": "daily",
     "window_start": "2026-11-14",
     "window_end": "2026-11-20",
-    "ts": "2026-11-23T17:37:03.281678"
+    "ts": "2026-11-23T20:03:41.067281"
   },
   {
     "date": "2026-11-20",
     "url": "2026-11-20-zh.html",
-    "summary": "Mem-X基准测试评估智能体在跨情节视觉和语言导航中的记忆依赖性。",
+    "summary": "VMSA通过视频记忆技能智能体提高长视频理解能力。",
     "lang": "zh",
     "kind": "daily",
     "window_start": "2026-11-14",
     "window_end": "2026-11-20",
-    "ts": "2026-11-23T17:36:49.857470"
+    "ts": "2026-11-23T20:03:30.245185"
   },
   {
     "date": "2026-11-20",
