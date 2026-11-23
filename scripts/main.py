@@ -19,8 +19,11 @@ from config import (
     languages_for_pipeline,
     get_news_timezone,
     NEWS_DATE_TZ,
+    I18N,
+    FOCUS_LOOKBACK_DAYS,
 )
 from rss_fetcher import NewsLoader
+from arxiv_fetcher import PaperLoader
 from llm_analyzer import ContentProcessor
 from html_generator import PageBuilder
 from notifier import AlertManager
@@ -130,24 +133,40 @@ async def run_pipeline():
     builder = PageBuilder()
 
     try:
-        print("\n[1/5] Fetching RSS...")
+        print("\n[1/5] Fetching sources...")
         loader = NewsLoader()
         feed = loader.pull_feed()
-
-        print("[2/5] Locating content...")
         raw_news = loader.fetch_by_day(target_day, feed)
 
-        if not raw_news:
-            print("⚠️ No content found. Generating empty page(s).")
+        print("[2/5] Fetching arXiv...")
+        papers = []
+        try:
+            papers = PaperLoader().fetch_for_date(target_day)
+        except Exception as err:
+            print(f"⚠️ arXiv fetch failed: {err}")
+
+        if not raw_news and not papers:
+            print("⚠️ No roundup and no papers. Generating empty page(s).")
             builder.write_styles()
             for lang in langs:
                 builder.build_empty(
                     target_day,
-                    EMPTY_RSS_MSG.get(lang, EMPTY_RSS_MSG["en"]),
+                    I18N.get(lang, I18N["zh"]).get("empty_focus", EMPTY_RSS_MSG["en"]),
                     lang,
                 )
-            print("📭 RSS empty for this date — skipping email notification.")
+            print("📭 Nothing on focus for this date — skipping email notification.")
             return
+
+        window_end = datetime.strptime(target_day, "%Y-%m-%d").date()
+        window_start = window_end - timedelta(days=max(FOCUS_LOOKBACK_DAYS, 1) - 1)
+        bundle = {
+            "title": (raw_news or {}).get("title") or "Focus digest",
+            "link": (raw_news or {}).get("link") or "",
+            "content": (raw_news or {}).get("content") or "",
+            "papers": papers,
+            "window_start": window_start.strftime("%Y-%m-%d"),
+            "window_end": target_day,
+        }
 
         ai = ContentProcessor()
         builder.write_styles()
@@ -155,7 +174,7 @@ async def run_pipeline():
         for lang in langs:
             print(f"\n========== Language: {lang} ==========")
             print(f"[3/5] AI Analysis ({lang})...")
-            report = ai.process_news(raw_news, target_day, lang)
+            report = ai.process_news(bundle, target_day, lang)
 
             if report.get("status") == "empty":
                 print(f"⚠️ AI returned empty analysis for {lang}.")

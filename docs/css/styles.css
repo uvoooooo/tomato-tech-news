@@ -23,6 +23,7 @@ body {
 .logo-icon { font-size: 32px; margin-bottom: 16px; }
 .header h1 { font-size: 48px; font-weight: 800; color: var(--title-color); letter-spacing: -0.04em; }
 .date-badge { font-size: 14px; color: var(--secondary-color); text-transform: uppercase; letter-spacing: 0.1em; }
+.focus-line { margin-top: 12px; font-size: 14px; color: var(--secondary-color); }
 .section-title { font-size: 13px; font-weight: 700; color: var(--secondary-color); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
 .summary-card { margin-bottom: 64px; }
 .summary-list { list-style: none; }

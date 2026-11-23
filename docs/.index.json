@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-11-20",
+    "url": "2026-11-20-zh.html",
+    "summary": "Mem-X基准测试评估智能体在跨情节视觉和语言导航中的记忆依赖性。",
+    "lang": "zh",
+    "ts": "2026-11-23T14:38:41.897990"
+  },
+  {
     "date": "2026-11-19",
     "url": "2026-11-19-en.html",
     "summary": "Google DeepMind released Gemini 4 Neon, outperforming previous models despite being smaller.",
@@ -19,13 +26,6 @@
     "summary": "Anthropic completed the largest IPO in history, valued at $1.5 trillion.",
     "lang": "en",
     "ts": "2026-11-20T11:51:17.608305"
-  },
-  {
-    "date": "2026-11-20",
-    "url": "2026-11-20-zh.html",
-    "summary": "Anthropic完成历史上最大IPO，估值达1.5万亿美元。",
-    "lang": "zh",
-    "ts": "2026-11-20T11:51:13.331663"
   },
   {
     "date": "2026-11-18",

@@ -5,6 +5,7 @@ Responsible for creating the daily news report in HTML format and updating the i
 import os
 import json
 from datetime import datetime
+from html import escape
 from typing import Dict, Any, List
 from pathlib import Path
 from config import (
@@ -12,7 +13,8 @@ from config import (
     THEMES,
     SITE_META,
     GITHUB_PAGES_URL,
-    I18N
+    I18N,
+    FOCUS_LOOKBACK_DAYS,
 )
 
 class PageBuilder:
@@ -94,11 +96,14 @@ class PageBuilder:
         lang = data.get("lang") or data.get("language") or "zh"
         ui = I18N.get(lang, I18N["zh"])
         date_label = self._pretty_date(day, lang)
+        focus_line = escape(ui.get("focus", "").format(n=FOCUS_LOOKBACK_DAYS))
         
         # Highlights
         highlights_section = ""
         if data.get("summary"):
-            items = "\n".join([f'<li class="summary-item">{s}</li>' for s in data["summary"]])
+            items = "\n".join([
+                f'<li class="summary-item">{escape(str(s))}</li>' for s in data["summary"]
+            ])
             highlights_section = f"""
             <section class="summary-card">
                 <h2 class="section-title">{ui['highlights']}</h2>
@@ -114,19 +119,26 @@ class PageBuilder:
             
             cards = ""
             for item in cat["items"]:
-                tags = "".join([f'<span class="tag">{t}</span>' for t in item.get("tags", [])[:3]])
-                link = f'<a href="{item["url"]}" class="item-link" target="_blank">{ui["read_more"]}</a>' if item.get("url") else ""
+                tags = "".join([
+                    f'<span class="tag">{escape(str(t))}</span>'
+                    for t in item.get("tags", [])[:3]
+                ])
+                link = ""
+                if item.get("url"):
+                    href = escape(item["url"], quote=True)
+                    link = f'<a href="{href}" class="item-link" target="_blank">{ui["read_more"]}</a>'
                 cards += f"""
                 <article class="news-card">
-                    <h3 class="news-title">{item['title']}</h3>
-                    <p class="news-summary">{item['summary']}</p>
+                    <h3 class="news-title">{escape(item['title'])}</h3>
+                    <p class="news-summary">{escape(item['summary'])}</p>
                     {link}
                     <div class="item-tags">{tags}</div>
                 </article>"""
             
+            heading = escape(f"{cat.get('icon', '')} {cat['name']}".strip())
             news_sections += f"""
             <section class="category-section">
-                <h2 class="section-title">{cat['name']}</h2>
+                <h2 class="section-title">{heading}</h2>
                 <div class="news-grid">{cards}</div>
             </section>"""
 
@@ -135,7 +147,7 @@ class PageBuilder:
         if data.get("keywords"):
             keywords_bar = f"""
             <footer class="keywords-footer">
-                <p>{ui['keywords']}: {' / '.join(data['keywords'])}</p>
+                <p>{ui['keywords']}: {escape(' / '.join(str(k) for k in data['keywords']))}</p>
             </footer>"""
 
         return f"""<!DOCTYPE html>
@@ -154,6 +166,7 @@ class PageBuilder:
             <div class="logo-icon">🍅</div>
             <h1>{ui['title']}</h1>
             <div class="date-badge">{date_label}</div>
+            <p class="focus-line">{focus_line}</p>
         </header>
         <main class="main-content">
             {highlights_section}
@@ -271,6 +284,7 @@ body {
 .logo-icon { font-size: 32px; margin-bottom: 16px; }
 .header h1 { font-size: 48px; font-weight: 800; color: var(--title-color); letter-spacing: -0.04em; }
 .date-badge { font-size: 14px; color: var(--secondary-color); text-transform: uppercase; letter-spacing: 0.1em; }
+.focus-line { margin-top: 12px; font-size: 14px; color: var(--secondary-color); }
 .section-title { font-size: 13px; font-weight: 700; color: var(--secondary-color); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
 .summary-card { margin-bottom: 64px; }
 .summary-list { list-style: none; }

@@ -11,10 +11,10 @@ from config import (
     OPENROUTER_API_KEY,
     OPENROUTER_MODEL,
     CLAUDE_MAX_TOKENS,
-    CATEGORIES,
-    THEMES,
     DEFAULT_THEME,
-    FIXED_THEME
+    FIXED_THEME,
+    FOCUS_TOPICS,
+    I18N,
 )
 
 class ContentProcessor:
@@ -51,8 +51,14 @@ class ContentProcessor:
         Returns:
             Structured analysis result
         """
-        if not raw_data or not raw_data.get("content"):
-            return self._generate_empty_state(date_tag, "No content provided", language)
+        has_roundup = bool(raw_data and raw_data.get("content"))
+        has_papers = bool(raw_data and raw_data.get("papers"))
+        if not has_roundup and not has_papers:
+            return self._generate_empty_state(
+                date_tag,
+                I18N.get(language, I18N["zh"]).get("empty_focus", "No content provided"),
+                language,
+            )
 
         print(f"🤖 Requesting AI analysis ({language})...")
         instruction = self._compose_instruction(raw_data, date_tag, language)
@@ -74,46 +80,52 @@ class ContentProcessor:
     def _compose_instruction(self, data: Dict[str, Any], date: str, lang: str) -> str:
         """Build the structured prompt for the AI"""
         lang_label = "中文" if lang == "zh" else "English"
-        
-        cat_list = "\n".join([
-            f"- {c['icon']} {c['name']}: {c['description']}"
-            for c in CATEGORIES.values()
+        topic_list = "\n".join([
+            f"- {topic['key']} {topic['icon']} {topic['name']['en']}: "
+            f"{topic['description'].get(lang, topic['description']['en'])}"
+            for topic in FOCUS_TOPICS
         ])
-        
-        theme_list = "\n".join([
-            f"- {k}: {t['name']} - {t['description']}"
-            for k, t in THEMES.items()
-        ])
-        
-        return f"""You are an expert AI technology scout. Analyze the provided daily news content.
-Target Language: {lang_label}.
+        keys = " / ".join(topic["key"] for topic in FOCUS_TOPICS)
+        papers = self._format_papers(data.get("papers") or [])
+        roundup = (data.get("content") or "").strip()
+        roundup_block = roundup[:8000] if roundup else "(none for this date)"
+
+        return f"""You write a narrow research brief. Keep only items that are clearly about the topics below.
+Target Language: {lang_label}. Write titles, summaries, highlights, and keywords in {lang_label}. Keep topic keys and proper nouns as given.
+
+[Topics]
+{topic_list}
+
+Drop general model launches, funding, product news, and policy unless they are specifically about one of these topics.
 
 [Target Date]
 {date}
+Paper window: {data.get('window_start', date)} through {data.get('window_end', date)}
 
-[News Source]
+[arXiv papers]
+{papers}
+
+[Industry roundup]
 Title: {data.get('title', 'Unknown')}
-URL: {data.get('link', '#')}
+URL: {data.get('link', '') or '(none)'}
 Body:
-{data.get('content', '')[:14000]}
+{roundup_block}
 
 ---
 
 [Tasks]
-1. Verify if content is meaningful. Status: "success" or "empty".
-2. Highlights: Extract 3-5 critical breakthroughs or events. Keep each under 50 words.
-3. Categorization: Group news into these buckets:
-{cat_list}
-
-   Each bucket should have:
-   - key: ID (model/product/research/tools/funding/events)
-   - name: Localized name ({lang_label})
-   - icon: Assigned emoji
-   - items: List of entries (title, summary, url, tags)
-
-4. Keywords: Identify 5-10 trending entities or concepts.
-5. Visual Theme: Pick the most appropriate style:
-{theme_list}
+1. status is "success" when you keep at least one item, otherwise "empty".
+2. summary: up to 5 highlights, each under 50 words, drawn only from kept items. Cover more than one topic when several topics have items. Do not pad.
+3. categories: one bucket per topic that has clear matches. key must be one of: {keys}.
+   Judge each topic on its own. When a topic's shortlist has clear papers, keep 3 to 4 of the strongest. Do not drop a topic because another topic has more papers.
+   Omit a topic only when nothing in its shortlist is actually about it.
+   A paper goes in exactly one bucket, the best fit among its topic hints.
+   Each item needs title, summary (under 60 words), url copied from the source, and up to 3 tags.
+   Tag arXiv items "arXiv" and roundup items "AINews".
+   From the roundup, keep only on-topic developments and link them to the roundup URL.
+   Do not invent papers, titles, or URLs.
+4. keywords: 5-8 specific terms that appear in the kept items.
+5. theme: "blue".
 
 [Output Format]
 Strict JSON only:
@@ -127,15 +139,15 @@ Strict JSON only:
   "keywords": ["KW1", "KW2"],
   "categories": [
     {{
-      "key": "model",
-      "name": "Models",
-      "icon": "🤖",
+      "key": "coding_agent",
+      "name": "Coding Agent",
+      "icon": "💻",
       "items": [
         {{
           "title": "Short Title",
           "summary": "Brief summary",
-          "url": "link",
-          "tags": ["tag1"]
+          "url": "https://arxiv.org/abs/0000.00000",
+          "tags": ["arXiv", "SWE-bench"]
         }}
       ]
     }}
@@ -143,6 +155,36 @@ Strict JSON only:
 }}
 ```
 """
+
+    def _format_papers(self, papers: list) -> str:
+        """Render a balanced arXiv shortlist, capped per topic."""
+        if not papers:
+            return "(none)"
+        per_topic = 5
+        chosen = []
+        seen = set()
+        for topic in FOCUS_TOPICS:
+            kept = 0
+            for paper in papers:
+                if paper.get("id") in seen or topic["key"] not in (paper.get("topics") or []):
+                    continue
+                seen.add(paper.get("id"))
+                chosen.append(paper)
+                kept += 1
+                if kept >= per_topic:
+                    break
+        blocks = []
+        for index, paper in enumerate(chosen, 1):
+            topics = ", ".join(paper.get("topics") or [])
+            abstract = (paper.get("summary") or "")[:400]
+            blocks.append(
+                f"{index}. topics: {topics}\n"
+                f"   title: {paper.get('title', '')}\n"
+                f"   published: {paper.get('published', '')}\n"
+                f"   url: {paper.get('url', '')}\n"
+                f"   abstract: {abstract}"
+            )
+        return "\n\n".join(blocks)
 
     def _decode_ai_output(self, text: str, date: str, language: str = "zh") -> Dict[str, Any]:
         """Parse and validate the JSON returned by AI"""
@@ -166,12 +208,61 @@ Strict JSON only:
             parsed.setdefault("summary", [])
             parsed.setdefault("keywords", [])
             parsed.setdefault("categories", [])
-            
+            parsed = self._keep_focus_topics(parsed, language)
+
             print(f"✅ Data verified: {len(parsed['summary'])} highlights, {len(parsed['categories'])} sections")
             return parsed
         except json.JSONDecodeError as err:
             print(f"❌ JSON decoding failed: {err}")
             return self._create_emergency_fallback({"title": "Parsing Error"}, date)
+
+    def _keep_focus_topics(self, parsed: Dict[str, Any], language: str) -> Dict[str, Any]:
+        """Drop buckets and items outside the configured focus topics."""
+        by_key = {}
+        for category in parsed.get("categories") or []:
+            key = category.get("key")
+            if key in by_key or not any(topic["key"] == key for topic in FOCUS_TOPICS):
+                continue
+            items = []
+            for item in category.get("items") or []:
+                title = str(item.get("title") or "").strip()
+                if not title:
+                    continue
+                tags = [str(tag).strip() for tag in (item.get("tags") or []) if str(tag).strip()]
+                items.append({
+                    "title": title,
+                    "summary": str(item.get("summary") or "").strip(),
+                    "url": str(item.get("url") or "").strip(),
+                    "tags": tags[:3],
+                })
+            if items:
+                by_key[key] = items
+
+        ordered = []
+        for topic in FOCUS_TOPICS:
+            items = by_key.get(topic["key"])
+            if not items:
+                continue
+            label = topic["name"].get(language, topic["name"]["en"])
+            ordered.append({
+                "key": topic["key"],
+                "name": label,
+                "icon": topic["icon"],
+                "items": items,
+            })
+
+        parsed["categories"] = ordered
+        if not ordered:
+            parsed["status"] = "empty"
+            parsed["summary"] = []
+            parsed["keywords"] = []
+            parsed["reason"] = I18N.get(language, I18N["zh"]).get(
+                "empty_focus",
+                "No items matched the focus topics.",
+            )
+        else:
+            parsed["status"] = "success"
+        return parsed
 
     def _generate_empty_state(self, date: str, msg: str, lang: str) -> Dict[str, Any]:
         """Standardized response for missing data"""
@@ -189,23 +280,14 @@ Strict JSON only:
     def _create_emergency_fallback(self, data: Dict[str, Any], date: str) -> Dict[str, Any]:
         """Minimal result when AI fails completely"""
         return {
-            "status": "success",
+            "status": "empty",
             "date": date,
             "theme": DEFAULT_THEME,
-            "summary": ["System encountered a processing error. Displaying raw data."],
-            "keywords": ["Error"],
-            "categories": [{
-                "key": "model",
-                "name": "General",
-                "icon": "🤖",
-                "items": [{
-                    "title": data.get("title", "Unknown"),
-                    "summary": "Unable to analyze content.",
-                    "url": data.get("link", ""),
-                    "tags": ["System"]
-                }]
-            }],
-            "lang": "en"
+            "summary": [],
+            "keywords": [],
+            "categories": [],
+            "reason": "AI processing failed",
+            "lang": "en",
         }
 
 def analyze_content(content: Dict[str, Any], target_date: str) -> Dict[str, Any]:
