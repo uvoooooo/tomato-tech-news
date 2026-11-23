@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 from html import escape
-from typing import List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from config import (
     SMTP_HOST,
@@ -17,6 +17,7 @@ from config import (
     SMTP_USER,
     SMTP_PASSWORD,
     GITHUB_PAGES_URL,
+    I18N,
     NOTIFICATION_RECIPIENTS,
     NOTIFICATION_TO_ZH,
     NOTIFICATION_TO_EN,
@@ -26,13 +27,15 @@ from config import (
 # Email body copy: mail_locale matches report link locale (zh / en)
 MAIL = {
     "zh": {
-        "success_subj": "✅ 日报已就绪 - {day}",
+        "success_subj": "Tomato AI Daily · {day}",
         "success_lead": "<strong>{day}</strong> 的日报已发布。",
         "weekly_subj": "Tomato AI Weekly · {start} – {end}",
         "weekly_lead": "截至 <strong>{day}</strong> 的一周周报已发布。",
         "weekly_btn": "打开周报",
         "success_items": "条目数",
         "success_btn": "打开日报",
+        "open_web": "在网页打开 ↗",
+        "items_unit": "条",
         "success_copy_hint": "若按钮无法点击，请复制以下链接：",
         "empty_subj": "📭 今日无内容 - {day}",
         "empty_title": "今日无更新 — {day}",
@@ -46,13 +49,15 @@ MAIL = {
         "footer_utc": "生成时间（UTC）",
     },
     "en": {
-        "success_subj": "✅ Daily Ready - {day}",
+        "success_subj": "Tomato AI Daily · {day}",
         "success_lead": "The report for <strong>{day}</strong> is live.",
         "weekly_subj": "Tomato AI Weekly · {start} – {end}",
         "weekly_lead": "The weekly report ending <strong>{day}</strong> is live.",
         "weekly_btn": "Open Weekly",
         "success_items": "Total items",
         "success_btn": "Open Report",
+        "open_web": "Open on the web ↗",
+        "items_unit": "items",
         "success_copy_hint": "If the button does not work, copy this link:",
         "empty_subj": "📭 No News - {day}",
         "empty_title": "No updates for {day}",
@@ -66,6 +71,203 @@ MAIL = {
         "footer_utc": "Generated at",
     },
 }
+
+_FONT = (
+    "Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',"
+    "'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"
+)
+_READ_MORE = "Read More ↗"
+
+
+def _pretty_mail_date(day: str, lang: str) -> str:
+    """Short date badge for the mail header, matching the site."""
+    ui = I18N.get(lang, I18N["zh"])
+    try:
+        dt = datetime.strptime(day, "%Y-%m-%d")
+        weekday = ui["weekdays"][dt.weekday()]
+        if lang == "zh":
+            return dt.strftime(ui["date_format"]) + f" {weekday}"
+        return f"{weekday}, " + dt.strftime(ui["date_format"])
+    except ValueError:
+        return day
+
+
+def _mail_date_label(report: Dict[str, Any], lang: str) -> str:
+    kind = report.get("kind") or "daily"
+    day = report.get("date") or ""
+    if kind == "weekly" and report.get("window_start"):
+        return f"{report['window_start']} – {report.get('window_end', day)}"
+    return _pretty_mail_date(day, lang)
+
+
+def build_inline_report_email(
+    report: Dict[str, Any],
+    link: str,
+    mail_locale: str = "zh",
+) -> Tuple[str, str]:
+    """Dark inline-styled report body for the inbox. Returns (html, plain)."""
+    loc = mail_locale if mail_locale in MAIL else "en"
+    t = MAIL[loc]
+    ui = I18N.get(loc, I18N["zh"])
+    kind = report.get("kind") or "daily"
+    weekly = kind == "weekly"
+    page_title = ui.get("weekly_title", ui["title"]) if weekly else ui["title"]
+    highlights_label = (
+        ui.get("weekly_highlights", ui["highlights"]) if weekly else ui["highlights"]
+    )
+    date_label = _mail_date_label(report, loc)
+    count = sum(len(c.get("items", [])) for c in report.get("categories", []))
+    meta = f"{date_label} · {count} {t['items_unit']}"
+    safe_href = escape(link, quote=True)
+    year = datetime.utcnow().year
+
+    highlights = [str(s).strip() for s in (report.get("summary") or []) if str(s).strip()]
+    preheader = highlights[0] if highlights else meta
+
+    blocks: List[str] = []
+
+    if highlights:
+        blocks.append(_section_label(highlights_label))
+        blocks.append('<tr><td height="28" style="font-size:0;line-height:0;">&nbsp;</td></tr>')
+        for line in highlights:
+            blocks.append(_highlight_row(line))
+        blocks.append('<tr><td height="40" style="font-size:0;line-height:0;">&nbsp;</td></tr>')
+
+    for cat in report.get("categories") or []:
+        items = cat.get("items") or []
+        if not items:
+            continue
+        heading = f"{cat.get('icon', '')} {cat.get('name', '')}".strip()
+        blocks.append(_section_label(heading))
+        blocks.append('<tr><td height="24" style="font-size:0;line-height:0;">&nbsp;</td></tr>')
+        for item in items:
+            blocks.append(_card_row(item, ui.get("read_more", "Read More")))
+        blocks.append('<tr><td height="28" style="font-size:0;line-height:0;">&nbsp;</td></tr>')
+
+    body_rows = "\n".join(blocks)
+    html = f"""<!DOCTYPE html>
+<html lang="{loc}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="supported-color-schemes" content="dark">
+  <title>{escape(page_title)} · {escape(date_label)}</title>
+</head>
+<body bgcolor="#000000" style="margin:0;padding:0;background:#000000;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#000000;">{escape(preheader)}</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#000000" style="background:#000000;">
+    <tr><td align="center" style="padding:56px 20px 64px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;">
+        <tr><td style="padding:0 0 14px;font-size:28px;line-height:32px;">🍅</td></tr>
+        <tr><td style="font-family:{_FONT};font-size:40px;line-height:44px;font-weight:800;letter-spacing:-0.04em;color:#ffffff;">{escape(page_title)}</td></tr>
+        <tr><td style="padding:12px 0 0;font-family:{_FONT};font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#888888;">{escape(meta)}</td></tr>
+        <tr><td height="56" style="font-size:0;line-height:0;">&nbsp;</td></tr>
+        {body_rows}
+        <tr><td height="24" style="font-size:0;line-height:0;">&nbsp;</td></tr>
+        <tr><td align="left" style="padding:0;">
+          <a href="{safe_href}" style="display:inline-block;font-family:{_FONT};font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;padding:12px 18px;border:1px solid #333333;border-radius:6px;">{escape(t["open_web"])}</a>
+        </td></tr>
+        <tr><td height="36" style="font-size:0;line-height:0;">&nbsp;</td></tr>
+        <tr><td style="font-family:{_FONT};font-size:12px;line-height:18px;color:#555555;">© {year} {escape(ui["title"])} · {escape(ui["footer_text"])}</td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>"""
+
+    plain_lines = [page_title, meta, ""]
+    if highlights:
+        plain_lines.append(highlights_label)
+        for line in highlights:
+            plain_lines.append(f"- {line}")
+        plain_lines.append("")
+    for cat in report.get("categories") or []:
+        items = cat.get("items") or []
+        if not items:
+            continue
+        heading = f"{cat.get('icon', '')} {cat.get('name', '')}".strip()
+        plain_lines.append(heading)
+        for item in items:
+            title = str(item.get("title") or "").strip()
+            summary = str(item.get("summary") or "").strip()
+            url = str(item.get("url") or "").strip()
+            plain_lines.append(f"* {title}")
+            if summary:
+                plain_lines.append(f"  {summary}")
+            if url:
+                plain_lines.append(f"  {url}")
+        plain_lines.append("")
+    plain_lines.append(link)
+    return html, "\n".join(plain_lines).rstrip() + "\n"
+
+
+def _section_label(text: str) -> str:
+    return (
+        f'<tr><td style="padding:0 0 10px;font-family:{_FONT};font-size:12px;'
+        f'font-weight:700;letter-spacing:0.12em;text-transform:uppercase;'
+        f'color:#888888;border-bottom:1px solid #222222;">{escape(text)}</td></tr>'
+    )
+
+
+def _highlight_row(text: str) -> str:
+    return f"""
+            <tr><td style="padding:0 0 14px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+                <td valign="top" width="22" style="font-family:{_FONT};font-size:16px;line-height:24px;color:#888888;">→</td>
+                <td style="font-family:{_FONT};font-size:16px;line-height:24px;font-weight:500;color:#ffffff;">{escape(text)}</td>
+              </tr></table>
+            </td></tr>"""
+
+
+def _card_row(item: Dict[str, Any], read_more_label: str) -> str:
+    title = str(item.get("title") or "").strip()
+    summary = str(item.get("summary") or "").strip()
+    url = str(item.get("url") or "").strip()
+    tags = [str(tag).strip() for tag in (item.get("tags") or []) if str(tag).strip()][:4]
+    safe_title = escape(title)
+    title_html = safe_title
+    if url:
+        href = escape(url, quote=True)
+        title_html = (
+            f'<a href="{href}" style="color:#ffffff;text-decoration:none;">{safe_title}</a>'
+        )
+    summary_html = (
+        f'<tr><td style="padding:8px 0 0;font-family:{_FONT};font-size:15px;'
+        f'line-height:22px;color:#cccccc;">{escape(summary)}</td></tr>'
+        if summary
+        else ""
+    )
+    more_html = ""
+    if url:
+        href = escape(url, quote=True)
+        label = escape(f"{read_more_label} ↗" if "↗" not in read_more_label else read_more_label)
+        # Prefer the fixed approved copy when the site string is plain "Read More".
+        if read_more_label == "Read More":
+            label = escape(_READ_MORE)
+        more_html = (
+            f'<tr><td style="padding:12px 0 0;font-family:{_FONT};font-size:14px;'
+            f'font-weight:600;"><a href="{href}" style="color:#ffffff;text-decoration:none;">'
+            f"{label}</a></td></tr>"
+        )
+    tags_html = ""
+    if tags:
+        pills = "".join(
+            f'<span style="display:inline-block;margin:0 8px 8px 0;padding:4px 10px;'
+            f'font-family:{_FONT};font-size:11px;line-height:16px;color:#888888;'
+            f'background:#111111;border-radius:999px;">{escape(tag)}</span>'
+            for tag in tags
+        )
+        tags_html = f'<tr><td style="padding:14px 0 0;">{pills}</td></tr>'
+    return f"""
+            <tr><td style="padding:0 0 28px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr><td style="font-family:{_FONT};font-size:18px;line-height:26px;font-weight:700;color:#ffffff;">{title_html}</td></tr>
+                {summary_html}
+                {more_html}
+                {tags_html}
+              </table>
+            </td></tr>"""
 
 
 class AlertManager:
@@ -107,6 +309,7 @@ class AlertManager:
         kind: str = "daily",
         window_start: str = "",
         window_end: str = "",
+        report: Optional[Dict[str, Any]] = None,
     ) -> bool:
         """Send success email in mail_locale. Weekly links point at week-{day}-{lang}.html."""
         recipients = self.recipients_for_locale(mail_locale)
@@ -116,8 +319,6 @@ class AlertManager:
         loc = mail_locale if mail_locale in MAIL else "en"
         t = MAIL[loc]
         link = self._build_report_link(day, mail_locale, kind)
-        safe_href = escape(link, quote=True)
-        safe_visible = escape(link)
         weekly = kind == "weekly"
         if weekly:
             subj = t["weekly_subj"].format(
@@ -127,15 +328,28 @@ class AlertManager:
             )
         else:
             subj = t["success_subj"].format(day=day)
+
+        payload = dict(report or {})
+        payload.setdefault("date", day)
+        payload.setdefault("kind", kind)
+        if window_start:
+            payload.setdefault("window_start", window_start)
+        if window_end:
+            payload.setdefault("window_end", window_end)
+        if payload.get("categories"):
+            html, plain = build_inline_report_email(payload, link, loc)
+            return self._dispatch(subj, html, plain, recipients)
+
+        # Fallback when callers have no report body (legacy helpers).
+        safe_href = escape(link, quote=True)
+        safe_visible = escape(link)
         lead = t["weekly_lead" if weekly else "success_lead"].format(day=day)
         button = t["weekly_btn"] if weekly else t["success_btn"]
-
         plain = (
             f"Tomato AI Daily — {day}\n{t['success_items']}: {count}\n\n{link}\n"
             if loc == "en"
             else f"Tomato AI Daily — {day}\n{t['success_items']}：{count}\n\n{link}\n"
         )
-
         html = f"""
         <html>
         <body style="font-family: sans-serif; background: #f9f9f9; padding: 20px;">

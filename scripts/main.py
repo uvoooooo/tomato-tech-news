@@ -131,6 +131,7 @@ async def _emit(builder, alerts, report, lang: str, kind: str = "daily"):
             kind=kind,
             window_start=report.get("window_start") or "",
             window_end=report.get("window_end") or "",
+            report=report,
         )
     print(f"\n✨ Done ({lang}): processed {total} items for {day}.")
 
