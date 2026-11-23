@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-11-20",
+    "url": "2026-11-20-en.html",
+    "summary": "Mem-X introduces a benchmark for evaluating memory-dependent cross-episode vision-and-language navigation, highlighting ",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "2026-11-14",
+    "window_end": "2026-11-20",
+    "ts": "2026-11-23T16:55:27.545304"
+  },
+  {
+    "date": "2026-11-20",
+    "url": "2026-11-20-zh.html",
+    "summary": "Mem-X基准测试评估智能体在跨情节视觉与语言导航中的记忆依赖性。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "2026-11-14",
+    "window_end": "2026-11-20",
+    "ts": "2026-11-23T16:55:18.194887"
+  },
+  {
+    "date": "2026-11-20",
     "url": "week-2026-11-20-zh.html",
     "summary": "ARISE 提出了一种实用的记忆架构，使智能体的记忆能够从自身失败中进化。",
     "lang": "zh",
@@ -40,25 +60,11 @@
     "ts": "2026-11-23T16:18:41.518482"
   },
   {
-    "date": "2026-11-20",
-    "url": "2026-11-20-zh.html",
-    "summary": "Mem-X基准测试评估智能体在跨情节视觉和语言导航中的记忆依赖性。",
-    "lang": "zh",
-    "ts": "2026-11-23T14:38:41.897990"
-  },
-  {
     "date": "2026-11-19",
     "url": "2026-11-19-en.html",
     "summary": "Google DeepMind released Gemini 4 Neon, outperforming previous models despite being smaller.",
     "lang": "en",
     "ts": "2026-11-20T16:53:49.169588"
-  },
-  {
-    "date": "2026-11-20",
-    "url": "2026-11-20-en.html",
-    "summary": "Anthropic completed the largest IPO in history, valued at $1.5 trillion.",
-    "lang": "en",
-    "ts": "2026-11-20T11:51:17.608305"
   },
   {
     "date": "2026-11-18",
