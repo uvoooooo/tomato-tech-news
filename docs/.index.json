@@ -2,22 +2,22 @@
   {
     "date": "2026-11-20",
     "url": "2026-11-20-en.html",
-    "summary": "Mem-X introduces a benchmark for evaluating memory-dependent cross-episode vision-and-language navigation, highlighting ",
+    "summary": "VMSA introduces a video memory skill agent for long video understanding, focusing on effective retrieval and reasoning.",
     "lang": "en",
     "kind": "daily",
     "window_start": "2026-11-14",
     "window_end": "2026-11-20",
-    "ts": "2026-11-23T16:55:27.545304"
+    "ts": "2026-11-23T17:11:27.959839"
   },
   {
     "date": "2026-11-20",
     "url": "2026-11-20-zh.html",
-    "summary": "Mem-X基准测试评估智能体在跨情节视觉与语言导航中的记忆依赖性。",
+    "summary": "VMSA 提出了一种视频记忆技能智能体，用于长视频理解，通过外部记忆组织视频信息并迭代检索证据。",
     "lang": "zh",
     "kind": "daily",
     "window_start": "2026-11-14",
     "window_end": "2026-11-20",
-    "ts": "2026-11-23T16:55:18.194887"
+    "ts": "2026-11-23T17:11:15.393747"
   },
   {
     "date": "2026-11-20",
