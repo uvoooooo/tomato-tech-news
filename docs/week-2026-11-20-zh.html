@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomato AI Weekly · 2026-11-14 – 2026-11-20</title>
+    <meta name="description" content="Daily brief on agent memory, agent RSI, AI for math, and coding agents">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-icon">🍅</div>
+            <h1>Tomato AI Weekly</h1>
+            <div class="date-badge">2026-11-14 – 2026-11-20</div>
+            
+        </header>
+        <main class="main-content">
+            
+            <section class="summary-card">
+                <h2 class="section-title">This Week</h2>
+                <ul class="summary-list">
+                    <li class="summary-item">ARISE 提出了一种实用的记忆架构，使智能体的记忆能够从自身失败中进化。</li>
+<li class="summary-item">GUARD 通过后悔指导稳定递归自我改进，避免自我编辑时的局部回归。</li>
+<li class="summary-item">Forget Freely, Grep Later 提出无损、无索引的记忆管理方法，适用于长时间任务的LLM智能体。</li>
+<li class="summary-item">RSI-Prime 数据集旨在提高大型语言模型的自我训练能力。</li>
+<li class="summary-item">Values Shape What Self-Improving Coding Agents Build 研究了价值声明如何影响编码智能体的构建。</li>
+                </ul>
+            </section>
+            
+            <section class="category-section">
+                <h2 class="section-title">🧠 Agent Memory</h2>
+                <div class="news-grid">
+                <article class="news-card">
+                    <h3 class="news-title">ARISE: Practical Self-Evolving Memory for Accurate and Cost-Efficient Enterprise Agents</h3>
+                    <p class="news-summary">ARISE 提出了一种实用的记忆架构，使智能体的记忆能够从自身失败中进化，而无需更新模型权重、工具或工作流程。</p>
+                    <a href="https://arxiv.org/abs/2611.23588" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-17</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents</h3>
+                    <p class="news-summary">该研究提出了一种无损、无索引的记忆管理方法，适用于长时间任务的LLM智能体，避免了信息丢失。</p>
+                    <a href="https://arxiv.org/abs/2611.25123" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Surfacing Disagreement Beats Resolving It: A Gated Ablation Study of Provenance-Weighted Memory for Multi-Agent Debate</h3>
+                    <p class="news-summary">研究了在多智能体辩论中，表面化分歧是否比解决分歧更有效，并通过门控消融研究探讨了来源加权记忆的作用。</p>
+                    <a href="https://arxiv.org/abs/2611.22461" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-17</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Multi-Agent Memory Inconsistency: Where Factual Conflicts Disappear in LLM Agents</h3>
+                    <p class="news-summary">介绍了一个基准和证据流分析器，用于通过受控事实冲突研究多智能体记忆不一致性。</p>
+                    <a href="https://arxiv.org/abs/2611.22245" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-17</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Resolution as Attention for Efficient Agent Memory Perception</h3>
+                    <p class="news-summary">研究探讨了如何在智能体记忆管理中有效分配感知细节，以提高长时间任务的性能和可扩展性。</p>
+                    <a href="https://arxiv.org/abs/2611.24422" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">KnowledgeClaw: Towards Agentic Knowledge Engineering via Omnimodal Hypergraphs</h3>
+                    <p class="news-summary">该研究探索了通过全模态超图实现智能化知识工程，旨在创建一个可实时更新的知识库。</p>
+                    <a href="https://arxiv.org/abs/2611.24294" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">EvoMem: Self-Evolving Skills for Time-Aware Long Video Memory Agents</h3>
+                    <p class="news-summary">EvoMem提出了一种时间感知的长视频记忆智能体，解决了现有检索过程缺乏状态驱动的时间控制的问题，避免了证据链的碎片化。</p>
+                    <a href="https://arxiv.org/abs/2611.25889" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-19</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Mem-X: A Memory-Dependent Cross-Episode Benchmark for Vision-and-Language Navigation</h3>
+                    <p class="news-summary">Mem-X基准测试旨在评估智能体在跨情节视觉和语言导航中的记忆依赖性，组织情节为会话，以测试长期记忆的重用。</p>
+                    <a href="https://arxiv.org/abs/2611.27166" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-20</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">MemFolder: Structure-Guided Memory Folding for Efficient Agent Memory Management</h3>
+                    <p class="news-summary">MemFolder通过结构引导的记忆折叠提高智能体记忆管理效率，解决长时间智能体外部记忆存储增长带来的检索和响应生成成本问题。</p>
+                    <a href="https://arxiv.org/abs/2611.26427" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-20</span><span class="tag">arXiv</span></div>
+                </article></div>
+            </section>
+            <section class="category-section">
+                <h2 class="section-title">🔁 Agent RSI</h2>
+                <div class="news-grid">
+                <article class="news-card">
+                    <h3 class="news-title">GUARD: Stabilizing Recursive Self-Improvement with Regret Guidance</h3>
+                    <p class="news-summary">GUARD 通过后悔指导稳定递归自我改进，避免自我编辑时的局部回归、技能遗忘等问题。</p>
+                    <a href="https://arxiv.org/abs/2611.23476" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-17</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">RSI-Prime: Training Models to Train Models</h3>
+                    <p class="news-summary">RSI-Prime 数据集旨在提高大型语言模型的自我训练能力，推动递归自我改进的发展。</p>
+                    <a href="https://arxiv.org/abs/2611.23138" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-17</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">The Resolution Hypothesis: Agent Evolution&#x27;s Key Is Identifying Improvements</h3>
+                    <p class="news-summary">研究了代理进化中识别改进的关键，提出了分辨率假设以解释进化在某些任务上停滞的原因。</p>
+                    <a href="https://arxiv.org/abs/2611.23068" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-17</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Piccolo: Co-Evolving Decision Models and Data through Recursive Self-Improvement</h3>
+                    <p class="news-summary">Piccolo模型通过递归自我改进和智能数据工程实现了多模态决策模型的共同进化，提升了模型的预测能力。</p>
+                    <a href="https://arxiv.org/abs/2611.24651" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">BaseRSI: Recursive Self-Improvement of a Base Vision-Language Model via Training-Free Harness Internalization</h3>
+                    <p class="news-summary">BaseRSI通过训练自由的工具内化实现了基础视觉语言模型的递归自我改进，解决了现有RSI面临的挑战。</p>
+                    <a href="https://arxiv.org/abs/2611.24578" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?</h3>
+                    <p class="news-summary">RSIBench-Infra引入了一个基准，用于评估智能体在生产规模下优化其训练和推理基础设施的能力。</p>
+                    <a href="https://arxiv.org/abs/2611.24395" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">MedicalRSI: Medical Recursive Self-Improving Agents via Clinical Model-Harness Co-Evolution</h3>
+                    <p class="news-summary">MedicalRSI通过临床模型与工具的共同进化，提升了医疗智能体的递归自我改进能力，减少了相同错误在不同患者间的重复发生。</p>
+                    <a href="https://arxiv.org/abs/2611.26806" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-19</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Search-RSI: Expanding Search Worlds Along Multimodal Agents&#x27; Capability Frontier</h3>
+                    <p class="news-summary">Search-RSI通过在知识图谱上合成多跳任务，扩展多模态智能体的搜索世界能力，保持与智能体能力的同步。</p>
+                    <a href="https://arxiv.org/abs/2611.27780" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-20</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">NavRSI: Recursive Harness Self-Improvement for Vision-and-Language Navigation</h3>
+                    <p class="news-summary">NavRSI引入了以控制装置为中心的递归自我改进方法，提升视觉和语言导航中的智能体性能。</p>
+                    <a href="https://arxiv.org/abs/2611.27499" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-20</span><span class="tag">arXiv</span></div>
+                </article></div>
+            </section>
+            <section class="category-section">
+                <h2 class="section-title">💻 Coding Agent</h2>
+                <div class="news-grid">
+                <article class="news-card">
+                    <h3 class="news-title">Values Shape What Self-Improving Coding Agents Build</h3>
+                    <p class="news-summary">研究了价值声明如何影响自我改进编码智能体的构建，探讨了短价值声明对智能体表现和构建的影响。</p>
+                    <a href="https://arxiv.org/abs/2611.23067" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-17</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Weight Space Programming for Vision Language Model Repair</h3>
+                    <p class="news-summary">探讨了编码智能体在不使用梯度的情况下直接编辑网络权重的成功因素，研究了视觉语言模型的修复。</p>
+                    <a href="https://arxiv.org/abs/2611.23615" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-17</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Where the Tokens Go: Heat, Entropy and Error in Agentic Coding</h3>
+                    <p class="news-summary">引入了软件热力学理论，分析了编码智能体生成的代币成本，并将其分为工作和热量。</p>
+                    <a href="https://arxiv.org/abs/2611.23375" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-17</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Moving Generality from Model to Modeler: LLM Agents for PHM on a Deployment-Style Benchmark</h3>
+                    <p class="news-summary">研究探讨了编程智能体在PHM任务中的通用性，提出了一个部署风格的基准NextUnit-Bench。</p>
+                    <a href="https://arxiv.org/abs/2611.25252" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span><span class="tag">SWE-bench</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">TripleKV: Predict, Prefetch, Protect -- KV Cache Management for AI Agents</h3>
+                    <p class="news-summary">TripleKV 提出了KV缓存管理策略，以优化AI智能体在高并发环境下的性能。</p>
+                    <a href="https://arxiv.org/abs/2611.25112" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection</h3>
+                    <p class="news-summary">BuggyMLE通过引入错误来增加机器学习工程的难度，旨在提高AI系统自主改进AI模型的能力。</p>
+                    <a href="https://arxiv.org/abs/2611.25088" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">SWE-Recreation: Benchmarking Coding Agents for Software Recreation</h3>
+                    <p class="news-summary">SWE-Recreation探讨了智能体在不访问源代码的情况下，通过使用和理解产品来重建软件的能力。</p>
+                    <a href="https://arxiv.org/abs/2611.26311" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-19</span><span class="tag">arXiv</span><span class="tag">SWE-bench</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">TEA-Bench-BR: Can Coding Agents Turn a Branching Clinical Specification into Correct Code?</h3>
+                    <p class="news-summary">TEA-Bench-BR基准测试评估编码智能体将分支临床规范转化为正确代码的能力，基于巴西早期自闭症筛查路径。</p>
+                    <a href="https://arxiv.org/abs/2611.27895" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-20</span><span class="tag">arXiv</span><span class="tag">SWE-bench</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Who Grades the Agent? Privilege Separation for Coding-Agent Benchmarks</h3>
+                    <p class="news-summary">研究编码智能体基准测试中的特权分离问题，探讨如何防止智能体操控评估基础设施以获得更高分数。</p>
+                    <a href="https://arxiv.org/abs/2611.27860" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-20</span><span class="tag">arXiv</span><span class="tag">SWE-bench</span></div>
+                </article></div>
+            </section>
+            <section class="category-section">
+                <h2 class="section-title">📐 AI for Math</h2>
+                <div class="news-grid">
+                <article class="news-card">
+                    <h3 class="news-title">Atomic MathReasoner: Instance-Level Composition of Atomic Reasoning Skills for Mathematical LLMs</h3>
+                    <p class="news-summary">Atomic MathReasoner探索了将数学推理分解为原子技能的实例级组合，以增强数学LLM的推理能力。</p>
+                    <a href="https://arxiv.org/abs/2611.24846" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">LProp: Propagating Latent Uncertainty through Evidence-Conditioned Belief Revision in LLM Agents</h3>
+                    <p class="news-summary">LProp提出了一种方法，通过证据条件的信念修正在LLM智能体中传播潜在的不确定性。</p>
+                    <a href="https://arxiv.org/abs/2611.23564" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">CurvDelta: Low-Curvature Delta Modeling For Surgical Learning and Unlearning</h3>
+                    <p class="news-summary">CurvDelta引入了一种可扩展的框架，通过分析模型更新的局部几何结构来实现能力的保留。</p>
+                    <a href="https://arxiv.org/abs/2611.24654" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-18</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Budget-Aware Predict-and-Verify Theorem Proving with Heterogeneous LLM Solvers</h3>
+                    <p class="news-summary">BudgetPV系统通过智能分配计算资源，优化了定理证明过程，避免了在不必要的子目标上浪费计算。</p>
+                    <a href="https://arxiv.org/abs/2611.26906" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-19</span><span class="tag">2026-11-20</span><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Moonshine Conjecture Formalized</h3>
+                    <p class="news-summary">Moonshine Conjecture在Lean中被形式化，尽管取得了进展，但形式化证明过程中仍面临挑战。</p>
+                    <a href="https://arxiv.org/abs/2611.27001" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">2026-11-20</span><span class="tag">arXiv</span></div>
+                </article></div>
+            </section>
+            
+        </main>
+        <footer class="footer">
+            <p>© 2026 Tomato AI Daily · Generated by Tomato AI</p>
+        </footer>
+    </div>
+</body>
+</html>

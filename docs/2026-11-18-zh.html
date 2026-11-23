@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tomato AI Daily · 2026-11-18 Wed</title>
-    <meta name="description" content="Daily AI news, smart classification, fast tracking">
+    <meta name="description" content="Daily brief on agent memory, agent RSI, AI for math, and coding agents">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -14,63 +14,112 @@
             <div class="logo-icon">🍅</div>
             <h1>Tomato AI Daily</h1>
             <div class="date-badge">2026-11-18 Wed</div>
+            <p class="focus-line">关注 Agent Memory、Agent RSI、AI for Math、Coding Agent · arXiv 近 7 日</p>
         </header>
         <main class="main-content">
             
             <section class="summary-card">
                 <h2 class="section-title">Today's Highlights</h2>
                 <ul class="summary-list">
-                    <li class="summary-item">OpenAI发布了GPT-6.2 Astra和Sol，Astra在智能指数上得分62，仅次于Fable 5.2的65。</li>
-<li class="summary-item">Astra和Sol的API价格分别为每百万个token $8和$2，Sol的成本仅为Astra的15%。</li>
-<li class="summary-item">尽管有负面反馈，Astra和Sol仍被用于自动化工作。</li>
-<li class="summary-item">微软推出了自己的编码模型MAI Code 2和Code 2 Flash，并宣布了多模态升级。</li>
-<li class="summary-item">NVIDIA在CEO过渡后首次财报中公布季度收入1158亿美元，同比增长103%。</li>
+                    <li class="summary-item">Forget Freely, Grep Later 提出了一种无损、无索引的长期记忆管理方法，适用于长时间任务的LLM智能体。</li>
+<li class="summary-item">Piccolo模型通过递归自我改进和智能数据工程实现了多模态决策模型的共同进化。</li>
+<li class="summary-item">Atomic MathReasoner探索了将数学推理分解为原子技能的实例级组合，以增强数学LLM的推理能力。</li>
+<li class="summary-item">Moving Generality from Model to Modeler 研究了编程智能体在PHM任务中的通用性。</li>
+<li class="summary-item">TripleKV 提出了KV缓存管理策略，以优化AI智能体在高并发环境下的性能。</li>
                 </ul>
             </section>
             
             <section class="category-section">
-                <h2 class="section-title">模型</h2>
+                <h2 class="section-title">🧠 Agent Memory</h2>
                 <div class="news-grid">
                 <article class="news-card">
-                    <h3 class="news-title">OpenAI发布GPT-6.2 Astra和Sol</h3>
-                    <p class="news-summary">Astra在智能指数上得分62，仅次于Fable 5.2的65，Sol的成本仅为Astra的15%。</p>
-                    <a href="https://openai.com/index/introducing-gpt-6-2-astra-sol/" class="item-link" target="_blank">Read More</a>
-                    <div class="item-tags"><span class="tag">OpenAI</span><span class="tag">GPT-6.2</span><span class="tag">Astra</span></div>
+                    <h3 class="news-title">Forget Freely, Grep Later: Lossless, Index-Free Memory for Long-Horizon LLM Agents</h3>
+                    <p class="news-summary">该研究提出了一种无损、无索引的记忆管理方法，适用于长时间任务的LLM智能体，避免了信息丢失。</p>
+                    <a href="https://arxiv.org/abs/2611.25123" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Resolution as Attention for Efficient Agent Memory Perception</h3>
+                    <p class="news-summary">研究探讨了如何在智能体记忆管理中有效分配感知细节，以提高长时间任务的性能和可扩展性。</p>
+                    <a href="https://arxiv.org/abs/2611.24422" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">KnowledgeClaw: Towards Agentic Knowledge Engineering via Omnimodal Hypergraphs</h3>
+                    <p class="news-summary">该研究探索了通过全模态超图实现智能化知识工程，旨在创建一个可实时更新的知识库。</p>
+                    <a href="https://arxiv.org/abs/2611.24294" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
                 </article></div>
             </section>
             <section class="category-section">
-                <h2 class="section-title">产品</h2>
+                <h2 class="section-title">🔁 Agent RSI</h2>
                 <div class="news-grid">
                 <article class="news-card">
-                    <h3 class="news-title">微软推出MAI Code 2和Code 2 Flash</h3>
-                    <p class="news-summary">微软推出了多步编码的MAI Code 2和快速编辑的Code 2 Flash，并宣布了多模态升级。</p>
-                    <a href="https://blogs.microsoft.com/blog/2026/11/17/ignite-2026-building-the-frontier-ecosystem/" class="item-link" target="_blank">Read More</a>
-                    <div class="item-tags"><span class="tag">Microsoft</span><span class="tag">MAI Code 2</span><span class="tag">Code 2 Flash</span></div>
+                    <h3 class="news-title">Piccolo: Co-Evolving Decision Models and Data through Recursive Self-Improvement</h3>
+                    <p class="news-summary">Piccolo模型通过递归自我改进和智能数据工程实现了多模态决策模型的共同进化，提升了模型的预测能力。</p>
+                    <a href="https://arxiv.org/abs/2611.24651" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">BaseRSI: Recursive Self-Improvement of a Base Vision-Language Model via Training-Free Harness Internalization</h3>
+                    <p class="news-summary">BaseRSI通过训练自由的工具内化实现了基础视觉语言模型的递归自我改进，解决了现有RSI面临的挑战。</p>
+                    <a href="https://arxiv.org/abs/2611.24578" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">RSIBench-Infra: Can Agents Optimize Their Own Training and Inference Infrastructure at Production Scale?</h3>
+                    <p class="news-summary">RSIBench-Infra引入了一个基准，用于评估智能体在生产规模下优化其训练和推理基础设施的能力。</p>
+                    <a href="https://arxiv.org/abs/2611.24395" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
                 </article></div>
             </section>
             <section class="category-section">
-                <h2 class="section-title">融资</h2>
+                <h2 class="section-title">📐 AI for Math</h2>
                 <div class="news-grid">
                 <article class="news-card">
-                    <h3 class="news-title">NVIDIA财报发布</h3>
-                    <p class="news-summary">在CEO过渡后，NVIDIA公布季度收入1158亿美元，同比增长103%。</p>
-                    <a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-qu" class="item-link" target="_blank">Read More</a>
-                    <div class="item-tags"><span class="tag">NVIDIA</span><span class="tag">财报</span><span class="tag">收入</span></div>
+                    <h3 class="news-title">Atomic MathReasoner: Instance-Level Composition of Atomic Reasoning Skills for Mathematical LLMs</h3>
+                    <p class="news-summary">Atomic MathReasoner探索了将数学推理分解为原子技能的实例级组合，以增强数学LLM的推理能力。</p>
+                    <a href="https://arxiv.org/abs/2611.24846" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">LProp: Propagating Latent Uncertainty through Evidence-Conditioned Belief Revision in LLM Agents</h3>
+                    <p class="news-summary">LProp提出了一种方法，通过证据条件的信念修正在LLM智能体中传播潜在的不确定性。</p>
+                    <a href="https://arxiv.org/abs/2611.23564" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">CurvDelta: Low-Curvature Delta Modeling For Surgical Learning and Unlearning</h3>
+                    <p class="news-summary">CurvDelta引入了一种可扩展的框架，通过分析模型更新的局部几何结构来实现能力的保留。</p>
+                    <a href="https://arxiv.org/abs/2611.24654" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
                 </article></div>
             </section>
             <section class="category-section">
-                <h2 class="section-title">事件</h2>
+                <h2 class="section-title">💻 Coding Agent</h2>
                 <div class="news-grid">
                 <article class="news-card">
-                    <h3 class="news-title">Astra和Sol的负面反馈</h3>
-                    <p class="news-summary">尽管有负面反馈，Astra和Sol仍被用于自动化工作。</p>
-                    <a href="https://latent.space/p/ainews-gpt-6-2-astra-the-2-frontier-model-is-better-and-20-600-cheaper-but-has-mixed-reviews-6-2-sol/" class="item-link" target="_blank">Read More</a>
-                    <div class="item-tags"><span class="tag">OpenAI</span><span class="tag">反馈</span><span class="tag">自动化</span></div>
+                    <h3 class="news-title">Moving Generality from Model to Modeler: LLM Agents for PHM on a Deployment-Style Benchmark</h3>
+                    <p class="news-summary">研究探讨了编程智能体在PHM任务中的通用性，提出了一个部署风格的基准NextUnit-Bench。</p>
+                    <a href="https://arxiv.org/abs/2611.25252" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span><span class="tag">SWE-bench</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">TripleKV: Predict, Prefetch, Protect -- KV Cache Management for AI Agents</h3>
+                    <p class="news-summary">TripleKV 提出了KV缓存管理策略，以优化AI智能体在高并发环境下的性能。</p>
+                    <a href="https://arxiv.org/abs/2611.25112" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">BuggyMLE: Scaling Machine Learning Engineering Difficulty with Bug Injection</h3>
+                    <p class="news-summary">BuggyMLE通过引入错误来增加机器学习工程的难度，旨在提高AI系统自主改进AI模型的能力。</p>
+                    <a href="https://arxiv.org/abs/2611.25088" class="item-link" target="_blank">Read More</a>
+                    <div class="item-tags"><span class="tag">arXiv</span></div>
                 </article></div>
             </section>
             
             <footer class="keywords-footer">
-                <p>Keywords: GPT-6.2 Astra / Sol / OpenAI / Anthropic / Microsoft / NVIDIA / AI Self-Improvement / API价格 / 多模态 / 智能指数</p>
+                <p>Keywords: 长期记忆 / 递归自我改进 / 数学推理 / 编程智能体 / KV缓存管理 / 多模态决策模型 / 智能数据工程 / 实例级组合</p>
             </footer>
         </main>
         <footer class="footer">

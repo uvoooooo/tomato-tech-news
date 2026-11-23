@@ -1,6 +1,46 @@
 [
   {
     "date": "2026-11-20",
+    "url": "week-2026-11-20-zh.html",
+    "summary": "ARISE 提出了一种实用的记忆架构，使智能体的记忆能够从自身失败中进化。",
+    "lang": "zh",
+    "kind": "weekly",
+    "window_start": "2026-11-14",
+    "window_end": "2026-11-20",
+    "ts": "2026-11-23T16:22:34.784850"
+  },
+  {
+    "date": "2026-11-19",
+    "url": "2026-11-19-zh.html",
+    "summary": "EvoMem提出了一种时间感知的长视频记忆智能体，解决了现有检索过程缺乏状态驱动的时间控制的问题。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "2026-11-13",
+    "window_end": "2026-11-19",
+    "ts": "2026-11-23T16:19:48.706915"
+  },
+  {
+    "date": "2026-11-18",
+    "url": "2026-11-18-zh.html",
+    "summary": "Forget Freely, Grep Later 提出了一种无损、无索引的长期记忆管理方法，适用于长时间任务的LLM智能体。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "2026-11-12",
+    "window_end": "2026-11-18",
+    "ts": "2026-11-23T16:19:18.838910"
+  },
+  {
+    "date": "2026-11-17",
+    "url": "2026-11-17-zh.html",
+    "summary": "ARISE 提出了一种实用的记忆架构，使智能体的记忆能够从自身失败中进化，而无需更新模型权重。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "2026-11-11",
+    "window_end": "2026-11-17",
+    "ts": "2026-11-23T16:18:41.518482"
+  },
+  {
+    "date": "2026-11-20",
     "url": "2026-11-20-zh.html",
     "summary": "Mem-X基准测试评估智能体在跨情节视觉和语言导航中的记忆依赖性。",
     "lang": "zh",
@@ -12,13 +52,6 @@
     "summary": "Google DeepMind released Gemini 4 Neon, outperforming previous models despite being smaller.",
     "lang": "en",
     "ts": "2026-11-20T16:53:49.169588"
-  },
-  {
-    "date": "2026-11-19",
-    "url": "2026-11-19-zh.html",
-    "summary": "Google DeepMind推出了Gemini 4 Neon模型，尽管体积较小，但在某些指标上优于Carbon。",
-    "lang": "zh",
-    "ts": "2026-11-20T16:53:41.232174"
   },
   {
     "date": "2026-11-20",
@@ -35,25 +68,11 @@
     "ts": "2026-11-20T11:51:06.502677"
   },
   {
-    "date": "2026-11-18",
-    "url": "2026-11-18-zh.html",
-    "summary": "OpenAI发布了GPT-6.2 Astra和Sol，Astra在智能指数上得分62，仅次于Fable 5.2的65。",
-    "lang": "zh",
-    "ts": "2026-11-20T11:51:00.810578"
-  },
-  {
     "date": "2026-11-17",
     "url": "2026-11-17-en.html",
     "summary": "Perplexity reaches a $1B revenue run rate, quadrupling its growth in 2026.",
     "lang": "en",
     "ts": "2026-11-20T11:50:53.968328"
-  },
-  {
-    "date": "2026-11-17",
-    "url": "2026-11-17-zh.html",
-    "summary": "Perplexity公司年收入突破10亿美元，估值达30-50亿美元。",
-    "lang": "zh",
-    "ts": "2026-11-20T11:50:43.414540"
   },
   {
     "date": "2026-09-02",
@@ -341,12 +360,5 @@
     "summary": "Google DeepMind undergoes leadership reshuffle with Demis Hassabis stepping back to focus on long-term strategy.",
     "lang": "en",
     "ts": "2026-08-06T10:47:19.346037"
-  },
-  {
-    "date": "2026-08-05",
-    "url": "2026-08-05-zh.html",
-    "summary": "谷歌DeepMind进行领导层重组，Demis Hassabis转任主席，Koray Kavukcuoglu接管日常运营。",
-    "lang": "zh",
-    "ts": "2026-08-06T10:47:10.344941"
   }
 ]
