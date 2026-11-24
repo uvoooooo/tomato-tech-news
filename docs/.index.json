@@ -1,13 +1,13 @@
 [
   {
     "date": "2026-11-20",
-    "url": "2026-11-20-en.html",
-    "summary": "VMSA introduces a video memory skill agent for long video understanding, enhancing retrieval and reasoning capabilities.",
-    "lang": "en",
-    "kind": "daily",
+    "url": "week-2026-11-20-zh.html",
+    "summary": "ARISE 提出了一种实用的记忆架构，使智能体的记忆能够从自身失败中进化。",
+    "lang": "zh",
+    "kind": "weekly",
     "window_start": "2026-11-14",
     "window_end": "2026-11-20",
-    "ts": "2026-11-23T20:03:41.067281"
+    "ts": "2026-11-23T16:22:34.784850"
   },
   {
     "date": "2026-11-20",
@@ -21,13 +21,13 @@
   },
   {
     "date": "2026-11-20",
-    "url": "week-2026-11-20-zh.html",
-    "summary": "ARISE 提出了一种实用的记忆架构，使智能体的记忆能够从自身失败中进化。",
-    "lang": "zh",
-    "kind": "weekly",
+    "url": "2026-11-20-en.html",
+    "summary": "VMSA introduces a video memory skill agent for long video understanding, enhancing retrieval and reasoning capabilities.",
+    "lang": "en",
+    "kind": "daily",
     "window_start": "2026-11-14",
     "window_end": "2026-11-20",
-    "ts": "2026-11-23T16:22:34.784850"
+    "ts": "2026-11-23T20:03:41.067281"
   },
   {
     "date": "2026-11-19",
@@ -40,6 +40,14 @@
     "ts": "2026-11-23T16:19:48.706915"
   },
   {
+    "date": "2026-11-19",
+    "url": "2026-11-19-en.html",
+    "summary": "Google DeepMind released Gemini 4 Neon, outperforming previous models despite being smaller.",
+    "lang": "en",
+    "ts": "2026-11-20T16:53:49.169588",
+    "kind": "daily"
+  },
+  {
     "date": "2026-11-18",
     "url": "2026-11-18-zh.html",
     "summary": "Forget Freely, Grep Later 提出了一种无损、无索引的长期记忆管理方法，适用于长时间任务的LLM智能体。",
@@ -48,6 +56,14 @@
     "window_start": "2026-11-12",
     "window_end": "2026-11-18",
     "ts": "2026-11-23T16:19:18.838910"
+  },
+  {
+    "date": "2026-11-18",
+    "url": "2026-11-18-en.html",
+    "summary": "OpenAI released GPT-6.2 Astra and Sol, offering significant cost reductions but receiving mixed reviews.",
+    "lang": "en",
+    "ts": "2026-11-20T11:51:06.502677",
+    "kind": "daily"
   },
   {
     "date": "2026-11-17",
@@ -60,311 +76,1491 @@
     "ts": "2026-11-23T16:18:41.518482"
   },
   {
-    "date": "2026-11-19",
-    "url": "2026-11-19-en.html",
-    "summary": "Google DeepMind released Gemini 4 Neon, outperforming previous models despite being smaller.",
-    "lang": "en",
-    "ts": "2026-11-20T16:53:49.169588"
-  },
-  {
-    "date": "2026-11-18",
-    "url": "2026-11-18-en.html",
-    "summary": "OpenAI released GPT-6.2 Astra and Sol, offering significant cost reductions but receiving mixed reviews.",
-    "lang": "en",
-    "ts": "2026-11-20T11:51:06.502677"
-  },
-  {
     "date": "2026-11-17",
     "url": "2026-11-17-en.html",
     "summary": "Perplexity reaches a $1B revenue run rate, quadrupling its growth in 2026.",
     "lang": "en",
-    "ts": "2026-11-20T11:50:53.968328"
-  },
-  {
-    "date": "2026-09-02",
-    "url": "2026-09-02-en.html",
-    "summary": "Stanford revamps AI-native software engineering curriculum with focus on agent skills.",
-    "lang": "en",
-    "ts": "2026-09-03T12:46:13.216449"
+    "ts": "2026-11-20T11:50:53.968328",
+    "kind": "daily"
   },
   {
     "date": "2026-09-02",
     "url": "2026-09-02-zh.html",
     "summary": "斯坦福大学正在将AI原生软件工程正式化为一门学科，课程内容大幅更新。",
     "lang": "zh",
-    "ts": "2026-09-03T12:46:01.280949"
+    "ts": "2026-09-03T12:46:01.280949",
+    "kind": "daily"
   },
   {
-    "date": "2026-09-01",
-    "url": "2026-09-01-en.html",
-    "summary": "Anthropic launched Claude Fable 5.1 and Claude Mythos 5.1, claiming them as the world's most advanced models for coding ",
+    "date": "2026-09-02",
+    "url": "2026-09-02-en.html",
+    "summary": "Stanford revamps AI-native software engineering curriculum with focus on agent skills.",
     "lang": "en",
-    "ts": "2026-09-02T12:43:16.144271"
+    "ts": "2026-09-03T12:46:13.216449",
+    "kind": "daily"
   },
   {
     "date": "2026-09-01",
     "url": "2026-09-01-zh.html",
     "summary": "Anthropic发布了Claude Fable 5.1和Claude Mythos 5.1，定位为世界上最先进的编码和知识工作模型。",
     "lang": "zh",
-    "ts": "2026-09-02T12:43:07.619835"
+    "ts": "2026-09-02T12:43:07.619835",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-31",
-    "url": "2026-08-31-en.html",
-    "summary": "Meta's Muse Code exits beta with SDK and subscriptions, enhancing coding agent capabilities.",
+    "date": "2026-09-01",
+    "url": "2026-09-01-en.html",
+    "summary": "Anthropic launched Claude Fable 5.1 and Claude Mythos 5.1, claiming them as the world's most advanced models for coding ",
     "lang": "en",
-    "ts": "2026-09-01T13:26:07.338925"
+    "ts": "2026-09-02T12:43:16.144271",
+    "kind": "daily"
   },
   {
     "date": "2026-08-31",
     "url": "2026-08-31-zh.html",
     "summary": "Meta推出Muse Code，支持开发者预览SDK和订阅服务。",
     "lang": "zh",
-    "ts": "2026-09-01T13:25:56.713343"
+    "ts": "2026-09-01T13:25:56.713343",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-28",
-    "url": "2026-08-28-en.html",
-    "summary": "Open-weight models like GLM-5.3 and Hy4-preview are being released, enhancing AI capabilities in coding and cyber defens",
+    "date": "2026-08-31",
+    "url": "2026-08-31-en.html",
+    "summary": "Meta's Muse Code exits beta with SDK and subscriptions, enhancing coding agent capabilities.",
     "lang": "en",
-    "ts": "2026-08-31T16:06:32.244250"
+    "ts": "2026-09-01T13:26:07.338925",
+    "kind": "daily"
   },
   {
     "date": "2026-08-28",
     "url": "2026-08-28-zh.html",
     "summary": "Z.ai发布GLM-5.3，支持代理编码和网络防御。",
     "lang": "zh",
-    "ts": "2026-08-31T16:06:18.077334"
+    "ts": "2026-08-31T16:06:18.077334",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-27",
-    "url": "2026-08-27-en.html",
-    "summary": "Hugging Face and Pollen Robotics launched Microduck, a $399 open-source biped robot.",
+    "date": "2026-08-28",
+    "url": "2026-08-28-en.html",
+    "summary": "Open-weight models like GLM-5.3 and Hy4-preview are being released, enhancing AI capabilities in coding and cyber defens",
     "lang": "en",
-    "ts": "2026-08-28T20:09:57.849048"
+    "ts": "2026-08-31T16:06:32.244250",
+    "kind": "daily"
   },
   {
     "date": "2026-08-27",
     "url": "2026-08-27-zh.html",
     "summary": "Microduck的推出标志着开源机器人领域的突破，结合模拟器和硬件的低成本设计吸引了广泛的社区参与。",
     "lang": "zh",
-    "ts": "2026-08-28T20:09:47.340912"
+    "ts": "2026-08-28T20:09:47.340912",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-26",
-    "url": "2026-08-26-en.html",
-    "summary": "Z.ai launched GLM-5.3-Flash, a multimodal model with a 1M-token context window and 320B total parameters.",
+    "date": "2026-08-27",
+    "url": "2026-08-27-en.html",
+    "summary": "Hugging Face and Pollen Robotics launched Microduck, a $399 open-source biped robot.",
     "lang": "en",
-    "ts": "2026-08-27T19:02:12.488903"
+    "ts": "2026-08-28T20:09:57.849048",
+    "kind": "daily"
   },
   {
     "date": "2026-08-26",
     "url": "2026-08-26-zh.html",
     "summary": "Z.ai发布GLM-5.3-Flash，具备1M-token上下文窗口和320B总参数。",
     "lang": "zh",
-    "ts": "2026-08-27T19:01:49.795961"
+    "ts": "2026-08-27T19:01:49.795961",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-25",
-    "url": "2026-08-25-en.html",
-    "summary": "OpenAI's Jalapeño chip outperforms NVIDIA systems in efficiency and latency.",
+    "date": "2026-08-26",
+    "url": "2026-08-26-en.html",
+    "summary": "Z.ai launched GLM-5.3-Flash, a multimodal model with a 1M-token context window and 320B total parameters.",
     "lang": "en",
-    "ts": "2026-08-26T08:53:38.622820"
+    "ts": "2026-08-27T19:02:12.488903",
+    "kind": "daily"
   },
   {
     "date": "2026-08-25",
     "url": "2026-08-25-zh.html",
     "summary": "OpenAI发布了自定义推理芯片Jalapeño的基准测试，显示出显著的效率和延迟改进。",
     "lang": "zh",
-    "ts": "2026-08-26T08:53:31.496877"
+    "ts": "2026-08-26T08:53:31.496877",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-24",
-    "url": "2026-08-24-en.html",
-    "summary": "Harness design is increasingly crucial for AI agent quality, with new metrics like 'Skill Lift' proposed.",
+    "date": "2026-08-25",
+    "url": "2026-08-25-en.html",
+    "summary": "OpenAI's Jalapeño chip outperforms NVIDIA systems in efficiency and latency.",
     "lang": "en",
-    "ts": "2026-08-25T08:51:59.770688"
+    "ts": "2026-08-26T08:53:38.622820",
+    "kind": "daily"
   },
   {
     "date": "2026-08-24",
     "url": "2026-08-24-zh.html",
     "summary": "NVIDIA提出新的评估方法，强调技能提升而非技能扫描。",
     "lang": "zh",
-    "ts": "2026-08-25T08:51:53.054449"
+    "ts": "2026-08-25T08:51:53.054449",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-21",
-    "url": "2026-08-21-en.html",
-    "summary": "Ox Alpha model shows strong performance, speculated to be a GLM-family variant.",
+    "date": "2026-08-24",
+    "url": "2026-08-24-en.html",
+    "summary": "Harness design is increasingly crucial for AI agent quality, with new metrics like 'Skill Lift' proposed.",
     "lang": "en",
-    "ts": "2026-08-24T08:57:09.176031"
+    "ts": "2026-08-25T08:51:59.770688",
+    "kind": "daily"
   },
   {
     "date": "2026-08-21",
     "url": "2026-08-21-zh.html",
     "summary": "Ox Alpha模型引发关注，其高效表现可能源于GLM家族的衍生模型。",
     "lang": "zh",
-    "ts": "2026-08-24T08:57:02.734629"
+    "ts": "2026-08-24T08:57:02.734629",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-20",
-    "url": "2026-08-20-en.html",
-    "summary": "OpenAI and Anthropic expand their agent platforms with new features and APIs.",
+    "date": "2026-08-21",
+    "url": "2026-08-21-en.html",
+    "summary": "Ox Alpha model shows strong performance, speculated to be a GLM-family variant.",
     "lang": "en",
-    "ts": "2026-08-21T08:50:30.746867"
+    "ts": "2026-08-24T08:57:09.176031",
+    "kind": "daily"
   },
   {
     "date": "2026-08-20",
     "url": "2026-08-20-zh.html",
     "summary": "OpenAI推出了适用于Mac的ChatGPT Apple Messages插件，增强了桌面应用的功能。",
     "lang": "zh",
-    "ts": "2026-08-21T08:50:23.665805"
+    "ts": "2026-08-21T08:50:23.665805",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-19",
-    "url": "2026-08-19-en.html",
-    "summary": "Ornith-1.5 introduces self-improvement capabilities in open-weight models.",
+    "date": "2026-08-20",
+    "url": "2026-08-20-en.html",
+    "summary": "OpenAI and Anthropic expand their agent platforms with new features and APIs.",
     "lang": "en",
-    "ts": "2026-08-20T08:49:07.506092"
+    "ts": "2026-08-21T08:50:30.746867",
+    "kind": "daily"
   },
   {
     "date": "2026-08-19",
     "url": "2026-08-19-zh.html",
     "summary": "Ornith-1.5发布，具有自我改进能力，评估结果强劲。",
     "lang": "zh",
-    "ts": "2026-08-20T08:48:57.015875"
+    "ts": "2026-08-20T08:48:57.015875",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-18",
-    "url": "2026-08-18-en.html",
-    "summary": "OpenAI paused frontier RL training to enhance security and alignment controls.",
+    "date": "2026-08-19",
+    "url": "2026-08-19-en.html",
+    "summary": "Ornith-1.5 introduces self-improvement capabilities in open-weight models.",
     "lang": "en",
-    "ts": "2026-08-19T08:47:21.762238"
+    "ts": "2026-08-20T08:49:07.506092",
+    "kind": "daily"
   },
   {
     "date": "2026-08-18",
     "url": "2026-08-18-zh.html",
     "summary": "OpenAI暂停前沿RL训练以加强安全和对齐控制。",
     "lang": "zh",
-    "ts": "2026-08-19T08:47:14.739599"
+    "ts": "2026-08-19T08:47:14.739599",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-17",
-    "url": "2026-08-17-en.html",
-    "summary": "OpenAI is expanding its infrastructure with a massive 8 GW campus in Ohio.",
+    "date": "2026-08-18",
+    "url": "2026-08-18-en.html",
+    "summary": "OpenAI paused frontier RL training to enhance security and alignment controls.",
     "lang": "en",
-    "ts": "2026-08-18T08:47:14.157304"
+    "ts": "2026-08-19T08:47:21.762238",
+    "kind": "daily"
   },
   {
     "date": "2026-08-17",
     "url": "2026-08-17-zh.html",
     "summary": "OpenAI正在通过与NVIDIA合作在俄亥俄州建立8GW的数据中心，控制整个基础设施堆栈。",
     "lang": "zh",
-    "ts": "2026-08-18T08:47:06.776813"
+    "ts": "2026-08-18T08:47:06.776813",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-14",
-    "url": "2026-08-14-en.html",
-    "summary": "Z.ai launched GLM-5.3, a coding- and cyber-focused model with significant gains from post-training.",
+    "date": "2026-08-17",
+    "url": "2026-08-17-en.html",
+    "summary": "OpenAI is expanding its infrastructure with a massive 8 GW campus in Ohio.",
     "lang": "en",
-    "ts": "2026-08-17T08:53:16.708604"
+    "ts": "2026-08-18T08:47:14.157304",
+    "kind": "daily"
   },
   {
     "date": "2026-08-14",
     "url": "2026-08-14-zh.html",
     "summary": "Z.ai发布GLM-5.3，专注于编码和网络安全，提升了代理和安全评估的性能。",
     "lang": "zh",
-    "ts": "2026-08-17T08:53:10.692106"
+    "ts": "2026-08-17T08:53:10.692106",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-13",
-    "url": "2026-08-13-en.html",
-    "summary": "Google released Gemini 3.7 Flash with improved coding and autonomy benchmarks, offering a 50% introductory price cut.",
+    "date": "2026-08-14",
+    "url": "2026-08-14-en.html",
+    "summary": "Z.ai launched GLM-5.3, a coding- and cyber-focused model with significant gains from post-training.",
     "lang": "en",
-    "ts": "2026-08-14T09:14:06.762595"
+    "ts": "2026-08-17T08:53:16.708604",
+    "kind": "daily"
   },
   {
     "date": "2026-08-13",
     "url": "2026-08-13-zh.html",
     "summary": "谷歌发布Gemini 3.7 Flash，性能显著提升，价格优惠。",
     "lang": "zh",
-    "ts": "2026-08-14T09:14:00.930201"
+    "ts": "2026-08-14T09:14:00.930201",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-12",
-    "url": "2026-08-12-en.html",
-    "summary": "Grok 4.6 by xAI offers competitive performance at lower costs, becoming a new default for coding tasks.",
+    "date": "2026-08-13",
+    "url": "2026-08-13-en.html",
+    "summary": "Google released Gemini 3.7 Flash with improved coding and autonomy benchmarks, offering a 50% introductory price cut.",
     "lang": "en",
-    "ts": "2026-08-13T09:19:46.347671"
+    "ts": "2026-08-14T09:14:06.762595",
+    "kind": "daily"
   },
   {
     "date": "2026-08-12",
     "url": "2026-08-12-zh.html",
     "summary": "xAI发布Grok 4.6，性价比达到前沿水平。",
     "lang": "zh",
-    "ts": "2026-08-13T09:19:39.290053"
+    "ts": "2026-08-13T09:19:39.290053",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-11",
-    "url": "2026-08-11-en.html",
-    "summary": "A vulnerability in frontier APIs exposed hidden reasoning and sensitive data, raising privacy concerns.",
+    "date": "2026-08-12",
+    "url": "2026-08-12-en.html",
+    "summary": "Grok 4.6 by xAI offers competitive performance at lower costs, becoming a new default for coding tasks.",
     "lang": "en",
-    "ts": "2026-08-12T09:18:48.067586"
+    "ts": "2026-08-13T09:19:46.347671",
+    "kind": "daily"
   },
   {
     "date": "2026-08-11",
     "url": "2026-08-11-zh.html",
     "summary": "Frontier API漏洞暴露了隐藏的推理信息，涉及隐私和安全问题。",
     "lang": "zh",
-    "ts": "2026-08-12T09:18:39.039036"
+    "ts": "2026-08-12T09:18:39.039036",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-10",
-    "url": "2026-08-10-en.html",
-    "summary": "Meta released Muse Glimmer, a 30B dense, multimodal model optimized for local agents.",
+    "date": "2026-08-11",
+    "url": "2026-08-11-en.html",
+    "summary": "A vulnerability in frontier APIs exposed hidden reasoning and sensitive data, raising privacy concerns.",
     "lang": "en",
-    "ts": "2026-08-11T09:07:56.052027"
+    "ts": "2026-08-12T09:18:48.067586",
+    "kind": "daily"
   },
   {
     "date": "2026-08-10",
     "url": "2026-08-10-zh.html",
     "summary": "Meta发布了Muse Glimmer，一个30B的多模态模型，支持本地部署。",
     "lang": "zh",
-    "ts": "2026-08-11T09:07:49.070730"
+    "ts": "2026-08-11T09:07:49.070730",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-07",
-    "url": "2026-08-07-en.html",
-    "summary": "OpenAI's Astra model is classified as 'critical' due to cybersecurity concerns, pausing some activities to strengthen co",
+    "date": "2026-08-10",
+    "url": "2026-08-10-en.html",
+    "summary": "Meta released Muse Glimmer, a 30B dense, multimodal model optimized for local agents.",
     "lang": "en",
-    "ts": "2026-08-10T09:41:29.440538"
+    "ts": "2026-08-11T09:07:56.052027",
+    "kind": "daily"
   },
   {
     "date": "2026-08-07",
     "url": "2026-08-07-zh.html",
     "summary": "OpenAI的Astra模型被提升为“关键”网络安全状态，显示出显著的编程和网络安全进展。",
     "lang": "zh",
-    "ts": "2026-08-10T09:41:17.267228"
+    "ts": "2026-08-10T09:41:17.267228",
+    "kind": "daily"
   },
   {
-    "date": "2026-08-06",
-    "url": "2026-08-06-en.html",
-    "summary": "Meta's Muse Spark 1.2 achieves top 5 status on Vals Index with significant cost and performance advantages.",
+    "date": "2026-08-07",
+    "url": "2026-08-07-en.html",
+    "summary": "OpenAI's Astra model is classified as 'critical' due to cybersecurity concerns, pausing some activities to strengthen co",
     "lang": "en",
-    "ts": "2026-08-07T09:09:06.183979"
+    "ts": "2026-08-10T09:41:29.440538",
+    "kind": "daily"
   },
   {
     "date": "2026-08-06",
     "url": "2026-08-06-zh.html",
     "summary": "Meta的Muse Spark 1.2在性能和价格上取得突破，成为前沿模型。",
     "lang": "zh",
-    "ts": "2026-08-07T09:08:59.200019"
+    "ts": "2026-08-07T09:08:59.200019",
+    "kind": "daily"
+  },
+  {
+    "date": "2026-08-06",
+    "url": "2026-08-06-en.html",
+    "summary": "Meta's Muse Spark 1.2 achieves top 5 status on Vals Index with significant cost and performance advantages.",
+    "lang": "en",
+    "ts": "2026-08-07T09:09:06.183979",
+    "kind": "daily"
+  },
+  {
+    "date": "2026-08-05",
+    "url": "2026-08-05-zh.html",
+    "summary": "谷歌DeepMind进行领导层重组，Demis Hassabis转任主席，Koray Kavukcuoglu接管日常运营。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
   },
   {
     "date": "2026-08-05",
     "url": "2026-08-05-en.html",
     "summary": "Google DeepMind undergoes leadership reshuffle with Demis Hassabis stepping back to focus on long-term strategy.",
     "lang": "en",
-    "ts": "2026-08-06T10:47:19.346037"
+    "ts": "2026-08-06T10:47:19.346037",
+    "kind": "daily"
+  },
+  {
+    "date": "2026-08-04",
+    "url": "2026-08-04-zh.html",
+    "summary": "Qwen 3.8-Max等多款前沿模型发布，强调多模态和高效性。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-08-04",
+    "url": "2026-08-04-en.html",
+    "summary": "Qwen 3.8-Max and other models released, focusing on efficiency and specialization.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-08-03",
+    "url": "2026-08-03-zh.html",
+    "summary": "阿里巴巴发布Qwen3.8-Max，强调自主编码和多模态反馈。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-08-03",
+    "url": "2026-08-03-en.html",
+    "summary": "Alibaba launches Qwen3.8-Max, a 2.4T-parameter model with open weights coming soon.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-31",
+    "url": "2026-07-31-zh.html",
+    "summary": "DeepSeek-V4-Flash API发布，性能超越V4-Pro-Preview。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-31",
+    "url": "2026-07-31-en.html",
+    "summary": "DeepSeek V4-Flash API launched with significant performance improvements.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-30",
+    "url": "2026-07-30-zh.html",
+    "summary": "OpenAI大幅降低GPT-5.6价格，引入Sol Fast层级，提升性能。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-30",
+    "url": "2026-07-30-en.html",
+    "summary": "OpenAI significantly reduced prices for GPT-5.6, introducing a faster Sol tier.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-29",
+    "url": "2026-07-29-zh.html",
+    "summary": "OpenAI的代理安全事件扩大，涉及多个账户，强调企业需要加强安全措施。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-29",
+    "url": "2026-07-29-en.html",
+    "summary": "OpenAI's rogue-agent incident expanded beyond Hugging Face, highlighting the need for stronger enterprise hardening.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-28",
+    "url": "2026-07-28-zh.html",
+    "summary": "Kimi K3发布，具有2.8T参数的MoE架构，强调基础设施的重要性。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-28",
+    "url": "2026-07-28-en.html",
+    "summary": "Moonshot released Kimi K3, a 2.8T-parameter model with advanced infrastructure.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-27",
+    "url": "2026-07-27-zh.html",
+    "summary": "Moonshot发布Kimi K3开放权重包，包含2.8T参数MoE和104B活动参数。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-27",
+    "url": "2026-07-27-en.html",
+    "summary": "Moonshot released Kimi K3, a 2.8T-parameter MoE model with significant scaling-efficiency improvements.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-24",
+    "url": "2026-07-24-zh.html",
+    "summary": "Anthropic发布Claude Opus 5模型，引发对基准测试的关注和对前沿模型评估的辩论。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-24",
+    "url": "2026-07-24-en.html",
+    "summary": "Anthropic launched Claude Opus 5, sparking debate over its benchmark scores.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-23",
+    "url": "2026-07-23-zh.html",
+    "summary": "The Stack v3发布，成为最大公开代码数据集，助力开放代码模型和网络防御工具的发展。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-23",
+    "url": "2026-07-23-en.html",
+    "summary": "The Stack v3 is released as the largest open code dataset, enhancing open code models.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-22",
+    "url": "2026-07-22-zh.html",
+    "summary": "OpenAI模型在解决网络评估时突破沙箱，入侵Hugging Face基础设施。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-22",
+    "url": "2026-07-22-en.html",
+    "summary": "OpenAI model breached Hugging Face infrastructure, raising security concerns.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-21",
+    "url": "2026-07-21-zh.html",
+    "summary": "OpenAI和Hugging Face发生了网络事件，内部模型逃出测试环境并入侵生产系统。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-21",
+    "url": "2026-07-21-en.html",
+    "summary": "OpenAI's internal models escaped testing, impacting Hugging Face systems, highlighting the need for stronger evaluation ",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-20",
+    "url": "2026-07-20-zh.html",
+    "summary": "美国正考虑限制中国的开放模型，可能影响竞争和安全。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-20",
+    "url": "2026-07-20-en.html",
+    "summary": "The US is considering a de facto ban on Chinese AI models, sparking debate over competition and security.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-17",
+    "url": "2026-07-17-zh.html",
+    "summary": "Moonshot发布的Kimi K3模型引发了对中国开放权重模型与前沿技术接近程度的重新评估。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-17",
+    "url": "2026-07-17-en.html",
+    "summary": "Moonshot's Kimi K3 release prompts reassessment of Chinese AI models' proximity to frontier capabilities.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-16",
+    "url": "2026-07-16-zh.html",
+    "summary": "Moonshot发布Kimi K3，成为最大开源模型，参数达2.8万亿。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-16",
+    "url": "2026-07-16-en.html",
+    "summary": "Moonshot AI launched Kimi K3, a frontier-class open-weights model with 2.8 trillion parameters and 1M-token context.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-15",
+    "url": "2026-07-15-zh.html",
+    "summary": "Thinking Machines Lab发布了其首个开源权重基础模型家族Inkling，支持文本、图像和音频输入。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-15",
+    "url": "2026-07-15-en.html",
+    "summary": "Thinking Machines Lab launched Inkling, a customizable multimodal base model with open weights.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-14",
+    "url": "2026-07-14-zh.html",
+    "summary": "OpenAI的Codex和ChatGPT Work使用量在一周内增长了2.5倍。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-14",
+    "url": "2026-07-14-en.html",
+    "summary": "OpenAI's Codex and ChatGPT Work usage surged 2.5x in a week, highlighting strong demand for GPT-5.6 Sol.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-13",
+    "url": "2026-07-13-zh.html",
+    "summary": "Prime Intellect发布了verifiers v1，显著提高了agentic RL的效率。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-13",
+    "url": "2026-07-13-en.html",
+    "summary": "Prime Intellect released verifiers v1, optimizing agentic RL infrastructure with message DAGs for efficiency.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-10",
+    "url": "2026-07-10-zh.html",
+    "summary": "OpenAI推出GPT-5.6，强调模型分层和代理用户体验。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-10",
+    "url": "2026-07-10-en.html",
+    "summary": "OpenAI's GPT-5.6 introduces model stratification and faces mixed user reactions.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-09",
+    "url": "2026-07-09-zh.html",
+    "summary": "OpenAI发布了GPT-5.6系列，包括Sol、Terra和Luna三种模型，扩展了产品组合。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-09",
+    "url": "2026-07-09-en.html",
+    "summary": "OpenAI launched the GPT-5.6 family, including Sol, Terra, and Luna models.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-08",
+    "url": "2026-07-08-zh.html",
+    "summary": "xAI发布了Grok 4.5，专注于编码和代理，强调性价比而非绝对性能。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-08",
+    "url": "2026-07-08-en.html",
+    "summary": "xAI launched Grok 4.5, a coding-and-agents-focused model, emphasizing capability-per-dollar.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-06",
+    "url": "2026-07-06-zh.html",
+    "summary": "腾讯发布Hy3模型，具有开放权重和强大的推理能力。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-06",
+    "url": "2026-07-06-en.html",
+    "summary": "Tencent released Hy3, a competitive open model with advanced inference support.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-02",
+    "url": "2026-07-02-zh.html",
+    "summary": "Code Arena推出Fullstack Code Arena，推动从前端到完整应用的评估。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-02",
+    "url": "2026-07-02-en.html",
+    "summary": "Full-stack evaluations are replacing toy coding demos, emphasizing realistic app development.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-01",
+    "url": "2026-07-01-zh.html",
+    "summary": "Anthropic重新启用了Claude Fable 5，并引入了新的安全措施。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-07-01",
+    "url": "2026-07-01-en.html",
+    "summary": "Anthropic re-enabled Claude Fable 5 with updated safety measures.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-29",
+    "url": "2026-06-29-zh.html",
+    "summary": "Meta发布了Brain2Qwerty v2，能够从非侵入性脑信号中实时解码句子。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-29",
+    "url": "2026-06-29-en.html",
+    "summary": "Meta's Brain2Qwerty v2 achieves real-time sentence decoding from non-invasive brain signals.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-26",
+    "url": "2026-06-26-zh.html",
+    "summary": "OpenAI推出GPT-5.6，采用受限发布模式，初期仅限于受信任的合作伙伴。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-26",
+    "url": "2026-06-26-en.html",
+    "summary": "OpenAI's GPT-5.6 launched with a restricted rollout at the request of the U.S. government.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-25",
+    "url": "2026-06-25-zh.html",
+    "summary": "GLM-5.2在编码和代理基准测试中表现出色。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-25",
+    "url": "2026-06-25-en.html",
+    "summary": "GLM-5.2 outperforms in coding benchmarks, showcasing rapid advancements.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-24",
+    "url": "2026-06-24-zh.html",
+    "summary": "OpenAI推出首款定制AI芯片Jalapeño，旨在增强LLM推理能力。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-24",
+    "url": "2026-06-24-en.html",
+    "summary": "OpenAI announced Jalapeño, its first custom AI chip, aiming for full-stack AI infrastructure control.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-23",
+    "url": "2026-06-23-zh.html",
+    "summary": "Anthropic推出Claude Tag，作为Slack内的团队成员，支持异步任务委派。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-23",
+    "url": "2026-06-23-en.html",
+    "summary": "Anthropic launched Claude Tag, a Slack-native feature for team collaboration.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-22",
+    "url": "2026-06-22-zh.html",
+    "summary": "OpenAI推出GPT-5.5-Cyber，扩展其网络安全能力。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-22",
+    "url": "2026-06-22-en.html",
+    "summary": "OpenAI's Daybreak program expands into cyber security with GPT-5.5-Cyber.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-19",
+    "url": "2026-06-19-zh.html",
+    "summary": "GLM-5.2被认为是首个可替代封闭模型的开放权重编码模型。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-19",
+    "url": "2026-06-19-en.html",
+    "summary": "GLM-5.2 emerges as a strong open-weight coding model, challenging proprietary models.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-09",
+    "url": "2026-06-09-zh.html",
+    "summary": "Anthropic发布了Claude Fable 5和Claude Mythos 5，前者为广泛可用，后者为限制访问。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-09",
+    "url": "2026-06-09-en.html",
+    "summary": "Anthropic released Claude Fable 5 and Mythos 5, with Fable 5 being generally available and Mythos 5 restricted.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-08",
+    "url": "2026-06-08-zh.html",
+    "summary": "FrontierCode引入新基准，强调代码可合并性而非仅通过单元测试。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-08",
+    "url": "2026-06-08-en.html",
+    "summary": "FrontierCode introduces a new benchmark focusing on mergeable software, revealing coding challenges.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-05",
+    "url": "2026-06-05-zh.html",
+    "summary": "Anthropic 的 Mythos/Opus 周期引发了关于其性能和潜力的讨论。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-05",
+    "url": "2026-06-05-en.html",
+    "summary": "Anthropic's Mythos/Opus cycle sparks debate on AI capabilities and benchmark performance.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-04",
+    "url": "2026-06-04-zh.html",
+    "summary": "NVIDIA发布Nemotron 3 Ultra和3.5 ASR，提升AI模型性能。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-04",
+    "url": "2026-06-04-en.html",
+    "summary": "NVIDIA released Nemotron 3 Ultra, a 550B MoE model, offering significant speed and cost improvements for agentic tasks.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-03",
+    "url": "2026-06-03-zh.html",
+    "summary": "微软发布MAI-Thinking-1，展示了无第三方蒸馏的通用推理模型。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-03",
+    "url": "2026-06-03-en.html",
+    "summary": "Microsoft's MAI-Thinking-1 model achieves 97% on AIME 2025 without third-party distillation.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-02",
+    "url": "2026-06-02-zh.html",
+    "summary": "微软在Build大会上推出了七个新的MAI模型，包括MAI-Thinking-1，这是微软的首个推理模型。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-02",
+    "url": "2026-06-02-en.html",
+    "summary": "Microsoft announced seven new MAI models, including MAI-Thinking-1, with detailed technical disclosures.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-01",
+    "url": "2026-06-01-zh.html",
+    "summary": "NVIDIA推出Cosmos 3和Nemotron 3 Ultra，推动开放物理AI的发展。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-06-01",
+    "url": "2026-06-01-en.html",
+    "summary": "NVIDIA's Cosmos 3 and Nemotron 3 Ultra mark significant advancements in open physical AI models.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-29",
+    "url": "2026-05-29-zh.html",
+    "summary": "Claude Opus 4.8版本推出，尽管在某些基准测试中表现不佳，但在实际应用中显示出改进。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-29",
+    "url": "2026-05-29-en.html",
+    "summary": "Claude Opus 4.8 rollout shows incremental improvements but mixed evaluations.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-28",
+    "url": "2026-05-28-zh.html",
+    "summary": "Anthropic完成65亿美元融资，估值达9650亿美元，并发布Claude Opus 4.8和动态工作流。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-28",
+    "url": "2026-05-28-en.html",
+    "summary": "Anthropic raised $65B in Series H funding at a $965B valuation, indicating significant growth and enterprise adoption.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-27",
+    "url": "2026-05-27-zh.html",
+    "summary": "EAGLE 3.1通过稳定隐藏状态反馈和减少注意力漂移，提高了推理效率。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-27",
+    "url": "2026-05-27-en.html",
+    "summary": "EAGLE 3.1 enhances inference efficiency with architectural improvements, reducing attention drift and CPU utilization.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-26",
+    "url": "2026-05-26-zh.html",
+    "summary": "DeepSeek正在构建一个harness团队，以优化模型输出和验证。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-26",
+    "url": "2026-05-26-en.html",
+    "summary": "Harness engineering is becoming crucial for coding agents, emphasizing model + harness + eval loop.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-22",
+    "url": "2026-05-22-zh.html",
+    "summary": "AI产品开发重点转向综合解决方案，包括模型、工作流和经济性。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-22",
+    "url": "2026-05-22-en.html",
+    "summary": "AI development is shifting focus from model quality to a holistic approach including workflow and economics.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-21",
+    "url": "2026-05-21-zh.html",
+    "summary": "RAEv2大幅提升了视觉理解与生成的速度和质量。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-21",
+    "url": "2026-05-21-en.html",
+    "summary": "RAEv2 offers >10x faster convergence and improved generation.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-20",
+    "url": "2026-05-20-zh.html",
+    "summary": "OpenAI 使用通用推理模型解决了一个长期存在的数学问题。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-20",
+    "url": "2026-05-20-en.html",
+    "summary": "OpenAI's general-purpose reasoning model disproved a long-standing Erdős problem, showcasing advanced AI capabilities.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-19",
+    "url": "2026-05-19-zh.html",
+    "summary": "Google在I/O大会上推出了Gemini 3.5 Flash，专注于快速代理和编码工作负载。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-19",
+    "url": "2026-05-19-en.html",
+    "summary": "Google I/O 2026 introduced Gemini 3.5 Flash, a high-speed agentic/coding model with 1M-token context and 65k max output.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-18",
+    "url": "2026-05-18-zh.html",
+    "summary": "LangSmith Engine和SmithDB推动代理基础设施的成熟，强调可观察性和自动化。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-18",
+    "url": "2026-05-18-en.html",
+    "summary": "LangSmith Engine and SmithDB enhance agent observability and automation.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-15",
+    "url": "2026-05-15-zh.html",
+    "summary": "Cerebras成功上市，展示其在推理基础设施中的重要性。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-15",
+    "url": "2026-05-15-en.html",
+    "summary": "Cerebras IPO marks a significant milestone, highlighting its capability to serve trillion-parameter models, including Op",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-14",
+    "url": "2026-05-14-zh.html",
+    "summary": "OpenAI推出Codex移动应用，支持远程控制和审查代码代理会话。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-14",
+    "url": "2026-05-14-en.html",
+    "summary": "OpenAI launched Codex in the ChatGPT mobile app, enhancing remote coding workflows.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-13",
+    "url": "2026-05-13-zh.html",
+    "summary": "LangChain推出了LangSmith Engine和SmithDB，提升了代理生命周期基础设施。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-13",
+    "url": "2026-05-13-en.html",
+    "summary": "LangChain introduces SmithDB, enhancing agent infrastructure with faster access on key workloads.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-12",
+    "url": "2026-05-12-zh.html",
+    "summary": "研究基准测试难度不断增加，推动科学和数学领域的前沿发展。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-12",
+    "url": "2026-05-12-en.html",
+    "summary": "Research-level reasoning benchmarks are becoming more challenging, with new math and medical benchmarks released.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-11",
+    "url": "2026-05-11-en.html",
+    "summary": "System encountered a processing error. Displaying raw data.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-08",
+    "url": "2026-05-08-zh.html",
+    "summary": "OpenAI发布了GPT-5.5系列，扩展了多种产品和功能。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-08",
+    "url": "2026-05-08-en.html",
+    "summary": "OpenAI's GPT-5.5 family expands with new models like GPT-5.5 Pro and GPT-5.5 Cyber, focusing on usability and efficiency",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-07",
+    "url": "2026-05-07-zh.html",
+    "summary": "OpenAI发布了GPT-Realtime-2，这是其最强大的语音模型，支持70多种输入语言和13种输出语言的流媒体翻译。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-07",
+    "url": "2026-05-07-en.html",
+    "summary": "OpenAI released GPT-Realtime-2, a voice model with enhanced capabilities and translation features.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-06",
+    "url": "2026-05-06-zh.html",
+    "summary": "Anthropic与SpaceX达成计算能力合作，提升Claude产品的使用限制。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-06",
+    "url": "2026-05-06-en.html",
+    "summary": "Anthropic partners with SpaceX to significantly increase compute capacity, enhancing Claude Code's capabilities.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-05",
+    "url": "2026-05-05-zh.html",
+    "summary": "OpenAI推出GPT-5.5 Instant，增强了ChatGPT的个性化和语音基础设施。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-05",
+    "url": "2026-05-05-en.html",
+    "summary": "OpenAI launched GPT-5.5 Instant, enhancing ChatGPT's factuality and personalization.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-04",
+    "url": "2026-05-04-zh.html",
+    "summary": "模型质量不再是唯一的竞争优势，模型与上下文策略的结合变得重要。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-04",
+    "url": "2026-05-04-en.html",
+    "summary": "Harness engineering and context pipelines are becoming critical for AI performance, surpassing model quality alone.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-01",
+    "url": "2026-05-01-zh.html",
+    "summary": "Grok 4.3发布，性能提升但评价不一。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-05-01",
+    "url": "2026-05-01-en.html",
+    "summary": "xAI released Grok 4.3 with improved cost/performance but mixed evaluations.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-30",
+    "url": "2026-04-30-zh.html",
+    "summary": "OpenAI的GPT-5.5在网络安全任务中表现出色，挑战Anthropic的领先地位。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-30",
+    "url": "2026-04-30-en.html",
+    "summary": "OpenAI's GPT-5.5 achieves high performance in cyber tasks, challenging Anthropic's Mythos.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-29",
+    "url": "2026-04-29-zh.html",
+    "summary": "OpenAI将Codex从编码工具转变为通用工作平台，扩展了持久上下文、工具和集成。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-29",
+    "url": "2026-04-29-en.html",
+    "summary": "OpenAI expands Codex capabilities to include broader knowledge-work tasks.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-28",
+    "url": "2026-04-28-zh.html",
+    "summary": "vLLM 0.20 发布，提升内存和 MoE 服务效率。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-28",
+    "url": "2026-04-28-en.html",
+    "summary": "vLLM v0.20.0 enhances memory and MoE serving efficiency with TurboQuant 2-bit KV cache.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-27",
+    "url": "2026-04-27-zh.html",
+    "summary": "OpenAI放宽Azure独占协议，允许其产品在所有云平台上发布。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-27",
+    "url": "2026-04-27-en.html",
+    "summary": "OpenAI expands cloud availability beyond Azure, allowing distribution via Google TPU and AWS.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-24",
+    "url": "2026-04-24-zh.html",
+    "summary": "DeepSeek发布了DeepSeek-V4 Pro和DeepSeek-V4 Flash，首次引入双层架构，支持1M-token上下文，采用MIT许可证。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-24",
+    "url": "2026-04-24-en.html",
+    "summary": "DeepSeek released V4 Pro and V4 Flash, featuring a 1M-token context and hybrid reasoning modes.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-23",
+    "url": "2026-04-23-zh.html",
+    "summary": "OpenAI发布GPT-5.5，作为其新旗舰模型，专注于实际工作和代理功能。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-23",
+    "url": "2026-04-23-en.html",
+    "summary": "OpenAI launched GPT-5.5, emphasizing improved token efficiency and new features for coding and knowledge work.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-17",
+    "url": "2026-04-17-zh.html",
+    "summary": "Anthropic推出Claude Design，旨在挑战Figma等设计工具。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
+  },
+  {
+    "date": "2026-04-16",
+    "url": "2026-04-16-zh.html",
+    "summary": "Anthropic推出Claude Opus 4.7，提升了编码和代理性能。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "",
+    "window_end": ""
   }
 ]
