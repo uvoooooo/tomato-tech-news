@@ -7,7 +7,7 @@ import re
 from datetime import datetime, timedelta
 from html import escape, unescape
 from html.parser import HTMLParser
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Set
 from pathlib import Path
 from config import (
     OUTPUT_DIR,
@@ -21,6 +21,7 @@ from config import (
 
 # daily: 2026-11-20-zh.html   weekly: week-2026-11-20-zh.html
 _REPORT_FILE = re.compile(r"^(week-)?(\d{4}-\d{2}-\d{2})-(zh|en)\.html$")
+_ARXIV_ID = re.compile(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})", re.I)
 
 class _DailyCardParser(HTMLParser):
     """Pull news cards out of a generated daily page."""
@@ -108,6 +109,28 @@ class PageBuilder:
     def _init_assets(self):
         """Prepare asset directories"""
         (self.root / "css").mkdir(parents=True, exist_ok=True)
+
+    def reported_arxiv_ids(self, start: str, before: str) -> Set[str]:
+        """
+        arXiv ids already linked from dailies in [start, before).
+
+        The report day itself is excluded, so a rerun can still choose the
+        same papers. Later dailies are ignored, so a backfill is not affected
+        by reports published after that day.
+        """
+        start_day = datetime.strptime(start, "%Y-%m-%d").date()
+        before_day = datetime.strptime(before, "%Y-%m-%d").date()
+        found: Set[str] = set()
+        day = start_day
+        while day < before_day:
+            stamp = day.strftime("%Y-%m-%d")
+            for lang in ("zh", "en"):
+                path = self.root / f"{stamp}-{lang}.html"
+                if not path.exists():
+                    continue
+                found.update(_ARXIV_ID.findall(path.read_text(encoding="utf-8", errors="replace")))
+            day += timedelta(days=1)
+        return found
 
     def collect_week_items(self, start: str, end: str, lang: str) -> List[Dict[str, Any]]:
         """Unique news cards from the weekday dailies in an inclusive date window."""

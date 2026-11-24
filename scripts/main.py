@@ -279,6 +279,14 @@ async def run_pipeline():
         except Exception as err:
             print(f"⚠️ arXiv fetch failed: {err}")
 
+        window_end = datetime.strptime(target_day, "%Y-%m-%d").date()
+        window_start = window_end - timedelta(days=max(FOCUS_LOOKBACK_DAYS, 1) - 1)
+        already = builder.reported_arxiv_ids(window_start.strftime("%Y-%m-%d"), target_day)
+        if already:
+            fresh = [paper for paper in papers if paper.get("id") not in already]
+            print(f"🧹 Skipped {len(papers) - len(fresh)} papers already in earlier dailies")
+            papers = fresh
+
         if not raw_news and not papers and not company_posts:
             print("⚠️ No roundup, no lab posts, and no papers. Generating empty page(s).")
             builder.write_styles()
@@ -291,8 +299,6 @@ async def run_pipeline():
             print("📭 Nothing on focus for this date — skipping email notification.")
             return
 
-        window_end = datetime.strptime(target_day, "%Y-%m-%d").date()
-        window_start = window_end - timedelta(days=max(FOCUS_LOOKBACK_DAYS, 1) - 1)
         bundle = {
             "title": (raw_news or {}).get("title") or "Focus digest",
             "link": (raw_news or {}).get("link") or "",
