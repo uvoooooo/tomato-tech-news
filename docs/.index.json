@@ -2,22 +2,22 @@
   {
     "date": "2026-11-23",
     "url": "2026-11-23-zh.html",
-    "summary": "OpenAI与Cisco推出Shirudo，一个用于Linux的开源运行时，帮助团队在推出补丁时保护运行系统。",
+    "summary": "OpenAI和Cisco推出Shirudo，一个用于Linux的开源运行时，帮助团队在推出补丁时保护运行系统。",
     "lang": "zh",
     "kind": "daily",
     "window_start": "2026-11-17",
     "window_end": "2026-11-23",
-    "ts": "2026-11-24T10:22:53.368506"
+    "ts": "2026-11-24T15:28:24.118868"
   },
   {
     "date": "2026-11-23",
     "url": "2026-11-23-en.html",
-    "summary": "FORGETMENOT explores privacy risks in AI agents with long-term memory, highlighting issues in memory storage and deletio",
+    "summary": "FORGETMENOT explores privacy risks in AI agents with long-term memory, focusing on storage, disclosure, and deletion con",
     "lang": "en",
     "kind": "daily",
     "window_start": "2026-11-17",
     "window_end": "2026-11-23",
-    "ts": "2026-11-24T10:23:02.626102"
+    "ts": "2026-11-24T15:28:36.767073"
   },
   {
     "date": "2026-11-20",
