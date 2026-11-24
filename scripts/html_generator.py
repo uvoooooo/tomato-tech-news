@@ -2,12 +2,12 @@
 HTML Generation Module
 Responsible for creating the daily news report in HTML format and updating the index page.
 """
-import os
 import json
+import re
 from datetime import datetime, timedelta
 from html import escape, unescape
 from html.parser import HTMLParser
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from pathlib import Path
 from config import (
     OUTPUT_DIR,
@@ -16,7 +16,11 @@ from config import (
     GITHUB_PAGES_URL,
     I18N,
     FOCUS_LOOKBACK_DAYS,
+    WEEKLY_WINDOW_DAYS,
 )
+
+# daily: 2026-11-20-zh.html   weekly: week-2026-11-20-zh.html
+_REPORT_FILE = re.compile(r"^(week-)?(\d{4}-\d{2}-\d{2})-(zh|en)\.html$")
 
 class _DailyCardParser(HTMLParser):
     """Pull news cards out of a generated daily page."""
@@ -324,16 +328,8 @@ class PageBuilder:
             return dstr
 
     def sync_index(self, day: str, data: Dict[str, Any], lang: str):
-        """Update the central archive page"""
-        db_path = self.root / ".index.json"
-        log = []
-        if db_path.exists():
-            try:
-                log = json.loads(db_path.read_text(encoding='utf-8'))
-            except:
-                log = []
-            
-        summary = data.get("summary", [""])[0]
+        """Update the central archive page from this report plus every issue on disk."""
+        summary = (data.get("summary") or [""])[0]
         kind = data.get("kind") or "daily"
         entry = {
             "date": day,
@@ -343,35 +339,140 @@ class PageBuilder:
             "kind": kind,
             "window_start": data.get("window_start", ""),
             "window_end": data.get("window_end", ""),
-            "ts": datetime.now().isoformat()
+            "ts": datetime.now().isoformat(),
         }
-        
-        # One row per (date, lang, kind) so a Friday daily and that week's report both stay
         log = [
-            e for e in log
+            e for e in self._load_index()
             if not (
                 e.get("date") == day
                 and e.get("lang", "zh") == lang
                 and (e.get("kind") or "daily") == kind
             )
         ]
-        log.insert(0, entry)
-        log = log[:50]
-        
-        db_path.write_text(json.dumps(log, ensure_ascii=False, indent=2), encoding='utf-8')
-        
-        # Rebuild index.html
+        log.append(entry)
+        self._write_archive(self._merge_archive(log), lang)
+
+    def rebuild_archive(self, lang: str = "en") -> int:
+        """Rewrite index.html from published HTML, in date order, grouped by month."""
+        log = self._merge_archive(self._load_index())
+        self._write_archive(log, lang)
+        return len(log)
+
+    def _load_index(self) -> List[Dict[str, Any]]:
+        db_path = self.root / ".index.json"
+        if not db_path.exists():
+            return []
+        try:
+            log = json.loads(db_path.read_text(encoding="utf-8"))
+        except Exception:
+            return []
+        return log if isinstance(log, list) else []
+
+    def _entry_key(self, entry: Dict[str, Any]):
+        return (
+            entry.get("date") or "",
+            entry.get("lang") or "zh",
+            entry.get("kind") or "daily",
+        )
+
+    def _is_empty_page(self, path: Path) -> bool:
+        text = path.read_text(encoding="utf-8", errors="replace")
+        return "No News Today" in text
+
+    def _blurb_from_html(self, path: Path) -> str:
+        text = path.read_text(encoding="utf-8", errors="replace")
+        match = re.search(r'class="summary-item">(.*?)</li>', text, re.S)
+        if not match:
+            match = re.search(r'class="news-summary">(.*?)</p>', text, re.S)
+        if not match:
+            return ""
+        raw = re.sub(r"<[^>]+>", "", match.group(1))
+        return unescape(re.sub(r"\s+", " ", raw)).strip()[:120]
+
+    def _entry_from_filename(self, name: str) -> Optional[Dict[str, Any]]:
+        match = _REPORT_FILE.match(name)
+        if not match:
+            return None
+        weekly, day, lang = match.groups()
+        kind = "weekly" if weekly else "daily"
+        entry = {
+            "date": day,
+            "url": name,
+            "summary": "",
+            "lang": lang,
+            "kind": kind,
+            "window_start": "",
+            "window_end": "",
+        }
+        if kind == "weekly":
+            end = datetime.strptime(day, "%Y-%m-%d").date()
+            start = end - timedelta(days=max(WEEKLY_WINDOW_DAYS, 1) - 1)
+            entry["window_start"] = start.strftime("%Y-%m-%d")
+            entry["window_end"] = day
+        return entry
+
+    def _merge_archive(self, log: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """One row per published issue that actually has news. Newest month first."""
+        by_key = {}
+        for entry in log:
+            if entry.get("date") and entry.get("url"):
+                by_key[self._entry_key(entry)] = entry
+
+        merged: List[Dict[str, Any]] = []
+        for path in self.root.glob("*.html"):
+            scanned = self._entry_from_filename(path.name)
+            if not scanned or self._is_empty_page(path):
+                continue
+            existing = by_key.get(self._entry_key(scanned))
+            summary = (existing or {}).get("summary") or self._blurb_from_html(path)
+            if not summary:
+                continue
+            row = dict(existing or scanned)
+            row["date"] = scanned["date"]
+            row["url"] = scanned["url"]
+            row["lang"] = scanned["lang"]
+            row["kind"] = scanned["kind"]
+            row["summary"] = summary[:120]
+            if scanned["kind"] == "weekly":
+                row["window_start"] = row.get("window_start") or scanned["window_start"]
+                row["window_end"] = row.get("window_end") or scanned["window_end"]
+            merged.append(row)
+
+        merged.sort(key=lambda e: 0 if (e.get("lang") or "zh") == "zh" else 1)
+        merged.sort(key=lambda e: 0 if (e.get("kind") or "daily") == "weekly" else 1)
+        merged.sort(key=lambda e: e.get("date") or "", reverse=True)
+        return merged
+
+    def _month_label(self, month: str) -> str:
+        try:
+            return datetime.strptime(month, "%Y-%m").strftime("%B %Y")
+        except Exception:
+            return month
+
+    def _write_archive(self, log: List[Dict[str, Any]], lang: str):
+        db_path = self.root / ".index.json"
+        db_path.write_text(json.dumps(log, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        sections = ""
+        month = None
         rows = ""
-        for e in log:
-            e_lang = e.get("lang", "zh")
+        for entry in log:
+            entry_month = (entry.get("date") or "")[:7]
+            if entry_month != month:
+                if month is not None:
+                    sections += self._month_section(month, rows)
+                month = entry_month
+                rows = ""
             rows += f"""
             <article class="index-entry">
-                <a href="{e.get('url', '#')}" class="entry-link">
-                    <span class="entry-date">{self._index_date(e)}</span>
-                    <p class="entry-summary">{e.get('summary', '')}</p>
+                <a href="{escape(entry.get('url') or '#')}" class="entry-link">
+                    <span class="entry-date">{escape(self._index_date(entry))}</span>
+                    <p class="entry-summary">{escape(entry.get('summary') or '')}</p>
                 </a>
             </article>"""
-            
+        if month is not None:
+            sections += self._month_section(month, rows)
+
         ui = I18N.get(lang, I18N["zh"])
         html = f"""<!DOCTYPE html>
 <html lang="{lang}">
@@ -389,12 +490,19 @@ class PageBuilder:
             <p class="subtitle">{ui['subtitle']}</p>
         </header>
         <main class="main-content">
-            <div class="index-entries">{rows}</div>
+            {sections}
         </main>
     </div>
 </body>
 </html>"""
-        (self.root / "index.html").write_text(html, encoding='utf-8')
+        (self.root / "index.html").write_text(html, encoding="utf-8")
+
+    def _month_section(self, month: str, rows: str) -> str:
+        return f"""
+        <section class="index-month">
+            <h2 class="section-title">{escape(self._month_label(month))}</h2>
+            <div class="index-entries">{rows}</div>
+        </section>"""
 
     def write_styles(self):
         """Generate the CSS stylesheet (preserved layout)"""
@@ -440,6 +548,8 @@ body {
 .tag { font-size: 12px; color: var(--secondary-color); background: var(--tag-bg); padding: 4px 10px; border-radius: 4px; }
 .keywords-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-color); color: var(--secondary-color); font-size: 14px; }
 .footer { margin-top: 40px; color: var(--secondary-color); font-size: 12px; }
+.index-month { margin-bottom: 56px; }
+.index-month .section-title { margin-bottom: 16px; }
 .index-entries { display: flex; flex-direction: column; gap: 24px; }
 .index-entry { padding: 24px; border: 1px solid var(--border-color); border-radius: 8px; }
 .entry-link { text-decoration: none; }
