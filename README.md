@@ -10,7 +10,7 @@ Fetches the day’s items from **RSS**, classifies and summarizes them with a **
 
 | Capability | Description |
 |------------|-------------|
-| Data source | Default Latent Space weekday AINews (`https://latent.space/feed`); only `[AINews]` / `ainews` items, matched by publish date. Override with `RSS_URL` |
+| Data source | Latent Space weekday AINews (`RSS_URL`, default `https://latent.space/feed`) for the tweet recap, plus official lab feeds (OpenAI, DeepMind, Google AI, Mistral, Hugging Face, Anthropic release notes). Replace the lab list with `COMPANY_RSS_URLS` |
 | Processing | OpenRouter-compatible API for categorization, takeaways, and keywords |
 | Outputs | Daily HTML under `docs/`, archive `index.html`, styles in `css/styles.css`; **PDF** (Playwright) locally or in CI |
 | Automation | `.github/workflows/daily.yml`: scheduled pipeline and Pages deploy |
@@ -28,7 +28,7 @@ A fixed sample lives in `docs/` (same layout as CI). **No extra screenshots need
 | **HTML** | [`docs/2026-04-16-zh.html`](./docs/2026-04-16-zh.html) | Chinese daily: dark minimal layout, **Today's Highlights**, cards by “Model / Product / Research”, links and keyword footer |
 | **Archive index** | [`docs/index.html`](./docs/index.html) | Dated list linking to each HTML issue |
 
-> To refresh the sample after cloning, run `scripts/main.py` once and commit the updated files under `docs/` (`.gitignore` whitelists the sample above and `docs/css/`; other dates stay ignored).
+> Daily and weekly HTML, `index.html`, and `docs/.index.json` stay in git so each issue keeps a stable URL. Ignored locally: `*preview.html`, and PDFs other than the sample above. The archive lists every issue that has news, newest month first. Empty “no news” pages stay on disk and are left off the index.
 
 ---
 
@@ -63,7 +63,8 @@ cp .env.example .env
 | `OPENROUTER_API_KEY` | **Yes** | Model API |
 | `OPENROUTER_BASE_URL` | No | Default `https://openrouter.ai/api/v1` |
 | `OPENROUTER_MODEL` | No | Default `openai/gpt-4o` |
-| `RSS_URL` | No | RSS feed URL |
+| `RSS_URL` | No | Tweet-roundup feed. Default `https://latent.space/feed` |
+| `COMPANY_RSS_URLS` | No | Replaces the built-in lab feeds. `Name\|url` pairs, comma-separated |
 | `OUTPUT_DIR` | No | Output directory, default `docs` |
 | `SKIP_WEEKENDS` | No | Default `true`: skip the main run on **Saturday and Sunday** in **`NEWS_DATE_TZ`** (override with `--date` / `--force` or set to `false`) |
 | `NEWS_DATE_TZ` | No | If unset, uses **`DEFAULT_NEWS_DATE_TZ`** in **`scripts/config.py`** (template default is UK **`Europe/London`**). After fork, change the default or set this (e.g. **`Asia/Shanghai`**, **`Etc/UTC`**) without editing app code. CI can set the same name under **Repository variables** |

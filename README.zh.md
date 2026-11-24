@@ -10,7 +10,7 @@
 
 | 能力 | 说明 |
 |------|------|
-| 数据源 | 默认 Latent Space 工作日 AINews（`https://latent.space/feed`），只取 `[AINews]` / `ainews` 条目并按发布日期匹配；可通过环境变量 `RSS_URL` 更换 |
+| 数据源 | Latent Space 工作日 AINews（`RSS_URL`，默认 `https://latent.space/feed`）提供推文综述；另抓 OpenAI、DeepMind、Google AI、Mistral、Hugging Face、Anthropic 发布说明。可用 `COMPANY_RSS_URLS` 换成自己的实验室源 |
 | 内容加工 | 使用 OpenRouter 兼容 API，对新闻做分类、要点与关键词提炼 |
 | 产出物 | `docs/` 下日报 HTML、归档 `index.html`、样式 `css/styles.css`，本地/CI 中可另存 **PDF**（Playwright） |
 | 自动化 | `.github/workflows/daily.yml`：定时运行流水线并部署 Pages |
@@ -28,7 +28,7 @@
 | **HTML** | [`docs/2026-04-16-zh.html`](./docs/2026-04-16-zh.html) | 同一期中文日报：深色极简排版、**Today's Highlights**、按「模型 / 产品 / 研究」等分组的卡片、外链与关键词页脚 |
 | **归档首页** | [`docs/index.html`](./docs/index.html) | 按日期列表入口，链到各期 HTML |
 
-> 若在本地克隆后想更新示例，重新运行一次 `scripts/main.py` 并提交 `docs/` 中对应文件即可（`.gitignore` 仅放行上述示例与 `docs/css/`，其它日期仍会被忽略）。
+> 各期日报、周报 HTML、`index.html` 和 `docs/.index.json` 都在 git 里，保证每期链接不变。本地忽略的是 `*preview.html`，以及上面那份示例以外的 PDF。归档按月份列出所有有内容的期次，最新的月份在前。空的「无新闻」页面仍留在目录里，但不进首页。
 
 ---
 
@@ -63,7 +63,8 @@ cp .env.example .env
 | `OPENROUTER_API_KEY` | **必填** | 调用模型 |
 | `OPENROUTER_BASE_URL` | 可选 | 默认 `https://openrouter.ai/api/v1` |
 | `OPENROUTER_MODEL` | 可选 | 默认 `openai/gpt-4o` |
-| `RSS_URL` | 可选 | RSS 地址 |
+| `RSS_URL` | 可选 | 推文综述源，默认 `https://latent.space/feed` |
+| `COMPANY_RSS_URLS` | 可选 | 替换内置实验室源，逗号分隔的 `名称\|地址` |
 | `OUTPUT_DIR` | 可选 | 输出目录，默认 `docs` |
 | `SKIP_WEEKENDS` | 可选 | 默认 `true`：在 **`NEWS_DATE_TZ` 时区的周六、周日** 不跑主流程（仍可用 `--date` / `--force` 或设为 `false` 绕过） |
 | `NEWS_DATE_TZ` | 可选 | 不设则用 **`scripts/config.py`** 里的 **`DEFAULT_NEWS_DATE_TZ`**（仓库模板当前为英国 **`Europe/London`**）。fork 后改默认值或设本变量（如 **`Asia/Shanghai`**、**`Etc/UTC`**）即可，不必改业务代码。CI 可在 **Repository variables** 里设同名变量，由 workflow 传入 |

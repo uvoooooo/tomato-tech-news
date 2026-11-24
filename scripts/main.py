@@ -22,7 +22,7 @@ from config import (
     FOCUS_LOOKBACK_DAYS,
     WEEKLY_WINDOW_DAYS,
 )
-from rss_fetcher import NewsLoader
+from rss_fetcher import NewsLoader, company_window, extract_twitter_recap
 from arxiv_fetcher import PaperLoader
 from llm_analyzer import ContentProcessor
 from html_generator import PageBuilder
@@ -264,6 +264,13 @@ async def run_pipeline():
         loader = NewsLoader()
         feed = loader.pull_feed()
         raw_news = loader.fetch_by_day(target_day, feed)
+        post_start, post_end = company_window(target_day)
+        company_posts = loader.fetch_company_posts(post_start, post_end)
+        twitter_recap = ""
+        if raw_news and raw_news.get("content"):
+            twitter_recap = extract_twitter_recap(raw_news["content"])
+            if twitter_recap:
+                print(f"🐦 Twitter recap: {len(twitter_recap)} chars")
 
         print("[2/5] Fetching arXiv...")
         papers = []
@@ -272,8 +279,8 @@ async def run_pipeline():
         except Exception as err:
             print(f"⚠️ arXiv fetch failed: {err}")
 
-        if not raw_news and not papers:
-            print("⚠️ No roundup and no papers. Generating empty page(s).")
+        if not raw_news and not papers and not company_posts:
+            print("⚠️ No roundup, no lab posts, and no papers. Generating empty page(s).")
             builder.write_styles()
             for lang in langs:
                 builder.build_empty(
@@ -289,7 +296,10 @@ async def run_pipeline():
         bundle = {
             "title": (raw_news or {}).get("title") or "Focus digest",
             "link": (raw_news or {}).get("link") or "",
-            "content": (raw_news or {}).get("content") or "",
+            "content": twitter_recap,
+            "company_posts": company_posts,
+            "company_start": post_start,
+            "company_end": post_end,
             "papers": papers,
             "window_start": window_start.strftime("%Y-%m-%d"),
             "window_end": target_day,

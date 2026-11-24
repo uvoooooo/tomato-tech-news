@@ -4,6 +4,7 @@ Uses OpenRouter (OpenAI-compatible API) to analyze, classify, and summarize news
 """
 import os
 import json
+import re
 from typing import Dict, Any, List, Optional
 from openai import OpenAI
 from config import (
@@ -15,6 +16,7 @@ from config import (
     FIXED_THEME,
     FOCUS_TOPICS,
     I18N,
+    LAB_SECTION,
 )
 
 class ContentProcessor:
@@ -177,7 +179,7 @@ The order array must contain each of these ids once: {ids}
         Returns:
             Structured analysis result
         """
-        has_roundup = bool(raw_data and raw_data.get("content"))
+        has_roundup = bool(raw_data and (raw_data.get("content") or raw_data.get("company_posts")))
         has_papers = bool(raw_data and raw_data.get("papers"))
         if not has_roundup and not has_papers:
             return self._generate_empty_state(
@@ -198,7 +200,8 @@ The order array must contain each of these ids once: {ids}
             )
             raw_output = chat_response.choices[0].message.content
             print(f"✅ AI analysis complete ({len(raw_output)} chars)")
-            return self._decode_ai_output(raw_output, date_tag, language)
+            parsed = self._decode_ai_output(raw_output, date_tag, language)
+            return self._keep_known_lab_urls(parsed, raw_data)
         except Exception as err:
             print(f"❌ AI processing error: {err}")
             return self._create_emergency_fallback(raw_data, date_tag)
@@ -213,50 +216,60 @@ The order array must contain each of these ids once: {ids}
         ])
         keys = " / ".join(topic["key"] for topic in FOCUS_TOPICS)
         papers = self._format_papers(data.get("papers") or [])
-        roundup = (data.get("content") or "").strip()
-        roundup_block = roundup[:8000] if roundup else "(none)"
+        posts = self._format_posts(data.get("company_posts") or [])
+        recap = (data.get("content") or "").strip() or "(none)"
+        lab = LAB_SECTION
         highlight_rule = (
             "2. summary: up to 5 highlights, each under 50 words, drawn only from kept items. "
-            "Cover more than one topic when several topics have items. Do not pad."
+            "When both papers and lab news are kept, include at least one of each. Do not pad."
         )
         keep_rule = (
             "When a topic's shortlist has clear papers, keep 3 to 4 of the strongest. "
             "Do not drop a topic because another topic has more papers."
         )
 
-        return f"""You write a narrow research brief. Keep only items that are clearly about the topics below.
+        return f"""You write a research brief plus a short lab-news section.
 Target Language: {lang_label}. Write titles, summaries, highlights, and keywords in {lang_label}. Keep topic keys and proper nouns as given.
 
-[Topics]
+[Research topics]
 {topic_list}
 
-Drop general model launches, funding, product news, and policy unless they are specifically about one of these topics.
+A paper goes in one of these topics only when it is clearly about that topic.
+Do not put a company post or a tweet into a research topic.
+
+[Lab news]
+key: {lab['key']} {lab['icon']} {lab['name']['en']}: {lab['description'].get(lang, lab['description']['en'])}
+Keep a launch, a major research claim, a new model or product, or a safety update from an AI company.
+Drop hiring, events, tutorials, customer stories, and minor changelog notes.
+Keep at most 5, one item per announcement. If several sources describe the same news, keep one.
+Copy the url from the source. A tweet must use its x.com status url. An official post must use that post's url.
 
 [Target Date]
 {date}
 Paper window: {data.get('window_start', date)} through {data.get('window_end', date)}
+Lab posts: {data.get('company_start', date)} through {data.get('company_end', date)}
 
 [arXiv papers]
 {papers}
 
-[Industry roundup]
-Title: {data.get('title', 'Unknown')}
-URL: {data.get('link', '') or '(none)'}
-Body:
-{roundup_block}
+[Lab posts]
+{posts}
+
+[AI Twitter Recap]
+{recap}
 
 ---
 
 [Tasks]
 1. status is "success" when you keep at least one item, otherwise "empty".
 {highlight_rule}
-3. categories: one bucket per topic that has clear matches. key must be one of: {keys}.
-   Judge each topic on its own. {keep_rule}
-   Omit a topic only when nothing in its shortlist is actually about it.
-   A paper goes in exactly one bucket, the best fit among its topic hints.
+3. categories: one bucket per research topic that has clear papers, plus {lab['key']} when lab news is kept.
+   Research keys must be one of: {keys}. The lab key is {lab['key']}.
+   Judge each research topic on its own. {keep_rule}
+   Omit a research topic only when nothing in its shortlist is actually about it.
+   A paper goes in exactly one research bucket, the best fit among its topic hints.
    Each item needs title, summary (under 60 words), url copied from the source, and up to 3 tags.
-   Tag arXiv items "arXiv" and roundup items "AINews".
-   From the roundup, keep only on-topic developments and link them to the roundup URL.
+   Tag arXiv items "arXiv". Tag a tweet "X" plus the company or author. Tag an official post with its source name.
    Do not invent papers, titles, or URLs.
 4. keywords: 5-8 specific terms that appear in the kept items.
 5. theme: "blue".
@@ -319,6 +332,21 @@ Strict JSON only:
             )
         return "\n\n".join(blocks)
 
+    def _format_posts(self, posts: list) -> str:
+        """Render official lab posts for the prompt."""
+        if not posts:
+            return "(none)"
+        blocks = []
+        for index, post in enumerate(posts, 1):
+            blocks.append(
+                f"{index}. source: {post.get('source', '')}\n"
+                f"   date: {post.get('date', '')}\n"
+                f"   title: {post.get('title', '')}\n"
+                f"   url: {post.get('url', '')}\n"
+                f"   summary: {post.get('summary', '')}"
+            )
+        return "\n\n".join(blocks)
+
     def _decode_ai_output(self, text: str, date: str, language: str = "zh") -> Dict[str, Any]:
         """Parse and validate the JSON returned by AI"""
         clean_text = text.strip()
@@ -349,29 +377,43 @@ Strict JSON only:
             print(f"❌ JSON decoding failed: {err}")
             return self._create_emergency_fallback({"title": "Parsing Error"}, date)
 
+    def _clean_items(self, category: Dict[str, Any]) -> List[Dict[str, Any]]:
+        items = []
+        for item in category.get("items") or []:
+            title = str(item.get("title") or "").strip()
+            if not title:
+                continue
+            tags = [str(tag).strip() for tag in (item.get("tags") or []) if str(tag).strip()]
+            items.append({
+                "title": title,
+                "summary": str(item.get("summary") or "").strip(),
+                "url": str(item.get("url") or "").strip(),
+                "tags": tags[:3],
+            })
+        return items
+
     def _keep_focus_topics(self, parsed: Dict[str, Any], language: str) -> Dict[str, Any]:
-        """Drop buckets and items outside the configured focus topics."""
+        """Keep the research topics and the lab-news section. Drop anything else."""
+        allowed = {topic["key"] for topic in FOCUS_TOPICS}
+        allowed.add(LAB_SECTION["key"])
         by_key = {}
         for category in parsed.get("categories") or []:
             key = category.get("key")
-            if key in by_key or not any(topic["key"] == key for topic in FOCUS_TOPICS):
+            if key in by_key or key not in allowed:
                 continue
-            items = []
-            for item in category.get("items") or []:
-                title = str(item.get("title") or "").strip()
-                if not title:
-                    continue
-                tags = [str(tag).strip() for tag in (item.get("tags") or []) if str(tag).strip()]
-                items.append({
-                    "title": title,
-                    "summary": str(item.get("summary") or "").strip(),
-                    "url": str(item.get("url") or "").strip(),
-                    "tags": tags[:3],
-                })
+            items = self._clean_items(category)
             if items:
                 by_key[key] = items
 
         ordered = []
+        lab_items = by_key.get(LAB_SECTION["key"])
+        if lab_items:
+            ordered.append({
+                "key": LAB_SECTION["key"],
+                "name": LAB_SECTION["name"].get(language, LAB_SECTION["name"]["en"]),
+                "icon": LAB_SECTION["icon"],
+                "items": lab_items[:5],
+            })
         for topic in FOCUS_TOPICS:
             items = by_key.get(topic["key"])
             if not items:
@@ -396,6 +438,72 @@ Strict JSON only:
         else:
             parsed["status"] = "success"
         return parsed
+
+    def _keep_known_lab_urls(self, parsed: Dict[str, Any], raw_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Drop lab items whose link was not in a lab feed or the tweet recap."""
+        allowed = self._source_urls(raw_data)
+        if not allowed:
+            return parsed
+        kept_categories = []
+        for category in parsed.get("categories") or []:
+            if category.get("key") != LAB_SECTION["key"]:
+                kept_categories.append(category)
+                continue
+            items = []
+            for item in category.get("items") or []:
+                if self._url_known(item.get("url") or "", allowed):
+                    items.append(item)
+                else:
+                    print(f"⚠️ Dropped lab item with unknown url: {item.get('url')}")
+            if items:
+                category = dict(category)
+                category["items"] = items
+                kept_categories.append(category)
+        parsed["categories"] = kept_categories
+        if not kept_categories:
+            language = parsed.get("lang") or "zh"
+            parsed["status"] = "empty"
+            parsed["summary"] = []
+            parsed["keywords"] = []
+            parsed["reason"] = I18N.get(language, I18N["zh"]).get(
+                "empty_focus",
+                "No items matched the focus topics.",
+            )
+        return parsed
+
+    def _source_urls(self, raw_data: Dict[str, Any]) -> set:
+        found = set()
+        for post in raw_data.get("company_posts") or []:
+            norm = self._norm_url(post.get("url") or "")
+            if norm:
+                found.add(norm)
+        blob = "\n".join([
+            raw_data.get("content") or "",
+            raw_data.get("link") or "",
+        ])
+        for match in re.findall(r"https?://[^\s<>\"]+", blob):
+            norm = self._norm_url(match)
+            if norm:
+                found.add(norm)
+        return found
+
+    def _url_known(self, url: str, allowed: set) -> bool:
+        norm = self._norm_url(url)
+        if not norm:
+            return False
+        if norm in allowed:
+            return True
+        tail = norm.rsplit("/", 1)[-1]
+        if len(tail) < 8:
+            return False
+        return any(known.endswith("/" + tail) for known in allowed)
+
+    def _norm_url(self, url: str) -> str:
+        url = str(url or "").strip().rstrip(").,;")
+        url = re.sub(r"[?#].*$", "", url)
+        url = url.rstrip("/")
+        url = url.replace("http://", "https://").replace("://twitter.com/", "://x.com/")
+        return url
 
     def _generate_empty_state(self, date: str, msg: str, lang: str) -> Dict[str, Any]:
         """Standardized response for missing data"""

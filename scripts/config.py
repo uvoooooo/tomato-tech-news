@@ -22,8 +22,22 @@ CLAUDE_MAX_TOKENS = 8192
 # RSS Feed Configuration
 # Latent Space weekday AINews roundups. The loader keeps entries tagged
 # `ainews` (title prefix `[AINews]`) and matches them by publish date.
+# That roundup is where company tweets are quoted, with x.com links.
 RSS_URL = os.getenv("RSS_URL", "https://latent.space/feed")
-RSS_TIMEOUT = 30     
+RSS_TIMEOUT = 30
+
+# Official lab feeds. These are the posts companies also announce on X.
+# Anthropic has no news feed; the Claude platform release notes are the
+# closest official channel. Set COMPANY_RSS_URLS to replace this list:
+# "OpenAI|https://openai.com/news/rss.xml,Mistral|https://mistral.ai/news/rss"
+COMPANY_FEEDS = [
+    {"name": "OpenAI", "url": "https://openai.com/news/rss.xml"},
+    {"name": "Google DeepMind", "url": "https://deepmind.google/blog/rss.xml"},
+    {"name": "Google AI", "url": "https://blog.google/innovation-and-ai/technology/ai/rss/"},
+    {"name": "Mistral", "url": "https://mistral.ai/news/rss"},
+    {"name": "Hugging Face", "url": "https://huggingface.co/blog/feed.xml"},
+    {"name": "Anthropic", "url": "https://platform.claude.com/docs/en/release-notes/feed.xml"},
+]
 
 # Output and Deployment Configuration
 OUTPUT_DIR = os.getenv("OUTPUT_DIR", "docs")
@@ -60,6 +74,9 @@ def _get_env_int(key: str, default: int) -> int:
     if value is None or value == "":
         return default
     return int(value)
+
+
+COMPANY_POSTS_PER_FEED = _get_env_int("COMPANY_POSTS_PER_FEED", 4)
 
 # Email Notification Configuration (SMTP)
 SMTP_HOST = os.getenv("SMTP_HOST")
@@ -122,7 +139,7 @@ I18N = {
     "zh": {
         "title": "Tomato AI Daily",
         "subtitle": "Agent Memory · Agent RSI · AI for Math · Coding Agent",
-        "focus": "关注 Agent Memory、Agent RSI、AI for Math、Coding Agent · arXiv 近 {n} 日",
+        "focus": "关注 Agent Memory、Agent RSI、AI for Math、Coding Agent · arXiv 近 {n} 日 · 实验室公告与重要推文",
         "highlights": "Today's Highlights",
         "weekly_title": "Tomato AI Weekly",
         "weekly_highlights": "This Week",
@@ -140,12 +157,13 @@ I18N = {
             "agent_rsi": "Agent RSI",
             "ai_math": "AI for Math",
             "coding_agent": "Coding Agent",
+            "lab_news": "Lab News",
         }
     },
     "en": {
         "title": "Tomato AI Daily",
         "subtitle": "Agent Memory · Agent RSI · AI for Math · Coding Agent",
-        "focus": "Focus: Agent Memory, Agent RSI, AI for Math, Coding Agent · arXiv last {n} days",
+        "focus": "Focus: Agent Memory, Agent RSI, AI for Math, Coding Agent · arXiv last {n} days · lab posts and notable tweets",
         "highlights": "Highlights",
         "weekly_title": "Tomato AI Weekly",
         "weekly_highlights": "This Week",
@@ -163,8 +181,20 @@ I18N = {
             "agent_rsi": "Agent RSI",
             "ai_math": "AI for Math",
             "coding_agent": "Coding Agent",
+            "lab_news": "Lab News",
         }
     }
+}
+
+# Company announcements and notable tweets. Not an arXiv query.
+LAB_SECTION = {
+    "key": "lab_news",
+    "icon": "📣",
+    "name": {"zh": "Lab News", "en": "Lab News"},
+    "description": {
+        "zh": "AI 公司的重要公告和推文：模型发布、重大研究、产品与安全更新",
+        "en": "Important AI-company posts and tweets: launches, major research, product and safety updates",
+    },
 }
 
 # Topics the daily keeps. Anything outside this list is dropped.
@@ -241,7 +271,7 @@ FOCUS_TOPICS = [
     },
 ]
 
-# News categories follow the focus topics (English labels for prompts and fallbacks).
+# News categories follow the focus topics, plus the lab-news section.
 CATEGORIES = {
     topic["key"]: {
         "name": topic["name"]["en"],
@@ -250,9 +280,14 @@ CATEGORIES = {
     }
     for topic in FOCUS_TOPICS
 }
+CATEGORIES[LAB_SECTION["key"]] = {
+    "name": LAB_SECTION["name"]["en"],
+    "icon": LAB_SECTION["icon"],
+    "description": LAB_SECTION["description"]["en"],
+}
 
 # Mapping categories to themes (currently all blue)
-CATEGORY_THEME_MAP = {topic["key"]: "blue" for topic in FOCUS_TOPICS}
+CATEGORY_THEME_MAP = {key: "blue" for key in CATEGORIES}
 
 DEFAULT_THEME = "blue"
 FIXED_THEME = "blue"
@@ -261,9 +296,9 @@ FIXED_THEME = "blue"
 SITE_META = {
     "title": "AI Daily",
     "subtitle": "AI News Daily",
-    "description": "Daily brief on agent memory, agent RSI, AI for math, and coding agents",
+    "description": "Daily brief on agent memory, agent RSI, AI for math, coding agents, and lab announcements",
     "author": "",
-    "keywords": ["Agent Memory", "Agent RSI", "AI for Math", "Coding Agent", "arXiv", "Daily"]
+    "keywords": ["Agent Memory", "Agent RSI", "AI for Math", "Coding Agent", "arXiv", "Lab News", "Daily"]
 }
 
 HTML_TEMPLATE_CONFIG = {

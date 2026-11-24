@@ -2,12 +2,17 @@
 RSS Fetcher and Parser Module
 Responsible for downloading RSS XML and extracting content for the target date.
 """
+import os
 import feedparser
 import requests
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, List, Any
+from urllib.parse import urlparse
 import re
-from config import RSS_URL, RSS_TIMEOUT
+from config import COMPANY_FEEDS, COMPANY_POSTS_PER_FEED, RSS_URL, RSS_TIMEOUT
+
+TWITTER_RECAP_LIMIT = 6500
+COMPANY_SUMMARY_LIMIT = 500
 
 class NewsLoader:
     """Handles fetching and parsing of news from RSS feeds"""
@@ -183,6 +188,127 @@ class NewsLoader:
         if not found_dates:
             return None, None
         return min(found_dates), max(found_dates)
+
+    def fetch_company_posts(self, start: str, end: str) -> List[Dict[str, Any]]:
+        """Official lab posts published from start through end, inclusive."""
+        posts: List[Dict[str, Any]] = []
+        for feed in company_feeds():
+            name = feed["name"]
+            url = feed["url"]
+            print(f"📥 Pulling {name}: {url}")
+            try:
+                resp = requests.get(
+                    url,
+                    timeout=self.request_timeout,
+                    headers={"User-Agent": "TomatoNews/2.0 (compatible; NewsBot/1.0)"},
+                )
+                resp.raise_for_status()
+                parsed = feedparser.parse(resp.content)
+            except Exception as err:
+                print(f"⚠️ {name} feed failed: {err}")
+                continue
+            matched = []
+            for item in parsed.entries:
+                day = self._published_day(item)
+                if not day or day < start or day > end:
+                    continue
+                matched.append(self._company_post(item, name, day))
+            matched.sort(key=lambda post: post["date"], reverse=True)
+            kept = matched[: max(COMPANY_POSTS_PER_FEED, 1)]
+            print(f"   {name}: {len(kept)} post(s) in {start} → {end}")
+            posts.extend(kept)
+        posts.sort(key=lambda post: (post["date"], post["source"]), reverse=True)
+        print(f"✅ Lab posts kept: {len(posts)}")
+        return posts
+
+    def _published_day(self, item) -> Optional[str]:
+        parsed = getattr(item, "published_parsed", None) or getattr(item, "updated_parsed", None)
+        if not parsed:
+            return None
+        return datetime(*parsed[:6], tzinfo=timezone.utc).strftime("%Y-%m-%d")
+
+    def _company_post(self, item, source: str, day: str) -> Dict[str, Any]:
+        summary = html_to_text(item.get("summary") or item.get("description") or "")
+        return {
+            "source": source,
+            "title": html_to_text(str(item.get("title") or "")).strip(),
+            "url": str(item.get("link") or "").strip(),
+            "date": day,
+            "summary": summary[:COMPANY_SUMMARY_LIMIT],
+        }
+
+
+def company_feeds() -> List[Dict[str, str]]:
+    """Default lab feeds, or COMPANY_RSS_URLS when that env var is set."""
+    raw = os.getenv("COMPANY_RSS_URLS", "").strip()
+    if not raw:
+        return list(COMPANY_FEEDS)
+    feeds = []
+    for part in raw.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        if "|" in part:
+            name, url = part.split("|", 1)
+            feeds.append({"name": name.strip(), "url": url.strip()})
+        else:
+            host = urlparse(part).netloc or part
+            feeds.append({"name": host, "url": part})
+    return feeds or list(COMPANY_FEEDS)
+
+
+def company_window(target_day: str) -> tuple:
+    """
+    Dates whose lab posts belong in this report.
+
+    A Monday report includes Saturday and Sunday, because those days have
+    no report of their own. Every other target day covers only itself.
+    """
+    target = datetime.strptime(target_day, "%Y-%m-%d").date()
+    previous = target - timedelta(days=1)
+    while previous.weekday() >= 5:
+        previous -= timedelta(days=1)
+    start = previous + timedelta(days=1)
+    return start.strftime("%Y-%m-%d"), target.strftime("%Y-%m-%d")
+
+
+def html_to_text(html: str) -> str:
+    """Flatten a feed snippet, keeping linked URLs."""
+    text = html or ""
+    text = re.sub(r"(?i)<br\s*/?>", "\n", text)
+    text = re.sub(r"(?i)</p>", "\n", text)
+    text = re.sub(r"(?i)<h[1-6][^>]*>", "\n## ", text)
+    text = re.sub(r'(?i)<a [^>]*href="([^"]+)"[^>]*>', r" \1 ", text)
+    text = re.sub(r"<[^>]+>", " ", text)
+    for src, dst in (
+        ("&nbsp;", " "),
+        ("&amp;", "&"),
+        ("&lt;", "<"),
+        ("&gt;", ">"),
+        ("&#39;", "'"),
+        ("&quot;", '"'),
+    ):
+        text = text.replace(src, dst)
+    text = re.sub(r"[ \t]+", " ", text)
+    text = re.sub(r"\n\s*", "\n", text)
+    return text.strip()
+
+
+def extract_twitter_recap(html: str, limit: int = TWITTER_RECAP_LIMIT) -> str:
+    """
+    The AINews 'AI Twitter Recap' section, as plain text with tweet URLs.
+
+    The full roundup is too long to send, and the tweet section is the part
+    that carries company posts from X.
+    """
+    match = re.search(r"AI Twitter Recap(.*?)(?:AI Reddit Recap|$)", html or "", re.S | re.I)
+    chunk = match.group(1) if match else (html or "")
+    text = html_to_text(chunk)
+    if len(text) <= limit:
+        return text
+    trimmed = text[:limit].rsplit(" ", 1)[0]
+    return trimmed + "…"
+
 
 def fetch_rss_content(target_date: str) -> Optional[Dict[str, Any]]:
     """Legacy helper for backward compatibility"""
