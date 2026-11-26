@@ -1,5 +1,25 @@
 [
   {
+    "date": "2026-11-25",
+    "url": "2026-11-25-zh.html",
+    "summary": "《Solve Vision with Code》研究表明，编码智能体在视觉推理方面比视频模型更强。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "2026-11-19",
+    "window_end": "2026-11-25",
+    "ts": "2026-11-26T18:19:45.608763"
+  },
+  {
+    "date": "2026-11-25",
+    "url": "2026-11-25-en.html",
+    "summary": "Agentic LongLive introduces asynchronous agentic memory for real-time video generation, addressing consistency challenge",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "2026-11-19",
+    "window_end": "2026-11-25",
+    "ts": "2026-11-26T18:19:52.370837"
+  },
+  {
     "date": "2026-11-24",
     "url": "2026-11-24-zh.html",
     "summary": "OpenAI发布GPT-6模型，展示了其在蛋白质设计方面的内在能力。",
