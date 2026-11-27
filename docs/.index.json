@@ -1,5 +1,25 @@
 [
   {
+    "date": "2026-11-26",
+    "url": "2026-11-26-zh.html",
+    "summary": "《How Much Do Coding Agents Over-Edit, and Why?》研究了代码代理在补丁中不必要编辑的现象。",
+    "lang": "zh",
+    "kind": "daily",
+    "window_start": "2026-11-20",
+    "window_end": "2026-11-26",
+    "ts": "2026-11-27T18:03:39.526780"
+  },
+  {
+    "date": "2026-11-26",
+    "url": "2026-11-26-en.html",
+    "summary": "CoverMem introduces a method for budgeted embodied question answering using coverage-constrained visual memory.",
+    "lang": "en",
+    "kind": "daily",
+    "window_start": "2026-11-20",
+    "window_end": "2026-11-26",
+    "ts": "2026-11-27T18:03:50.325828"
+  },
+  {
     "date": "2026-11-25",
     "url": "2026-11-25-zh.html",
     "summary": "《Solve Vision with Code》研究表明，编码智能体在视觉推理方面比视频模型更强。",
